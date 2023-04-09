@@ -8,15 +8,7 @@ public class PlayerModel : UnitModel
     private float _exp;
     private float _expForNextLvl;
 
-    private List<EnemyView> _lvlEnemyPull;
-    private EnemyView _currentTarget;
-
-    public void SetPull(List<EnemyView> lvlEnemyPull)
+    public PlayerModel(float mapSize) : base(mapSize)
     {
-        _lvlEnemyPull = lvlEnemyPull;
-    }
-    private void ChangeTarget()
-    {
-
     }
 }

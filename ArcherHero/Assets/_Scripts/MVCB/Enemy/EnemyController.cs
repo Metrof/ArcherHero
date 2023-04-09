@@ -1,18 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XInput;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : UnitController<EnemyView, EnemyModel>
 {
-    // Start is called before the first frame update
-    void Start()
+    public EnemyController(EnemyView view, EnemyModel model, UnitBody body, Vector3 startPos) : base(view, model, body, startPos)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
