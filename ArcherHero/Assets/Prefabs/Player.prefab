@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8673544390339888370}
   - component: {fileID: 8673544390339888372}
   - component: {fileID: 8673544390339888382}
-  - component: {fileID: 1220721309}
+  - component: {fileID: 6352859802852638498}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8673544391391377074}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8673544390339888371
 MeshFilter:
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1220721309}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: SetMoveInput
         m_Mode: 0
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1220721309
+--- !u!114 &6352859802852638498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,10 +168,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8673544390339888375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4deb5429bc1eb4e4a925a8edfc7d0935, type: 3}
+  m_Script: {fileID: 11500000, guid: 34b13409ea76c3f409af5d3684bf2397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 100
+  moveSpeed: 10
 --- !u!1 &8673544391391377077
 GameObject:
   m_ObjectHideFlags: 0
