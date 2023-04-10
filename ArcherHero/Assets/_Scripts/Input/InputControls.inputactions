@@ -28,34 +28,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "UI",
-            "id": "408d6c47-8f8d-4839-9f44-3832e109d03e",
-            "actions": [
-                {
-                    "name": "OnClick",
-                    "type": "Button",
-                    "id": "f91a8768-8305-4b95-bf74-ceaf3cdcb9a7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "5ddcba8f-78dd-4a32-8975-4864d31506c2",
-                    "path": "<Touchscreen>/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OnClick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": []
