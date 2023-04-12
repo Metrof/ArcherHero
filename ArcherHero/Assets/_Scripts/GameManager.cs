@@ -30,19 +30,18 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        CreatePlayer();
         CreateEnemys();
+        CreatePlayer();
 
-        _playerController.SetEnemyPull(_enemyDeathList);
+        _playerController.StartNewLvl(_enemyDeathList);
     }
 
     private void CreatePlayer()
     {
         if (_playerPref != null)
         {
-            _playerModel = new PlayerModel(_mapDiagonalSize);
-
             _playerBody = Instantiate(_playerPref, Vector3.zero, Quaternion.identity);
+            _playerModel = new PlayerModel(_mapDiagonalSize, _playerBody.gameObject.layer);
             var playerView = _playerBody.GetComponent<PlayerView>();
 
             _playerController = new PlayerController(playerView, _playerModel, _playerBody, _defoltPlayerPos.position);
@@ -56,17 +55,19 @@ public class GameManager : MonoBehaviour
     {
         if (_enemyPref != null)
         {
-            EnemyModel model = new EnemyModel(_mapDiagonalSize);
+            for (int i = 0; i < 3; i++)
+            {
+                UnitBody enemyBody = Instantiate(_enemyPref, new Vector3(1.5f * i, 1.5f, 2 * i), Quaternion.identity);
+                EnemyModel model = new EnemyModel(_mapDiagonalSize, enemyBody.gameObject.layer);
+                var enemyView = enemyBody.GetComponent<EnemyView>();
 
-            _enemyBody = Instantiate(_enemyPref, Vector3.zero, Quaternion.identity);
-            var enemyView = _enemyBody.GetComponent<EnemyView>();
+                var enemyController = new EnemyController(enemyView, model, enemyBody, new Vector3(0, 1, 0), new Vector3(-50, 0, 0));
+                _enemys.Add(enemyController);
 
-            var enemyController = new EnemyController(enemyView, model, _enemyBody, new Vector3(0, 2, 0));
-            _enemys.Add(enemyController);
-
-            enemyController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList; 
-            _enemyDeathList.Add(_enemyBody);
-            _deathHandler.SetTargetList(_playerDeathList);
+                enemyController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList;
+                _enemyDeathList.Add(enemyBody);
+            }
+            _deathHandler.SetTargetList(_enemyDeathList);
         }
     }
 }

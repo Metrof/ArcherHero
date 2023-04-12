@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerModel : UnitModel
 {
-    private int _currentLvl;
-    private float _exp;
-    private float _expForNextLvl;
-
-    public PlayerModel(float mapSize) : base(mapSize)
+    public PlayerModel(float mapSize, int lauerNum) : base(mapSize, lauerNum)
     {
+    }
+    public override void Attack(Vector3 shotPos)
+    {
+        base.Attack(shotPos);
     }
 }
