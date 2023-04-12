@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitController<V, M> 
+public class UnitController<V, M> : MonoBehaviour
     where V : UnitView 
     where M : UnitModel
 {
