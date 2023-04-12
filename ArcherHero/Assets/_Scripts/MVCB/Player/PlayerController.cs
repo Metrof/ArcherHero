@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : UnitController<PlayerView, PlayerModel>
 {
-    private Controller _inputController;
+    private Controller _inputController = new();
     public PlayerController(PlayerView view, PlayerModel model, UnitBody body, Vector3 startPos) : base(view, model, body, startPos)
     {
-        _inputController = new Controller();
     }
     protected override void Enable()
     {
+        base.Enable();
         _inputController.Enable();
         _inputController.Player.Move.performed += Move;
         _inputController.Player.Move.canceled += StopMove;
@@ -21,6 +21,7 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     {
         SetEnemyPull(enemies);
         TransformToDefoltPos();
+        _model.ChangeTarget(_body.Position);
     }
     public void SetEnemyPull(List<UnitBody> enemies)
     {
@@ -28,29 +29,29 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     }
     public void TransformToDefoltPos()
     {
-
+        _body.Teleportation(_defoltPosition);
     }
 
 
     public void Move(InputAction.CallbackContext obj)
     {
         _view.ChangeMoveDirection(obj.ReadValue<Vector2>(), _body.MovementSpeed);
-        _model.ChangeTarget(_view.Position);
+        _model.ChangeTarget(_body.Position);
     }
     public void StopMove(InputAction.CallbackContext obj)
     {
         _view.ChangeMoveDirection(Vector2.zero, 0);
-        _model.ChangeTarget(_view.Position);
+        _model.ChangeTarget(_body.Position);
     }
 
 
     protected override void Death()
     {
         base.Death();
-        _model.ChangeTarget(_view.Position);
     }
     protected override void Disable() 
     {
+        base.Disable();
         _inputController.Player.Move.performed -= Move;
         _inputController.Player.Move.canceled -= StopMove;
         _inputController.Disable();
