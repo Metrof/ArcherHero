@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : UnitController<PlayerView, PlayerModel>
 {
-    private Controller _inputController = new();
+    //private Controller _inputController = new();
     public PlayerController(PlayerView view, PlayerModel model, UnitBody body, Vector3 startPos) : base(view, model, body, startPos)
     {
     }
     protected override void Enable()
     {
         base.Enable();
-        _inputController.Enable();
-        _inputController.Player.Move.performed += Move;
-        _inputController.Player.Move.canceled += StopMove;
+        //_inputController.Enable();
+        //_inputController.Player.Move.performed += Move;
+        //_inputController.Player.Move.canceled += StopMove;
     }
 
     public void StartNewLvl(List<UnitBody> enemies)
@@ -52,8 +52,8 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     protected override void Disable() 
     {
         base.Disable();
-        _inputController.Player.Move.performed -= Move;
-        _inputController.Player.Move.canceled -= StopMove;
-        _inputController.Disable();
+        //_inputController.Player.Move.performed -= Move;
+        //_inputController.Player.Move.canceled -= StopMove;
+        //_inputController.Disable();
     }
 }
