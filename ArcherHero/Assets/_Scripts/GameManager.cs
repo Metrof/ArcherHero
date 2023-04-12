@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DeathHandler))]
+[RequireComponent(typeof(ProjectilePull))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private UnitBody _playerPref;
     [SerializeField] private UnitBody _enemyPref;
 
     [SerializeField] private Transform _defoltPlayerPos;
-    [SerializeField] private float _mapDiagonalSize;
+    [SerializeField] private float _mapDiagonalSize = 39;
 
     private PlayerController _playerController;
     private List<EnemyController> _enemys = new List<EnemyController>();
