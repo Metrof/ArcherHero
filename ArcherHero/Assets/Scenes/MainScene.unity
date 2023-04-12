@@ -229,6 +229,9 @@ GameObject:
   - component: {fileID: 2082586980}
   - component: {fileID: 2082586979}
   - component: {fileID: 2082586982}
+  - component: {fileID: 2082586983}
+  - component: {fileID: 2082586984}
+  - component: {fileID: 2082586985}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -303,7 +306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082586978}
   m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
-  m_LocalPosition: {x: 0, y: 1, z: 16}
+  m_LocalPosition: {x: 0, y: 19.73, z: -9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -317,7 +320,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082586978}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d59b11b14d0b2ae4f85d184ba2f017cb, type: 3}
   m_Name: 
@@ -325,3 +328,47 @@ MonoBehaviour:
   target: {fileID: 0}
   smoothTime: 0.3
   offset: {x: 0, y: 0, z: 0}
+--- !u!114 &2082586983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082586978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d6b74d854503a4eb35fbfced923773, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerPref: {fileID: 7212818564010566731, guid: 06d6e0c309d33ff4984657482df6767d, type: 3}
+  _enemyPref: {fileID: 5253235291027596376, guid: 3f5aeac1457194a43aed8d66797a34c6, type: 3}
+  _defoltPlayerPos: {fileID: 0}
+  _mapDiagonalSize: 37
+--- !u!114 &2082586984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082586978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af55144a723f5d42a602d48624e58bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectilePref: {fileID: 3007121341085871996, guid: 3007af59c663f3a41a460f218ca4c7ad, type: 3}
+  _projectileAnchor: {fileID: 0}
+  _pullPos: {fileID: 0}
+  _projectileCount: 20
+--- !u!114 &2082586985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082586978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f83745c3fe6454b9c89488862bd3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

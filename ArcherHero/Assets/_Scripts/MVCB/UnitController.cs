@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XInput;
 
 public class UnitController<V, M> 
     where V : UnitView 
@@ -20,12 +19,21 @@ public class UnitController<V, M>
         _model = model;
         _body = body;
         _defoltPosition = startPos;
+
+
         _body.OnDeath += Death;
+        _model.OnAttackModel += ModelAttack;
         Enable();
     }
     protected virtual void Enable()
     {
-
+        _model.OnStopAttack += _body.StopAttacking;
+        _model.OnStartAttack += _body.StartAttacking;
+        _body.OnAttack += _model.Attack;
+    }
+    protected virtual void ModelAttack()
+    {
+        _model.ChangeTarget(_body.Position);
     }
     protected virtual void Death()
     {
