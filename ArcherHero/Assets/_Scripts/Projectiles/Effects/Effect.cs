@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Effect
 {
-    public abstract void GetEffect(UnitBody body);
+    protected CharacterStats _changes;
+    public abstract void GetEffect(Action<CharacterStats> changer);
 }
