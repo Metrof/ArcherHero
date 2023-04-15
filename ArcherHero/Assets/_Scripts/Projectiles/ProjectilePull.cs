@@ -9,8 +9,6 @@ public class ProjectilePull : MonoBehaviour
     [SerializeField] private Transform _pullPos;
     [SerializeField] private int _projectileCount = 20;
 
-    [SerializeField] private CharacterStats _baseDamage;
-
     private static int _currentProjectile = 0;
     private static List<Projectile> _projectiles = new List<Projectile>();
     private void Start()
@@ -21,7 +19,7 @@ public class ProjectilePull : MonoBehaviour
             {
                 Projectile projectile = Instantiate(_projectilePref, _projectileAnchor);
                 projectile.SetPullPos(_pullPos.position);
-                projectile.Effects.Add(new DamageEffect(_baseDamage));
+                projectile.Effects.Add(new DamageEffect(50));
                 _projectiles.Add(projectile);
             }
         }

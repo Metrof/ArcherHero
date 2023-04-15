@@ -6,14 +6,13 @@ using UnityEngine.InputSystem.XInput;
 public class EnemyController : UnitController<EnemyView, EnemyModel>
 {
     private Vector3 _pullPos;
-
-    public void SetPullPos(Vector3 pullPos)
+    public EnemyController(EnemyView view, EnemyModel model, UnitBody body, Vector3 startPos, Vector3 pullPos) : base(view, model, body, startPos)
     {
         _pullPos = pullPos;
     }
     protected override void Death()
     {
         base.Death();
-        Teleportation(_pullPos);
+        _body.Teleportation(_pullPos);
     }
 }

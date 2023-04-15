@@ -1,19 +1,22 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class DamageEffect : Effect
 {
-    public DamageEffect(CharacterStats baseDamage, CharacterStats addDamage = null)
+    private float _damage;
+    public DamageEffect(float damage)
     {
-        _changes = baseDamage;
-        if (addDamage != null) _changes.AddStats(addDamage);
+        _damage = damage;
     }
 
-    public override void GetEffect(Action<CharacterStats> changer)
+    protected float Damage { get { return _damage; } private set { _damage = value; } }
+    public override void GetEffect(UnitBody body)
     {
-        changer.Invoke(_changes);
+        body.TakeDamage(Damage);
+    }
+    public void ChangeDamage(float newDamage)
+    {
+        Damage = newDamage;
     }
 }

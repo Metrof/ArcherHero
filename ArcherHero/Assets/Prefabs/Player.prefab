@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 293859640828442225}
   - component: {fileID: 8673544390339888382}
   - component: {fileID: 6352859802852638498}
+  - component: {fileID: 7212818564010566731}
   - component: {fileID: -6794234384025202730}
   - component: {fileID: 6683611215230000413}
   m_Layer: 6
@@ -38,7 +39,7 @@ Transform:
   m_Children:
   - {fileID: 8673544391391377074}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8673544390339888371
 MeshFilter:
@@ -202,6 +203,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+--- !u!114 &7212818564010566731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8673544390339888375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcafbaaa1decc6a4c81c4c5c63571903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 100
+  _movementSpeed: 8
+  _rotationSpeed: 2
+  _attackDellay: 1
 --- !u!114 &-6794234384025202730
 MonoBehaviour:
   m_ObjectHideFlags: 0
