@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     private PlayerController _playerController;
     private List<EnemyController> _enemys = new List<EnemyController>();
 
-    private PlayerModel _playerModel;
     private DeathHandler _deathHandler;
 
     private List<Transform> _playerDeathList = new List<Transform>();
@@ -35,7 +34,11 @@ public class GameManager : MonoBehaviour
         CreateEnemys();
         CreatePlayer();
 
-        _playerController.StartNewLvl(_enemyDeathList);
+        _playerController.LvlStart(_enemyDeathList);
+        foreach (var enemy in _enemys)
+        {
+            enemy.LvlStart(_playerDeathList);
+        }
     }
 
     private void CreatePlayer()
@@ -44,9 +47,9 @@ public class GameManager : MonoBehaviour
         {
             _playerController = Instantiate(_playerPref, _defoltPlayerPos.position, Quaternion.identity);
             var playerView = _playerController.GetComponent<PlayerView>();
-            _playerModel = new PlayerModel(_mapDiagonalSize, _playerController.gameObject.layer);
+            var playerModel = new PlayerModel(_mapDiagonalSize, _playerController.gameObject.layer, _playerController.GetComponent<Renderer>().material);
 
-            _playerController.Init(playerView, _playerModel, _defoltPlayerPos.position);
+            _playerController.Init(playerView, playerModel, _defoltPlayerPos.position);
             _playerController.SetNewModelParram(_baseCharacterStats);
             _playerController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList;
 
@@ -60,12 +63,12 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                EnemyController enemyController = Instantiate(_enemyPref, new Vector3(1.5f * i, 1.5f, 2 * i), Quaternion.identity);
-                EnemyModel model = new EnemyModel(_mapDiagonalSize, enemyController.gameObject.layer);
+                var enemyController = Instantiate(_enemyPref, Vector3.zero, Quaternion.identity);
+                var model = new EnemyModel(_mapDiagonalSize, enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
                 var enemyView = enemyController.GetComponent<EnemyView>();
 
                 enemyController.gameObject.transform.SetParent(_enemyAnchor);
-                enemyController.Init(enemyView, model, new Vector3(0, 1, 0));
+                enemyController.Init(enemyView, model, new Vector3(1.5f * i, 1.5f, 2 * i));
                 enemyController.SetPullPos(_enemyPullPos);
                 enemyController.SetNewModelParram(_baseCharacterStats);
                 _enemys.Add(enemyController);

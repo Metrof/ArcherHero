@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plane
       objectReference: {fileID: 0}
+    - target: {fileID: 7062730259729290625, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7062730259729290636, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -771,7 +775,7 @@ MonoBehaviour:
   _projectilePref: {fileID: 3007121341085871996, guid: 3007af59c663f3a41a460f218ca4c7ad, type: 3}
   _projectileAnchor: {fileID: 1060556858}
   _pullPos: {fileID: 1525613559}
-  _projectileCount: 20
+  _projectileCount: 40
   _baseDamage: {fileID: 11400000, guid: a392f686fb910104499e8b99bf27f34a, type: 2}
 --- !u!1001 &488569016220944481
 PrefabInstance:

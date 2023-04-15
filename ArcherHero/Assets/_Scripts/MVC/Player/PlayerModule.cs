@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerModel : UnitModel
 {
-    public PlayerModel(float mapSize, int lauerNum) : base(mapSize, lauerNum)
+    public PlayerModel(float mapSize, int lauerNum, Material material) : base(mapSize, lauerNum, material)
     {
     }
 }

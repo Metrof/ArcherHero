@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
 
     private int _defoltLayer;
     private Rigidbody _rigidbody;
+    private Renderer _renderer;
     private Vector3 _moveDirection;
     private Vector3 _pullPos;
     private List<Effect> _effects = new List<Effect>();
@@ -19,6 +20,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _renderer = GetComponent<Renderer>();
         _defoltLayer = gameObject.layer;
     }
     public void MoveToDirection(Vector3 moveDirection, Vector3 shotPos)
@@ -27,9 +29,10 @@ public class Projectile : MonoBehaviour
         _moveDirection = moveDirection.normalized;
         _rigidbody.velocity = _moveDirection * _movementSpeed;
     }
-    public void ChangeLayer(int layer)
+    public void ChangeOwner(int layer, Material ownerMat)
     {
-        gameObject.layer = layer;
+        gameObject.layer = layer * 2;
+        _renderer.material = ownerMat;
     }
     public void SetPullPos(Vector3 pullPos)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyModel : UnitModel
 {
-    public EnemyModel(float mapSize, int lauerNum) : base(mapSize, lauerNum)
+    public EnemyModel(float mapSize, int lauerNum, Material material) : base(mapSize, lauerNum, material)
     {
 
     }

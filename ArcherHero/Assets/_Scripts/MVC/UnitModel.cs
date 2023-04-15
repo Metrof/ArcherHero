@@ -21,6 +21,7 @@ public class UnitModel
     protected float _mapDiagonalSize;
     protected List<Transform> _lvlEnemyPull;
     protected Transform _currentTarget;
+    protected Material _material;
     public int MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public float CurrentHP
     {
@@ -40,10 +41,11 @@ public class UnitModel
     public float MovementSpeed { get { return _movementSpeed; } private set { _movementSpeed = value; } }
     public float RotationSpeed { get { return _rotationSpeed; } private set { _rotationSpeed = value; } }
 
-    public UnitModel(float mapSize, int layerNum)
+    public UnitModel(float mapSize, int layerNum, Material material)
     {
         _mapDiagonalSize = mapSize;
         _layerNum = layerNum;
+        _material = material;
     }
     public void SetPull(List<Transform> lvlEnemyPull)
     {
@@ -74,7 +76,6 @@ public class UnitModel
             _currentTarget = null;
             return;
         }
-
         float minMagnitude = _mapDiagonalSize;
         float currentMagnitude;
         foreach (var enemy in _lvlEnemyPull)
@@ -95,7 +96,7 @@ public class UnitModel
             OnStopAttack?.Invoke();
             return;
         }
-        Projectile projectile = ProjectilePull.GetProjectile(_layerNum);
+        Projectile projectile = ProjectilePull.GetProjectile(_layerNum, _material);
         projectile.MoveToDirection(_currentTarget.position - shotPos, shotPos);
     }
 }

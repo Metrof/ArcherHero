@@ -26,12 +26,12 @@ public class ProjectilePull : MonoBehaviour
             }
         }
     }
-    public static Projectile GetProjectile(int layer)
+    public static Projectile GetProjectile(int layer, Material ownerMat)
     {
         _currentProjectile++;
         _currentProjectile %= _projectiles.Count;
         Projectile projectile = _projectiles[_currentProjectile];
-        projectile.ChangeLayer(layer);
+        projectile.ChangeOwner(layer, ownerMat);
         return projectile;
     }
 }

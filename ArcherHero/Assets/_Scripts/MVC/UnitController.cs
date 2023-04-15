@@ -10,6 +10,8 @@ public class UnitController<V, M> : MonoBehaviour
     public delegate void DeathDelegate(Transform unitController);
     public event DeathDelegate OnEnablePerson;
 
+    private Coroutine _attackCoroutine;
+
     protected V _view;
     protected M _model;
     protected Vector3 _defoltPosition;
@@ -35,11 +37,11 @@ public class UnitController<V, M> : MonoBehaviour
     }
     private void StartAttacking()
     {
-        StartCoroutine(AttackCorotine());
+        _attackCoroutine = StartCoroutine(AttackCorotine());
     }
     private void StopAttacking()
     {
-        StopCoroutine(AttackCorotine());
+        StopCoroutine(_attackCoroutine);
     }
     IEnumerator AttackCorotine()
     {
@@ -49,16 +51,24 @@ public class UnitController<V, M> : MonoBehaviour
             _model.Attack(transform.position);
         }
     }
-    private void OnTriggerEnter(Collider other)
+
+
+    public void LvlStart(List<Transform> enemies)
     {
-        if (other.TryGetComponent(out Projectile projectile))
-        {
-            foreach (var effect in projectile.Effects)
-            {
-                effect.GetEffect(ChangeModelParram);
-            }
-        }
+        SetEnemyPull(enemies);
+        TransformToDefoltPos();
+        _model.ChangeTarget(transform.position);
     }
+    public void SetEnemyPull(List<Transform> enemies)
+    {
+        _model.SetPull(enemies);
+    }
+    public void TransformToDefoltPos()
+    {
+        Teleportation(_defoltPosition);
+    }
+
+
     public void SetNewModelParram(CharacterStatsE stats)
     {
         _model.SetStats(stats);
@@ -78,10 +88,22 @@ public class UnitController<V, M> : MonoBehaviour
     protected virtual void Death()
     {
         OnEnablePerson?.Invoke(transform);
+        StopAttacking();
         Disable();
     }
     protected virtual void Disable()
     {
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Projectile projectile))
+        {
+            foreach (var effect in projectile.Effects)
+            {
+                effect.GetEffect(ChangeModelParram);
+            }
+        }
     }
 }
