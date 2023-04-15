@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerPref;
-    [SerializeField] private CharacterStats _baseCharacterStats;
+    [SerializeField] private CharacterStatsE _baseCharacterStats;
     [SerializeField] private EnemyController _enemyPref;
     
     [SerializeField] private Transform _defoltPlayerPos;

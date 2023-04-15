@@ -59,11 +59,11 @@ public class UnitController<V, M> : MonoBehaviour
             }
         }
     }
-    public void SetNewModelParram(CharacterStats stats)
+    public void SetNewModelParram(CharacterStatsE stats)
     {
         _model.SetStats(stats);
     }
-    public void ChangeModelParram(CharacterStats stats)
+    public void ChangeModelParram(CharacterStatsE stats)
     {
         _model.ChangeStats(stats);
     }

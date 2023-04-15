@@ -6,13 +6,13 @@ using UnityEngine.InputSystem.XR;
 
 public class DamageEffect : Effect
 {
-    public DamageEffect(CharacterStats baseDamage, CharacterStats addDamage = null)
+    public DamageEffect(CharacterStatsE baseDamage, CharacterStatsE addDamage = null)
     {
         _changes = baseDamage;
         if (addDamage != null) _changes.AddStats(addDamage);
     }
 
-    public override void GetEffect(Action<CharacterStats> changer)
+    public override void GetEffect(Action<CharacterStatsE> changer)
     {
         changer.Invoke(_changes);
     }

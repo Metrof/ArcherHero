@@ -9,7 +9,7 @@ public class ProjectilePull : MonoBehaviour
     [SerializeField] private Transform _pullPos;
     [SerializeField] private int _projectileCount = 20;
 
-    [SerializeField] private CharacterStats _baseDamage;
+    [SerializeField] private CharacterStatsE _baseDamage;
 
     private static int _currentProjectile = 0;
     private static List<Projectile> _projectiles = new List<Projectile>();

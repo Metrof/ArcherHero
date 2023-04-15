@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStats", order = 3)]
-public class CharacterStats : ScriptableObject
+public class CharacterStatsE : ScriptableObject
 {
     [Header("HP")]
     [SerializeField] private int _maxHP;
@@ -22,7 +22,7 @@ public class CharacterStats : ScriptableObject
     public float RotationSpeed => _rotationSpeed;
     public float AttackDellay => _attackDellay;
 
-    public void AddStats(CharacterStats stats)
+    public void AddStats(CharacterStatsE stats)
     {
         _maxHP += stats.MaxHp;
         _hpChange += stats.HPChange;

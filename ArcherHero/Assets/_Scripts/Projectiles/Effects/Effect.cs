@@ -5,6 +5,6 @@ using UnityEngine;
 
 public abstract class Effect
 {
-    protected CharacterStats _changes;
-    public abstract void GetEffect(Action<CharacterStats> changer);
+    protected CharacterStatsE _changes;
+    public abstract void GetEffect(Action<CharacterStatsE> changer);
 }

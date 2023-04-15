@@ -50,7 +50,7 @@ public class UnitModel
         _lvlEnemyPull = lvlEnemyPull;
         OnStartAttack?.Invoke();
     }
-    public void SetStats(CharacterStats stats)
+    public void SetStats(CharacterStatsE stats)
     {
         MaxHP = stats.MaxHp;
         AttackDellay = stats.AttackDellay;
@@ -59,7 +59,7 @@ public class UnitModel
 
         CurrentHP = MaxHP;
     }
-    public void ChangeStats(CharacterStats stats)
+    public void ChangeStats(CharacterStatsE stats)
     {
         MaxHP += stats.MaxHp;
         CurrentHP += stats.HPChange;
