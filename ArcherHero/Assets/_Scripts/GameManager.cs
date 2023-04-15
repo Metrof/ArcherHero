@@ -6,10 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(ProjectilePull))]
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private UnitBody _playerPref;
-    [SerializeField] private UnitBody _enemyPref;
-
+    [SerializeField] private PlayerController _playerPref;
+    [SerializeField] private CharacterStatsE _baseCharacterStats;
+    [SerializeField] private EnemyController _enemyPref;
+    
     [SerializeField] private Transform _defoltPlayerPos;
+    [SerializeField] private Transform _enemyAnchor;
+    [SerializeField] private Vector3 _enemyPullPos;
     [SerializeField] private float _mapDiagonalSize = 39;
 
     private PlayerController _playerController;
@@ -18,11 +21,8 @@ public class GameManager : MonoBehaviour
     private PlayerModel _playerModel;
     private DeathHandler _deathHandler;
 
-    private UnitBody _playerBody;
-    private UnitBody _enemyBody;
-
-    private List<UnitBody> _playerDeathList = new List<UnitBody>();
-    private List<UnitBody> _enemyDeathList = new List<UnitBody>();
+    private List<Transform> _playerDeathList = new List<Transform>();
+    private List<Transform> _enemyDeathList = new List<Transform>();
 
 
     private void Awake()
@@ -42,14 +42,15 @@ public class GameManager : MonoBehaviour
     {
         if (_playerPref != null)
         {
-            _playerBody = Instantiate(_playerPref, Vector3.zero, Quaternion.identity);
-            _playerModel = new PlayerModel(_mapDiagonalSize, _playerBody.gameObject.layer);
-            var playerView = _playerBody.GetComponent<PlayerView>();
+            _playerController = Instantiate(_playerPref, _defoltPlayerPos.position, Quaternion.identity);
+            var playerView = _playerController.GetComponent<PlayerView>();
+            _playerModel = new PlayerModel(_mapDiagonalSize, _playerController.gameObject.layer);
 
-            _playerController = new PlayerController(playerView, _playerModel, _playerBody, _defoltPlayerPos.position);
+            _playerController.Init(playerView, _playerModel, _defoltPlayerPos.position);
+            _playerController.SetNewModelParram(_baseCharacterStats);
             _playerController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList;
 
-            _playerDeathList.Add(_playerBody);
+            _playerDeathList.Add(_playerController.transform);
             _deathHandler.SetTargetList(_playerDeathList);
         }
     }
@@ -59,15 +60,18 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < 3; i++)
             {
-                UnitBody enemyBody = Instantiate(_enemyPref, new Vector3(1.5f * i, 1.5f, 2 * i), Quaternion.identity);
-                EnemyModel model = new EnemyModel(_mapDiagonalSize, enemyBody.gameObject.layer);
-                var enemyView = enemyBody.GetComponent<EnemyView>();
+                EnemyController enemyController = Instantiate(_enemyPref, new Vector3(1.5f * i, 1.5f, 2 * i), Quaternion.identity);
+                EnemyModel model = new EnemyModel(_mapDiagonalSize, enemyController.gameObject.layer);
+                var enemyView = enemyController.GetComponent<EnemyView>();
 
-                var enemyController = new EnemyController(enemyView, model, enemyBody, new Vector3(0, 1, 0), new Vector3(-50, 0, 0));
+                enemyController.gameObject.transform.SetParent(_enemyAnchor);
+                enemyController.Init(enemyView, model, new Vector3(0, 1, 0));
+                enemyController.SetPullPos(_enemyPullPos);
+                enemyController.SetNewModelParram(_baseCharacterStats);
                 _enemys.Add(enemyController);
 
                 enemyController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList;
-                _enemyDeathList.Add(enemyBody);
+                _enemyDeathList.Add(enemyController.transform);
             }
             _deathHandler.SetTargetList(_enemyDeathList);
         }

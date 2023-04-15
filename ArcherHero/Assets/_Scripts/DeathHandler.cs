@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DeathHandler : MonoBehaviour
 {
-    private List<List<UnitBody>> _listsOftargets = new List<List<UnitBody>>();
-    public void SetTargetList(List<UnitBody> targetList)
+    private List<List<Transform>> _listsOftargets = new List<List<Transform>>();
+    public void SetTargetList(List<Transform> targetList)
     {
         _listsOftargets.Add(targetList);
     }
-    public void DeleteBodyFromTargetList(UnitBody target)
+    public void DeleteBodyFromTargetList(Transform target)
     {
         foreach (var list in _listsOftargets)
         {
