@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c209e03cdc4394f9887f72a30da8cd, type: 3}
+  m_Name: CharacterStats
+  m_EditorClassIdentifier: 
+  _maxHP: 200
+  _hpUpgradeCounter: 0
+  _hpUpgradeLimit: 30
+  _hpUpgradePrice: 100
+  _hpUpgradeValue: 10
+  _hpPriceFactor: 2
+  _damage: 50
+  _damageUpgradeCounter: 0
+  _damageUpgradeLimit: 35
+  _damageUpgradePrice: 150
+  _damageUpgradeValue: 5
+  _damagePriceFactor: 2
+  _speedAttack: 1
+  _speedAttackUpgradeCounter: 0
+  _speedAttackUpgradeLimit: 15
+  _speedAttackUpgradePrice: 250
+  _speedAttackUpgradeValue: 1
+  _speedAttackPriceFactor: 2
+  _money: 50000
