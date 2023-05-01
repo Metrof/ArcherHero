@@ -77,20 +77,20 @@ public class OptionsMenuController : MonoBehaviour
     }
     private void UpgradeText()
     {
-        _hpCurrentText.text = $"Current HP == {_characterStats.MaxHp}";
+        _hpCurrentText.text = $" HP = {_characterStats.MaxHp}";
         _hpUpgradeText.text = $"{_characterStats.HpUpgradeCounter} out of {_characterStats.HpUpgradeLimit}";
         _hpPriceText.text = $"Price : {_characterStats.HpUpgradePrice}";
         _hpValueText.text =$"HP +  {_characterStats.HpUpgradeValue}";
 
-        _damageCurrentText.text = $"Current Damage == {_characterStats.Damage}";
+        _damageCurrentText.text = $" Damage = {_characterStats.Damage}";
         _damageUpgradeText.text = $"{_characterStats.DamageUpgradeCounter} out of {_characterStats.DamageUpgradeLimit}";
         _damagePriceText.text = $"Price : {_characterStats.DamageUpgradePrice}";
-        _damageValueText.text = $"Value + {_characterStats.DamageUpgradeValue}";
+        _damageValueText.text = $"Damage + {_characterStats.DamageUpgradeValue}";
         
         _speedAttackUpgradeText.text = $"{_characterStats.SpeedAttackUpgradeCounter} out of {_characterStats.SpeedAttackUpgradeLimit}";
         _speedAttackPriceText.text = $"Price : {_characterStats.SpeedAttackUpgradePrice}";
-        _speedAttackValueText.text = $"Value + {_characterStats.SpeedAttackUpgradeValue}";
-        _speedAttackCurrentText.text = $"Current Speed Attack == {_characterStats.SpeedAttack}";      
+        _speedAttackValueText.text = $"Speed Attack + {_characterStats.SpeedAttackUpgradeValue}";
+        _speedAttackCurrentText.text = $"Speed Attack = {_characterStats.SpeedAttack}";      
     }
 }
  
