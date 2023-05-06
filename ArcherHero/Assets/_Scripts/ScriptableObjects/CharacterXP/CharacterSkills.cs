@@ -16,12 +16,6 @@ public class CharacterSkills : ScriptableObject
     public int XPToLevelUp => _xpToLevelUp;
     public int SkillPoints => _skillPoints;
 
-   /* public int Experience
-    {
-        get => _currentXP;
-        set => _currentXP = value;
-    }*/
-    
     public void GainExperience(int amount)
     {
         _currentXP += amount;
@@ -40,13 +34,6 @@ public class CharacterSkills : ScriptableObject
         _skillPoints++;
     }
 
-    public void SetValues(int currentLevel, int currentXP, int xpToLevelUp, int skillPoints)
-    {
-        _currentLevel = currentLevel;
-        _currentXP = currentXP;
-        _xpToLevelUp = xpToLevelUp;
-        _skillPoints = skillPoints;   
-    }
 }
 
     

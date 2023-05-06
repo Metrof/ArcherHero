@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +16,9 @@ public class XPBar : MonoBehaviour
     void Awake()
     {
         Slider slider = GetComponent<Slider>();
+    }
+    void Start()
+    {
         UpgradeText();
     }
     public void UpgradeText()

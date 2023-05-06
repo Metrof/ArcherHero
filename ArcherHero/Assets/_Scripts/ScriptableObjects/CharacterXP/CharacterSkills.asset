@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037cae984769ff045b8a1d43c5d58cc1, type: 3}
   m_Name: CharacterSkills
   m_EditorClassIdentifier: 
-  _currentLevel: 11
-  _currentXP: 11
-  _xpToLevelUp: 11
-  _skillPoints: 11
+  _currentLevel: 1
+  _currentXP: 1
+  _xpToLevelUp: 1
+  _skillPoints: 1
