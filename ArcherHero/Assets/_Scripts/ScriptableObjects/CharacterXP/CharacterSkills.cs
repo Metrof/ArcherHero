@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "CharacterSkills" ,menuName = "ArcherHero/CharacterSkills")]
+
 public class CharacterSkills : ScriptableObject
 {
     [SerializeField] private int _currentLevel = 1;
@@ -16,12 +16,6 @@ public class CharacterSkills : ScriptableObject
     public int XPToLevelUp => _xpToLevelUp;
     public int SkillPoints => _skillPoints;
 
-    public int Experience
-    {
-        get => _currentXP;
-        set => _currentXP = value;
-    }
-    
     public void GainExperience(int amount)
     {
         _currentXP += amount;
@@ -39,5 +33,10 @@ public class CharacterSkills : ScriptableObject
         _xpToLevelUp = (int)(_xpToLevelUp * 1.5f);
         _skillPoints++;
     }
+
 }
+
+    
+    
+
 

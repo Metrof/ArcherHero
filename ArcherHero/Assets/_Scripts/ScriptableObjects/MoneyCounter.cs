@@ -1,7 +1,7 @@
 
 using TMPro;
 using UnityEngine;
-using ScriptableObjects;
+
 
 public class MoneyCounter : MonoBehaviour
 {

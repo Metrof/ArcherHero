@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +16,9 @@ public class XPBar : MonoBehaviour
     void Awake()
     {
         Slider slider = GetComponent<Slider>();
+    }
+    void Start()
+    {
         UpgradeText();
     }
     public void UpgradeText()
@@ -34,8 +36,5 @@ public class XPBar : MonoBehaviour
         slider.value = (float)_characterSkills.CurrentXP / _characterSkills.XPToLevelUp;
 
         _characterSkills.GainExperience(5);  // прибавляю опыт
-    }
-
-    
-     
+    }   
 }
