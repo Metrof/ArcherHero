@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
-{   
+/*{   
     private CharacterController controller;
     private CharacterController Controller{get { return controller = controller ?? GetComponent<CharacterController>();} }
   
@@ -34,4 +34,12 @@ public class Player : MonoBehaviour
     {
         Move(moveDirection);  
     }
+}*/
+{   
+    
+  
+
+
 }
+
+

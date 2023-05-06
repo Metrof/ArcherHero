@@ -34,8 +34,5 @@ public class XPBar : MonoBehaviour
         slider.value = (float)_characterSkills.CurrentXP / _characterSkills.XPToLevelUp;
 
         _characterSkills.GainExperience(5);  // прибавляю опыт
-    }
-
-    
-     
+    }   
 }

@@ -1,39 +1,51 @@
 
 using UnityEngine;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
-public static class SaveSystemXP
+public class SaveManager : MonoBehaviour
 {
-    public static void SaveXP(CharacterSkills characterSkills)
+    [SerializeField] private CharacterSkills _characterSkills;
+
+    private const string LevelKey = "CurrentLevel";
+    private const string XPKey = "CurrentXP";
+    private const string XPToLevelUpKey = "XPToLevelUp";
+    private const string SkillPointsKey = "SkillPoints";
+    
+
+    /* private void  OnApplicationFocus(bool hasFocus)
+    {  
+        // ???????
+    }*/
+
+    private void OnApplicationQuit()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/character.fun";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        XPData data = new XPData(characterSkills);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
+        Save();
     }
 
-    public static XPData LoadXP()
+    private void Awake()
     {
-        string path = Application.persistentDataPath + "/character.fun";
-        if(File.Exists(path))
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
+        Load();
+    }
 
-            XPData data = formatter.Deserialize(stream) as XPData;
+    public void Save()
+    {
+        PlayerPrefs.SetInt(LevelKey, _characterSkills.CurrentLevel);
+        PlayerPrefs.SetInt(XPKey, _characterSkills.CurrentXP);
+        PlayerPrefs.SetInt(XPToLevelUpKey, _characterSkills.XPToLevelUp);
+        PlayerPrefs.SetInt(SkillPointsKey, _characterSkills.SkillPoints);
+        PlayerPrefs.Save();
+        
+        Debug.Log("Data saved");
+    }
 
-            stream.Close();
+   public void Load()
+    {
+        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", _characterSkills.CurrentLevel);
+        int currentXP = PlayerPrefs.GetInt("CurrentXP", _characterSkills.CurrentXP);
+        int xpToLevelUp = PlayerPrefs.GetInt("XPToLevelUp", _characterSkills.XPToLevelUp);
+        int skillPoints = PlayerPrefs.GetInt("SkillPoints", _characterSkills.SkillPoints);
 
-            return data;
-        }
-        else
-        {
-            return null;
-        }
+        _characterSkills.SetValues(currentLevel, currentXP, xpToLevelUp, skillPoints);
+
+        Debug.Log("Data loaded");
     }
 }
