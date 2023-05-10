@@ -15,7 +15,7 @@ public class UnitController<V, M> : MonoBehaviour
     protected V _view;
     protected M _model;
     protected Vector3 _defoltPosition;
-   public void Init(V view, M model, Vector3 startPos)
+   public virtual void Init(V view, M model, Vector3 startPos)
    {
         _view = view;
         _model = model;
@@ -37,11 +37,12 @@ public class UnitController<V, M> : MonoBehaviour
     }
     private void StartAttacking()
     {
+        StopAttacking();
         _attackCoroutine = StartCoroutine(AttackCorotine());
     }
     private void StopAttacking()
     {
-        StopCoroutine(_attackCoroutine);
+        if (_attackCoroutine != null) StopCoroutine(_attackCoroutine);
     }
     IEnumerator AttackCorotine()
     {
@@ -53,15 +54,18 @@ public class UnitController<V, M> : MonoBehaviour
     }
 
 
-    public void LvlStart(List<Transform> enemies)
+    public void LvlStart()
     {
-        SetEnemyPull(enemies);
         TransformToDefoltPos();
         _model.ChangeTarget(transform.position);
     }
-    public void SetEnemyPull(List<Transform> enemies)
+    public void WaveStart()
     {
-        _model.SetPull(enemies);
+        StartAttacking();
+    }
+    public void WaveStop()
+    {
+        StopAttacking();
     }
     public void TransformToDefoltPos()
     {
@@ -87,6 +91,7 @@ public class UnitController<V, M> : MonoBehaviour
     }
     protected virtual void Death()
     {
+        _model.Restats();
         OnEnablePerson?.Invoke(transform);
         StopAttacking();
         Disable();

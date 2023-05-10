@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStats", order = 3)]
 public class CharacterStatsE : ScriptableObject
 {
     [Header("HP")]
-    [SerializeField] private int _maxHP;
+    [SerializeField] private float _maxHP;
     [SerializeField] private float _hpChange;
 
     [Header("Speed")]
@@ -16,7 +17,7 @@ public class CharacterStatsE : ScriptableObject
     [Header("Attack")]
     [SerializeField] private float _attackDellay;
 
-    public int MaxHp => _maxHP;
+    public float MaxHp => _maxHP;
     public float HPChange => _hpChange;
     public float MovementSpeed => _movementSpeed;
     public float RotationSpeed => _rotationSpeed;
@@ -29,5 +30,9 @@ public class CharacterStatsE : ScriptableObject
         _movementSpeed += stats.MovementSpeed;
         _rotationSpeed += stats.RotationSpeed;
         _attackDellay += stats.AttackDellay;
+    }
+    public void ScaleStats(float scale)
+    {
+        _maxHP *= scale;
     }
 }

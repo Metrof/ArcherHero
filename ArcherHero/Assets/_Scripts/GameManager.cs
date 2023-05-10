@@ -1,47 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(DeathHandler))]
 [RequireComponent(typeof(ProjectilePull))]
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerController _playerPref;
     [SerializeField] private CharacterStatsE _baseCharacterStats;
     [SerializeField] private EnemyController _enemyPref;
-    
+
     [SerializeField] private Transform _defoltPlayerPos;
     [SerializeField] private Transform _enemyAnchor;
     [SerializeField] private Vector3 _enemyPullPos;
     [SerializeField] private float _mapDiagonalSize = 39;
 
+    [SerializeField] private Level[] _levels;
+
     private PlayerController _playerController;
-    private List<EnemyController> _enemys = new List<EnemyController>();
+    private CameraController _cameraController;
 
-    private DeathHandler _deathHandler;
+    private Level _currentLvl;
+    private GameObject _lvlObj;
 
-    private List<Transform> _playerDeathList = new List<Transform>();
-    private List<Transform> _enemyDeathList = new List<Transform>();
+    private Wave[] _waves;
+    private int _currentWave;
 
+    private LvlTriggerZone _startTriggerZone;
+    private LvlTriggerZone _endTriggerZone;
 
     private void Awake()
     {
-        _deathHandler = GetComponent<DeathHandler>();
+        _cameraController = GetComponent<CameraController>();
+        _currentLvl = _levels[DataHolder.LvlStart];
     }
 
     public void Start()
     {
-        CreateEnemys();
-        CreatePlayer();
-
-        _playerController.LvlStart(_enemyDeathList);
-        foreach (var enemy in _enemys)
-        {
-            enemy.LvlStart(_playerDeathList);
-        }
+        LvlInit();
+        CreateEnemys(_currentLvl.EnemyPower);
+        CreatePlayer(DataHolder.PlayerStats);
+        _cameraController.SetTarget(_playerController.transform);
     }
 
-    private void CreatePlayer()
+    private void CreatePlayer(CharacterStatsE playerStats)
     {
         if (_playerPref != null)
         {
@@ -49,34 +51,69 @@ public class GameManager : MonoBehaviour
             var playerView = _playerController.GetComponent<PlayerView>();
             var playerModel = new PlayerModel(_mapDiagonalSize, _playerController.gameObject.layer, _playerController.GetComponent<Renderer>().material);
 
+            if (playerStats == null) playerStats = _baseCharacterStats;
             _playerController.Init(playerView, playerModel, _defoltPlayerPos.position);
-            _playerController.SetNewModelParram(_baseCharacterStats);
-            _playerController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList;
+            _playerController.SetNewModelParram(playerStats);
+            _playerController.LvlStart();
 
-            _playerDeathList.Add(_playerController.transform);
-            _deathHandler.SetTargetList(_playerDeathList);
+            UnitManager.Instance.SetPlayerAtUnitManager(_playerController);
         }
     }
-    private void CreateEnemys()
+    private void CreateEnemys(float scaleStats)
     {
-        if (_enemyPref != null)
+        if (_currentLvl != null)
         {
-            for (int i = 0; i < 3; i++)
+            var enemysList = new List<EnemyController>();
+            for (int i = 0; i < _currentLvl.Enemies.Count; i++)
             {
-                var enemyController = Instantiate(_enemyPref, Vector3.zero, Quaternion.identity);
-                var model = new EnemyModel(_mapDiagonalSize, enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
-                var enemyView = enemyController.GetComponent<EnemyView>();
+                for (int f = 0; f < _currentLvl.EnemyCount; f++)
+                {
+                    var enemyController = Instantiate(_currentLvl.Enemies[i], _enemyAnchor);
+                    var model = new EnemyModel(_mapDiagonalSize, enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
+                    var enemyView = enemyController.GetComponent<EnemyView>();
+                    var enemyStats = _baseCharacterStats;
+                    enemyStats.ScaleStats(scaleStats);
 
-                enemyController.gameObject.transform.SetParent(_enemyAnchor);
-                enemyController.Init(enemyView, model, new Vector3(1.5f * i, 1.5f, 2 * i));
-                enemyController.SetPullPos(_enemyPullPos);
-                enemyController.SetNewModelParram(_baseCharacterStats);
-                _enemys.Add(enemyController);
-
-                enemyController.OnEnablePerson += _deathHandler.DeleteBodyFromTargetList;
-                _enemyDeathList.Add(enemyController.transform);
+                    enemyController.Init(enemyView, model, _enemyPullPos);
+                    enemyController.SetEnemyType(_currentLvl.Enemies[i].Type);
+                    enemyController.SetNewModelParram(enemyStats);
+                    enemyController.OnLastEnemyDeath += StartNewWave;
+                    enemyController.LvlStart();
+                    enemysList.Add(enemyController);
+                }
             }
-            _deathHandler.SetTargetList(_enemyDeathList);
+            UnitManager.Instance.SetEnemysAtUnitManager(enemysList);
         }
+    }
+    private void LvlInit()
+    {
+        _lvlObj = Instantiate(_currentLvl.LvlPref, Vector3.zero, Quaternion.identity);
+        _startTriggerZone = Instantiate(_currentLvl.LvlStartTriggerZone);
+        _endTriggerZone =  Instantiate(_currentLvl.LvlEndTriggerZone);
+        _waves = _lvlObj.GetComponentsInChildren<Wave>();
+
+        _startTriggerZone.OnTrigger += LvlStart;
+        _endTriggerZone.OnTrigger += LvlEnd;
+    }
+    private void LvlStart()
+    {
+        LvlDoor.CloseDoor();
+        StartNewWave();
+    }
+    public void StartNewWave()
+    {
+        if (_currentWave > _waves.Length - 1)
+        {
+            LvlDoor.OpenDoor();
+            UnitManager.Instance.Player.WaveStop();
+            return;
+        }
+        UnitManager.Instance.TeleportWaveEnemys(_waves[_currentWave].Points);
+        UnitManager.Instance.WaveStart();
+        _currentWave++;
+    }
+    private void LvlEnd()
+    {
+        SceneManager.LoadScene(0);
     }
 }

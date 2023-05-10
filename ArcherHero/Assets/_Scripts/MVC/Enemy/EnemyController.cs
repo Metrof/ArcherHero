@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class EnemyController : UnitController<EnemyView, EnemyModel>
 {
-    private Vector3 _pullPos;
+    public delegate void EnemyControllerDelegate();
+    public event EnemyControllerDelegate OnLastEnemyDeath;
+    [SerializeField] private EnemyTypes _type;
 
-    public void SetPullPos(Vector3 pullPos)
+    public EnemyTypes Type { get { return _type; } }
+
+
+    public void SetEnemyType(EnemyTypes type)
     {
-        _pullPos = pullPos;
+        _type = type;
     }
     protected override void Death()
     {
         base.Death();
-        Teleportation(_pullPos);
+        TransformToDefoltPos();
+        if(!UnitManager.Instance.AnySurvivingEnemies()) OnLastEnemyDeath?.Invoke();
     }
 }

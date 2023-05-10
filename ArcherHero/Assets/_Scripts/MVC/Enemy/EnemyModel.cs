@@ -8,4 +8,8 @@ public class EnemyModel : UnitModel
     {
 
     }
+    public override void ChangeTarget(Vector3 myPos)
+    {
+        _currentTarget = UnitManager.Instance.PlayerTransform;
+    }
 }

@@ -11,7 +11,7 @@ public class UnitModel
     public event Action OnAttackModel;
     public event Action OnDeath;
 
-    protected int _maxHP;
+    protected float _maxHP;
     protected float _movementSpeed;
     protected float _rotationSpeed;
     protected float _attackDellay;
@@ -22,7 +22,9 @@ public class UnitModel
     protected List<Transform> _lvlEnemyPull;
     protected Transform _currentTarget;
     protected Material _material;
-    public int MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
+
+    protected CharacterStatsE _spawnStats;
+    public float MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public float CurrentHP
     {
         get { return _currentHP; }
@@ -54,6 +56,7 @@ public class UnitModel
     }
     public void SetStats(CharacterStatsE stats)
     {
+        _spawnStats = stats;
         MaxHP = stats.MaxHp;
         AttackDellay = stats.AttackDellay;
         MovementSpeed = stats.MovementSpeed;
@@ -69,24 +72,13 @@ public class UnitModel
         MovementSpeed += stats.MovementSpeed;
         RotationSpeed += stats.RotationSpeed;
     }
+    public void Restats()
+    {
+        SetStats(_spawnStats);
+    }
     public virtual void ChangeTarget(Vector3 myPos)
     {
-        if (_lvlEnemyPull.Count <= 0) 
-        {
-            _currentTarget = null;
-            return;
-        }
-        float minMagnitude = _mapDiagonalSize;
-        float currentMagnitude;
-        foreach (var enemy in _lvlEnemyPull)
-        {
-            currentMagnitude = Vector3.Distance(enemy.transform.position, myPos);
-            if (currentMagnitude < minMagnitude)
-            {
-                minMagnitude = currentMagnitude;
-                _currentTarget = enemy;
-            }
-        }
+        
     }
     public virtual void Attack(Vector3 shotPos)
     {

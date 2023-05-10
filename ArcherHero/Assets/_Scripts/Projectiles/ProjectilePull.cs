@@ -17,13 +17,18 @@ public class ProjectilePull : MonoBehaviour
     {
         if (_projectilePref != null)
         {
-            for (int i = 0; i < _projectileCount; i++)
-            {
-                Projectile projectile = Instantiate(_projectilePref, _projectileAnchor);
-                projectile.SetPullPos(_pullPos.position);
-                projectile.Effects.Add(new DamageEffect(_baseDamage));
-                _projectiles.Add(projectile);
-            }
+            SpawnProjectiles();
+        }
+    }
+    private void SpawnProjectiles()
+    {
+        _projectiles.Clear();
+        for (int i = 0; i < _projectileCount; i++)
+        {
+            Projectile projectile = Instantiate(_projectilePref, _projectileAnchor);
+            projectile.SetPullPos(_pullPos.position);
+            projectile.Effects.Add(new DamageEffect(_baseDamage));
+            _projectiles.Add(projectile);
         }
     }
     public static Projectile GetProjectile(int layer, Material ownerMat)
