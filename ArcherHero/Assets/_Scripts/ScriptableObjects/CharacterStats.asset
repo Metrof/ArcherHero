@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c209e03cdc4394f9887f72a30da8cd, type: 3}
   m_Name: CharacterStats
   m_EditorClassIdentifier: 
-  _maxHP: 60
-  _hpUpgradeCounter: 10
-  _hpUpgradeLimit: 10
-  _hpUpgradePrice: 339
+  _maxHP: 3
+  _hpUpgradeCounter: 3
+  _hpUpgradeLimit: 3
+  _hpUpgradePrice: 3
   _hpUpgradeValue: 3
   _hpPriceFactor: 3
-  _damage: 2
-  _damageUpgradeCounter: 10
-  _damageUpgradeLimit: 10
-  _damageUpgradePrice: 118
-  _damageUpgradeValue: 0
-  _damagePriceFactor: 2
-  _speedAttack: 31
-  _speedAttackUpgradeCounter: 12
-  _speedAttackUpgradeLimit: 0
-  _speedAttackUpgradePrice: 228
+  _damage: 3
+  _damageUpgradeCounter: 3
+  _damageUpgradeLimit: 3
+  _damageUpgradePrice: 3
+  _damageUpgradeValue: 3
+  _damagePriceFactor: 3
+  _speedAttack: 3
+  _speedAttackUpgradeCounter: 3
+  _speedAttackUpgradeLimit: 3
+  _speedAttackUpgradePrice: 3
   _speedAttackUpgradeValue: 3
   _speedAttackPriceFactor: 3
-  _money: 6360205
+  _money: 3

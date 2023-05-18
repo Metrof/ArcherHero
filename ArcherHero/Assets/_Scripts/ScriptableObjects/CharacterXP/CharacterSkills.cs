@@ -26,18 +26,6 @@ public class CharacterSkills : ScriptableObject
         }
     }
 
-    public void PurchasePerk(int price)
-    {   
-        if (_skillPoints >= price)
-        {
-            _skillPoints -= price;
-        }
-        else
-        {
-            Debug.Log("Insufficient skill points to purchase the perk.");
-        }
-    }
-
     private void LevelUp()
     {
         _currentLevel++;
