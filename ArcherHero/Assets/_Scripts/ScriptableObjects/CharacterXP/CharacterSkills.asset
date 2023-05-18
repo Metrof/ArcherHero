@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: CharacterSkills
   m_EditorClassIdentifier: 
   _currentLevel: 1
-  _currentXP: 0
+  _currentXP: 90
   _xpToLevelUp: 100
-  _skillPoints: 20
+  _skillPoints: 83
