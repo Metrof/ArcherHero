@@ -57,6 +57,7 @@ public static class SaveSystem
         string json = JsonUtility.ToJson(characterStats);
         if (json != null)
         {
+                Debug.Log(savePathStats + "PS");
             File.WriteAllText(savePathStats, json);
         }
     }
@@ -72,19 +73,31 @@ public static class SaveSystem
 
 
    public static void SavePerkData(Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> perkData)
-    {
+   {
         string json = JsonConvert.SerializeObject(perkData);
         File.WriteAllText(savePathPerk, json); 
-    }
+   }
 
     public static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> LoadPerkData()
-    {       
+    {
         string json = File.ReadAllText(savePathPerk);
-        try
+
+        Debug.Log(savePathPerk);
+
+        Debug.Log(json);
+
+        if (json != null)
         {
-           return JsonConvert.DeserializeObject<Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>>(json);
+            try
+            {
+                return JsonConvert.DeserializeObject<Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>>(json);
+            }
+            catch (Exception)
+            {
+                return GetDefaultPerkData();
+            }
         }
-        catch(Exception)
+        else
         {
             return GetDefaultPerkData();
         }
@@ -93,7 +106,7 @@ public static class SaveSystem
     private static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> GetDefaultPerkData()
     {
         Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> perkData = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
-        
+        Debug.Log("GetDefaultPerkData()");
         foreach (PerkManager.PerkType perkType in Enum.GetValues(typeof(PerkManager.PerkType)))
         {
             perkData.Add(perkType, PerkManager.PerkStatus.NotAvailable);

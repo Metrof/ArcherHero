@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : UnitController<PlayerView, PlayerModel>
 {
+    [SerializeField] private CharacterSkills _characterSkills;
+    [SerializeField] private CharacterStats _characterStats;
     [SerializeField] Dagger _dagger;
     private Skill _firstSkill;
     private Skill _secondSkill;
