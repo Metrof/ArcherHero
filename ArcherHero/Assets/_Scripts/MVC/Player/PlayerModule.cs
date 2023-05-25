@@ -9,6 +9,6 @@ public class PlayerModel : UnitModel
     }
     public override void ChangeTarget(Vector3 myPos)
     {
-        _currentTarget = FindNearestTarget.GetNearestTarget(myPos, UnitManager.Instance.EnemiesTransforms);
+        _currentTarget = FindNearestTarget.GetNearestTarget(myPos, UnitManager.Instance.WaveEnemiesTransforms);
     }
 }

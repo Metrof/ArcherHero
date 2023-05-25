@@ -15,7 +15,11 @@ public class UnitController<V, M> : MonoBehaviour
     protected V _view;
     protected M _model;
     protected Vector3 _defoltPosition;
-   public virtual void Init(V view, M model, Vector3 startPos)
+
+    protected bool _isMoving = true;
+    protected Rigidbody _rigidbody;
+    public Rigidbody Rigidbody { get { return _rigidbody ??= GetComponent<Rigidbody>(); } }   
+    public virtual void Init(V view, M model, Vector3 startPos)
    {
         _view = view;
         _model = model;
@@ -24,17 +28,26 @@ public class UnitController<V, M> : MonoBehaviour
 
         _model.OnDeath += Death;
         _model.OnAttackModel += ModelAttack;
-        Enable();
-    }
-    protected virtual void Enable()
-    {
         _model.OnStopAttack += StopAttacking;
         _model.OnStartAttack += StartAttacking;
     }
+
     protected virtual void ModelAttack()
     {
         _model.ChangeTarget(transform.position);
     }
+
+    protected virtual void EnableUnit()
+    {
+        _isMoving = true;
+        StartAttacking();
+    }
+    protected virtual void DisableUnit()
+    {
+        _isMoving = false;
+        StopAttacking();
+    }
+
     private void StartAttacking()
     {
         StopAttacking();
@@ -46,11 +59,28 @@ public class UnitController<V, M> : MonoBehaviour
     }
     IEnumerator AttackCorotine()
     {
+        if (!_model.ThereIsTarget) StopAttacking();
         while (true)
         {
             yield return new WaitForSeconds(_model.AttackDellay);
-            _model.Attack(transform.position);
+            _model.Attack(transform);
         }
+    }
+
+
+    public void StartStun(float enableTime)
+    {
+        StartCoroutine(StunCorotine(enableTime));
+    }
+    IEnumerator StunCorotine(float enableTime)
+    {
+        DisableUnit();
+        float endEnableTime = Time.time + enableTime;
+        while (endEnableTime > Time.time)
+        {
+            yield return null;
+        }
+        EnableUnit();
     }
 
 
@@ -82,9 +112,6 @@ public class UnitController<V, M> : MonoBehaviour
         _model.ChangeStats(stats);
     }
 
-
-
-
     public void Teleportation(Vector3 newPos)
     {
         transform.position = newPos;
@@ -94,11 +121,7 @@ public class UnitController<V, M> : MonoBehaviour
         _model.Restats();
         OnEnablePerson?.Invoke(transform);
         StopAttacking();
-        Disable();
-    }
-    protected virtual void Disable()
-    {
-
+        DisableUnit();
     }
 
     private void OnTriggerEnter(Collider other)

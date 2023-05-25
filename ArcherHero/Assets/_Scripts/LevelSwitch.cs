@@ -1,50 +1,23 @@
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class LevelSwitch : MonoBehaviour
 {
-    public GameObject[] objectsToActivate;
-    public Transform teleportLocation;
-    private int currentObjectIndex = 1; 
-    public GameObject player;
-    private CharacterController characterController;
-    [SerializeField] private TextMeshPro tableText;
+    [SerializeField][Range(-1, 1)] private int _swipeDir = 0;
+    [SerializeField] private TextMeshPro _text;
+    Button _switchButton;
 
-    void Start()
+    private void Awake()
     {
-        characterController = player.GetComponent<CharacterController>();
+        _switchButton = GetComponent<Button>();
+        _switchButton.onClick.AddListener(SwitchLvlNum);
+        if (_text != null) _text.text = "Level " + (DataHolder.LvlStart + 1);
     }
-    
-    private void OnTriggerEnter(Collider other)
-    {   
-        
-        if (other.CompareTag("Player"))
-        {   
-            characterController.enabled = false;
-            player.transform.position = teleportLocation.position;
-            characterController.enabled = true;
-            
-            tableText.text = "Level " + (currentObjectIndex + 1);
 
-            for (int i = 0; i < objectsToActivate.Length; i++)
-            {
-                if (i != currentObjectIndex)
-                {
-                    objectsToActivate[i].SetActive(false);
-                }
-            }
-
-            objectsToActivate[currentObjectIndex].SetActive(true);
-            currentObjectIndex++;
-
-            if (currentObjectIndex >= objectsToActivate.Length)
-            {
-                currentObjectIndex = 1;
-            }
-
-           
-        }
+    private void SwitchLvlNum()
+    {
+        DataHolder.LvlStart += _swipeDir;
+        if(_text != null) _text.text = "Level " + (DataHolder.LvlStart + 1);
     }
 }

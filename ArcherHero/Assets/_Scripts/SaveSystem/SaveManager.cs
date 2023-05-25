@@ -11,20 +11,24 @@ public class SaveManager : MonoBehaviour
     PerkManager _perkManager;
 
     private void Awake()
-    {   
+    {
+        _characterSkills.GainExperience(DataHolder.PlayerBounty.MinedExp);
+        _characterStats.Money += DataHolder.PlayerBounty.MinedGold;
+        DataHolder.PlayerBounty.ClearStruct();
+        Save();
         SaveSystem.Initialize();
         _perkManager = FindObjectOfType<PerkManager>();
         Load();
     }
    
 
-    private void  OnApplicationFocus(bool hasFocus)
-    {  
-        if (!hasFocus)
-        {
-            Save();
-        }
-    }
+    //private void  OnApplicationFocus(bool hasFocus)
+    //{  
+    //    if (!hasFocus)
+    //    {
+    //        Save();
+    //    }
+    //}
 
     private void OnApplicationQuit()
     {

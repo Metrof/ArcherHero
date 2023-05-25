@@ -42,6 +42,7 @@ public class UnitModel
     public float AttackDellay { get { return _attackDellay; } private set { _attackDellay = value; } }
     public float MovementSpeed { get { return _movementSpeed; } private set { _movementSpeed = value; } }
     public float RotationSpeed { get { return _rotationSpeed; } private set { _rotationSpeed = value; } }
+    public bool ThereIsTarget { get { return _currentTarget != null; } }
 
     public UnitModel(float mapSize, int layerNum, Material material)
     {
@@ -80,15 +81,11 @@ public class UnitModel
     {
         
     }
-    public virtual void Attack(Vector3 shotPos)
+    public virtual void Attack(Transform shotPos)
     {
         OnAttackModel?.Invoke();
-        if (_currentTarget == null) 
-        {
-            OnStopAttack?.Invoke();
-            return;
-        }
+        if (_currentTarget == null) return;
         Projectile projectile = ProjectilePull.GetProjectile(_layerNum, _material);
-        projectile.MoveToDirection(_currentTarget.position - shotPos, shotPos);
+        projectile.MoveToDirection(_currentTarget.position - shotPos.position, shotPos);
     }
 }

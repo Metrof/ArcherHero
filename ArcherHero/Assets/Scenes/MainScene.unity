@@ -505,15 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dd09e8bb263bb4f8680257324e4b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToActivate:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  teleportLocation: {fileID: 1259366058}
-  player: {fileID: 0}
-  tableText: {fileID: 0}
+  _swipeDir: 0
+  _text: {fileID: 0}
 --- !u!65 &1757232896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -730,6 +723,9 @@ MonoBehaviour:
   _mapDiagonalSize: 39
   _levels:
   - {fileID: 11400000, guid: c18404c0c76bcba4aa6d2387adc07eff, type: 2}
+  - {fileID: 11400000, guid: 7030ca9800b46e941bfda00e91968444, type: 2}
+  - {fileID: 11400000, guid: 9b4235c6009d0f344b3dc0d27e8ded96, type: 2}
+  - {fileID: 11400000, guid: b373464f231c5154e86ac74eabbda151, type: 2}
 --- !u!114 &2082586985
 MonoBehaviour:
   m_ObjectHideFlags: 0

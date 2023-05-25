@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float _movementSpeed = 1;
-
-
     private int _defoltLayer;
     private Rigidbody _rigidbody;
     private Renderer _renderer;
     private Vector3 _moveDirection;
     private Vector3 _pullPos;
     private List<Effect> _effects = new List<Effect>();
+
+    private Transform _shoterTrans;
 
     public List<Effect> Effects { get { return _effects; } }
     private void Awake()
@@ -23,16 +23,21 @@ public class Projectile : MonoBehaviour
         _renderer = GetComponent<Renderer>();
         _defoltLayer = gameObject.layer;
     }
-    public void MoveToDirection(Vector3 moveDirection, Vector3 shotPos)
+    public void MoveToDirection(Vector3 moveDirection, Transform shotSource, float speed = 5)
     {
-        transform.position = shotPos;
+        _shoterTrans = shotSource;
+        transform.position = _shoterTrans.position;
         _moveDirection = moveDirection.normalized;
-        _rigidbody.velocity = _moveDirection * _movementSpeed;
+        _rigidbody.velocity = _moveDirection * speed;
     }
     public void ChangeOwner(int layer, Material ownerMat)
     {
-        gameObject.layer = layer * 2;
+        ChangeLayer(layer);
         _renderer.material = ownerMat;
+    }
+    private void ChangeLayer(int layer)
+    {
+        gameObject.layer = layer * 2;
     }
     public void SetPullPos(Vector3 pullPos)
     {
@@ -51,6 +56,15 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        OnHit();
+        if (other.TryGetComponent(out Dagger dagger))
+        {
+            //делать копию пули
+            MoveToDirection(_shoterTrans.position - transform.position, dagger.transform, 10);
+            ChangeLayer(dagger.Ownerlayer);
+        }
+        else
+        {
+            OnHit();
+        }
     }
 }

@@ -29,8 +29,12 @@ public class GameManager : MonoBehaviour
     private LvlTriggerZone _startTriggerZone;
     private LvlTriggerZone _endTriggerZone;
 
+    private static int _lvlCount;
+    public static int LvlCount { get { return _lvlCount; } }
+
     private void Awake()
     {
+        _lvlCount = _levels.Length;
         _cameraController = GetComponent<CameraController>();
         _currentLvl = _levels[DataHolder.LvlStart];
     }
@@ -105,11 +109,10 @@ public class GameManager : MonoBehaviour
         if (_currentWave > _waves.Length - 1)
         {
             LvlDoor.OpenDoor();
-            UnitManager.Instance.Player.WaveStop();
+            UnitManager.Instance.LvlEnd();
             return;
         }
         UnitManager.Instance.TeleportWaveEnemys(_waves[_currentWave].Points);
-        UnitManager.Instance.WaveStart();
         _currentWave++;
     }
     private void LvlEnd()

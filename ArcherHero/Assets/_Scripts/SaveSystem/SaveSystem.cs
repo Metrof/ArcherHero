@@ -55,7 +55,10 @@ public static class SaveSystem
     public static void SaveCharacterStats(CharacterStats characterStats)
     {
         string json = JsonUtility.ToJson(characterStats);
-        File.WriteAllText(savePathStats, json);
+        if (json != null)
+        {
+            File.WriteAllText(savePathStats, json);
+        }
     }
 
     public static void LoadCharacterStats(CharacterStats characterStats)

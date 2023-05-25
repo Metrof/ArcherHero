@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8673544390339888371}
   - component: {fileID: 8673544390339888370}
   - component: {fileID: 293859640828442225}
-  - component: {fileID: 238646219642187309}
+  - component: {fileID: 5552369047464873172}
   - component: {fileID: 8673544390339888382}
   - component: {fileID: 6352859802852638498}
   - component: {fileID: -6794234384025202730}
@@ -117,7 +117,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!136 &238646219642187309
+--- !u!136 &5552369047464873172
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b13409ea76c3f409af5d3684bf2397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
 --- !u!114 &-6794234384025202730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6652d9e69a9c4448cd4d2406a569a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dagger: {fileID: 4891051446219949109, guid: ccff7dac0d9d28440990b81bcc63cd61, type: 3}
 --- !u!1 &8673544391391377077
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 8673544391391377075}
   m_Layer: 6
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,7 +249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8673544391391377077}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37600005, z: 0.47}
+  m_LocalPosition: {x: 0, y: 0.37600005, z: 0.4699998}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
