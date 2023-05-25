@@ -10,17 +10,21 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
+        _characterSkills.GainExperience(DataHolder.PlayerBounty.MinedExp);
+        _characterStats.Money += DataHolder.PlayerBounty.MinedGold;
+        DataHolder.PlayerBounty.ClearStruct();
+        Save();
         Load();
     }
 
 
-    private void  OnApplicationFocus(bool hasFocus)
-    {  
-        if (!hasFocus)
-        {
-            Save();
-        }
-    }
+    //private void  OnApplicationFocus(bool hasFocus)
+    //{  
+    //    if (!hasFocus)
+    //    {
+    //        Save();
+    //    }
+    //}
 
     private void OnApplicationQuit()
     {

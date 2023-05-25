@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PlayerView : UnitView
 {
-    public void ChangeMoveDirection(Vector2 dir, float speed)
+    public void ChangeMoveDirection(Vector2 dir, float speed, Rigidbody rigidbody)
     {
-        Vector3 velocity = _rigidbody.velocity;
+        Vector3 velocity = rigidbody.velocity;
         dir *= speed;
         velocity.x = dir.x;
         velocity.z = dir.y;
-        _rigidbody.velocity = velocity;
+        rigidbody.velocity = velocity;
     }
 }

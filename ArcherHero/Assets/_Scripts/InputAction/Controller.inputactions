@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FirstSkill",
+                    "type": "Button",
+                    "id": "5b1c4cb8-6d59-4a9f-a7bb-27fae7af1b1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SecondSkill",
+                    "type": "Button",
+                    "id": "982e3431-0767-4bb8-aa61-fe8a9697e740",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -88,6 +106,28 @@
                     "processors": "",
                     "groups": "KeyBoard+Mouse",
                     "action": "Strike",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72763e9e-b0c8-4f41-a752-627b3ff1bd05",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47b4a1cb-51e4-4567-84b2-6a79e4e38eba",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class FindNearestTarget : MonoBehaviour
 {
     public static Transform GetNearestTarget(Vector3 unitPos, List<Transform> targets)
     {
+        if (targets == null)
+        {
+            return null;
+        }
         Transform nearestTarget = null;
         float minDistance = Mathf.Infinity;
         foreach (var target in targets)

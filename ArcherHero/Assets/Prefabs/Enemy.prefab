@@ -160,3 +160,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+  _expForDie: 100
+  _goldForDie: 20

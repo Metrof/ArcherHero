@@ -78,6 +78,7 @@ public class UnitManager : Singleton<UnitManager>
         {
             foreach (var enemy in WaveEnemies)
             {
+                enemy.WaveStop();
                 enemy.OnEnablePerson -= DeleteUnitFromTargetList;
             }
             WaveEnemies.Clear();
@@ -125,14 +126,20 @@ public class UnitManager : Singleton<UnitManager>
         {
             _waveEnemysTransforms.Add(enemy.transform);
         }
+        WaveStart();
     }
-    public void WaveStart()
+    private void WaveStart()
     {
         Player.WaveStart();
         foreach (var enemy in WaveEnemies)
         {
             enemy.WaveStart();
         }
+    }
+    public void LvlEnd()
+    {
+        SubscribeDiedEvent(false);
+        Player.WaveStop();
     }
     public bool AnySurvivingEnemies()
     {

@@ -20,7 +20,7 @@ public class CharacterSkills : ScriptableObject
     {
         _currentXP += amount;
 
-        while (_currentXP >= _xpToLevelUp)
+        if(_currentXP >= _xpToLevelUp)
         {
             LevelUp();
         }
