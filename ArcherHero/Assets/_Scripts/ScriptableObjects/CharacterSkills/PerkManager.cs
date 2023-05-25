@@ -55,7 +55,7 @@ public class PerkManager : MonoBehaviour
         _xpCounter = FindObjectOfType<XPCounter>();
         LoadPerkData();
     }
-    public Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> GetPerkStates()       //  получение словоря с перками
+    public Dictionary<PerkType, PerkStatus> GetPerkStates()       //  получение словоря с перками
     {
         return _perkStates;
     }
@@ -72,6 +72,7 @@ public class PerkManager : MonoBehaviour
 
     public void InitializedPerk()
     {
+        Debug.Log("Init");
         foreach (PerkType perk in Enum.GetValues(typeof(PerkType)))
         {
             _perkStates[perk] = PerkStatus.NotAvailable;
@@ -89,6 +90,7 @@ public class PerkManager : MonoBehaviour
         }
         catch (Exception)
         {
+            
             InitializedPerk();
             return GetPerkStatus(perkType);
         }

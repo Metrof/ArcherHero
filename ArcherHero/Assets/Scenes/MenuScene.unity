@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6110326, g: 0.5797211, b: 0.6066183, a: 1}
+  m_IndirectSpecularColor: {r: 0.6114131, g: 0.5786423, b: 0.6075084, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -393,15 +393,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957390b6af87cb5488d2525f73ada01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _perkType: 12
+  _perkType: 10
   _perkButton: {fileID: 79652675}
   _perkButtons:
   - {fileID: 1497688630}
   - {fileID: 536239120}
   _perkPrice: 4
   _perkMenu: {fileID: 1781637177}
-  _perkName: p13
-  _perkDiscription: d13
+  _perkName: p11
+  _perkDiscription: d11
 --- !u!1 &97408262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,6 +2697,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536239118}
   m_CullTransparentMesh: 1
+--- !u!114 &536239123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536239118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957390b6af87cb5488d2525f73ada01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _perkType: 11
+  _perkButton: {fileID: 536239120}
+  _perkButtons:
+  - {fileID: 125451581}
+  _perkPrice: 3
+  _perkMenu: {fileID: 1781637177}
+  _perkName: p 12
+  _perkDiscription: d 12
 --- !u!114 &547979755 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1910778120, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
@@ -7503,14 +7523,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957390b6af87cb5488d2525f73ada01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _perkType: 10
+  _perkType: 12
   _perkButton: {fileID: 1497688630}
   _perkButtons:
   - {fileID: 125451581}
   _perkPrice: 3
   _perkMenu: {fileID: 1781637177}
-  _perkName: p11
-  _perkDiscription: d11
+  _perkName: p13
+  _perkDiscription: d13
 --- !u!1 &1502893547
 GameObject:
   m_ObjectHideFlags: 0

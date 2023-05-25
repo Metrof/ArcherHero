@@ -222,6 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6652d9e69a9c4448cd4d2406a569a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterSkills: {fileID: 11400000, guid: ca58592e5525d3346ba6d5762611a87f, type: 2}
+  _characterStats: {fileID: 11400000, guid: 397fbc1d05069c94e8affac9d94c460f, type: 2}
   _dagger: {fileID: 4891051446219949109, guid: ccff7dac0d9d28440990b81bcc63cd61, type: 3}
 --- !u!1 &8673544391391377077
 GameObject:
