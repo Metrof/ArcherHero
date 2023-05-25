@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(ProjectilePull))]
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] Dagger _dagger;
     [SerializeField] private PlayerController _playerPref;
     [SerializeField] private CharacterStatsE _baseCharacterStats;
     [SerializeField] private EnemyController _enemyPref;
@@ -58,6 +59,12 @@ public class GameManager : MonoBehaviour
             if (playerStats == null) playerStats = _baseCharacterStats;
             _playerController.Init(playerView, playerModel, _defoltPlayerPos.position);
             _playerController.SetNewModelParram(playerStats);
+
+            Dagger dagger = Instantiate(_dagger);
+            dagger.SetOwner(transform);
+            _playerController.SetFirstSkill(new Dash(2));
+            _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
+
             _playerController.LvlStart();
 
             UnitManager.Instance.SetPlayerAtUnitManager(_playerController);
