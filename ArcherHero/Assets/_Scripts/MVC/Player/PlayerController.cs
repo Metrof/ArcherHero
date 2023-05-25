@@ -6,9 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : UnitController<PlayerView, PlayerModel>
 {
-    [SerializeField] private CharacterSkills _characterSkills;
-    [SerializeField] private CharacterStats _characterStats;
-    [SerializeField] Dagger _dagger;
     private Skill _firstSkill;
     private Skill _secondSkill;
 
@@ -17,12 +14,7 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
 
     private void Awake()
     {
-        Dagger dagger = Instantiate(_dagger);
-        dagger.SetOwner(transform);
-
         _controller = new Controller();
-        _firstSkill = new Dash(2);
-        _secondSkill = new Parry(dagger.gameObject, 2);
     }
 
     private void OnEnable()
@@ -42,6 +34,14 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
         if (!_isMoving) return;
         _view.ChangeMoveDirection(context.ReadValue<Vector2>(), _model.MovementSpeed, Rigidbody);
         _model.ChangeTarget(transform.position);
+    }
+    public void SetFirstSkill(Skill skill)
+    {
+        _firstSkill = skill;
+    }
+    public void SetSecondSkill(Skill skill)
+    {
+        _secondSkill = skill;
     }
     private void ActiveFirstSkill(InputAction.CallbackContext context)
     {
