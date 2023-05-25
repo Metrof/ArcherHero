@@ -3,10 +3,12 @@ using UnityEngine;
 
 namespace SaveSystem
 {
+[System.Serializable]
 public class SaveManager : MonoBehaviour
 {
     [SerializeField] private CharacterSkills _characterSkills;
     [SerializeField] private CharacterStats _characterStats;
+    PerkManager _perkManager;
 
     private void Awake()
     {
@@ -14,9 +16,11 @@ public class SaveManager : MonoBehaviour
         _characterStats.Money += DataHolder.PlayerBounty.MinedGold;
         DataHolder.PlayerBounty.ClearStruct();
         Save();
+        SaveSystem.Initialize();
+        _perkManager = FindObjectOfType<PerkManager>();
         Load();
     }
-
+   
 
     //private void  OnApplicationFocus(bool hasFocus)
     //{  
@@ -36,14 +40,13 @@ public class SaveManager : MonoBehaviour
     {   
         SaveSystem.SaveCharacterStats(_characterStats);
         SaveSystem.SaveCharacterSkills(_characterSkills);
-        Debug.Log("Data saved");
+        _perkManager.SavePerkData(); 
     }
  
    public void Load()
     {   
         SaveSystem.LoadCharacterStats(_characterStats);
         SaveSystem.LoadCharacterSkills(_characterSkills);
-        Debug.Log("Data loaded");
     }
 }
 }
