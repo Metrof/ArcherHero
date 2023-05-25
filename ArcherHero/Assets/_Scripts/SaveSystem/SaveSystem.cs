@@ -57,7 +57,6 @@ public static class SaveSystem
         string json = JsonUtility.ToJson(characterStats);
         if (json != null)
         {
-                Debug.Log(savePathStats + "PS");
             File.WriteAllText(savePathStats, json);
         }
     }
@@ -74,8 +73,12 @@ public static class SaveSystem
 
    public static void SavePerkData(Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> perkData)
    {
+     
         string json = JsonConvert.SerializeObject(perkData);
-        File.WriteAllText(savePathPerk, json); 
+        File.WriteAllText(savePathPerk, json);
+
+            Debug.Log(perkData);
+            Debug.Log(savePathPerk);
    }
 
     public static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> LoadPerkData()
@@ -98,7 +101,7 @@ public static class SaveSystem
             }
         }
         else
-        {
+        {   
             return GetDefaultPerkData();
         }
     }
