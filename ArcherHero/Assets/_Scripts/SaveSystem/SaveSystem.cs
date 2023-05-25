@@ -39,16 +39,27 @@ public static class SaveSystem
 
     public static void SaveCharacterSkills(CharacterSkills characterSkills)
     {
-        string json = JsonUtility.ToJson(characterSkills);
-        File.WriteAllText(savePathSkills, json);
+        if (characterSkills != null)
+        {
+            string json = JsonUtility.ToJson(characterSkills);
+            File.WriteAllText(savePathSkills, json);
+        }
+        else
+        {
+            Debug.LogError("CharacterSkills is null. Unable to save.");
+        }
     }
 
-    public static void LoadCharacterSkills(CharacterSkills characterSkills)
+        public static void LoadCharacterSkills(CharacterSkills characterSkills)
     {
         if (File.Exists(savePathSkills))
         {
             string json = File.ReadAllText(savePathSkills);
             JsonUtility.FromJsonOverwrite(json, characterSkills);
+        }
+        else
+        {
+            Debug.LogWarning("CharacterSkills save file does not exist. Unable to load.");
         }
     }
 
@@ -68,26 +79,30 @@ public static class SaveSystem
             string json = File.ReadAllText(savePathStats);
             JsonUtility.FromJsonOverwrite(json, characterStats);
         }
+        else
+        {
+            Debug.LogError("CharacterStats save file does not exist. Unable to load.");
+        }
     }
 
 
    public static void SavePerkData(Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> perkData)
    {
-     
-        string json = JsonConvert.SerializeObject(perkData);
-        File.WriteAllText(savePathPerk, json);
 
-            Debug.Log(perkData);
-            Debug.Log(savePathPerk);
+        if(perkData != null)
+        {
+            string json = JsonConvert.SerializeObject(perkData);
+            File.WriteAllText(savePathPerk, json);
+        }
+        else
+        {
+            Debug.LogError("PerkData is null. Unable to save.");
+        }
    }
 
     public static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> LoadPerkData()
     {
         string json = File.ReadAllText(savePathPerk);
-
-        Debug.Log(savePathPerk);
-
-        Debug.Log(json);
 
         if (json != null)
         {

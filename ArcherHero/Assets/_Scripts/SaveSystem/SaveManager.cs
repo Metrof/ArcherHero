@@ -23,17 +23,23 @@ public class SaveManager : MonoBehaviour
 
         //Save();
 
-        Load();
+        //Load();
     }
-   
+    private void Start()
+    {
+            Save();
 
-    //private void  OnApplicationFocus(bool hasFocus)
-    //{  
-    //    if (!hasFocus)
-    //    {
-    //        Save();
-    //    }
-    //}
+            Load();
+    }
+
+
+        //private void  OnApplicationFocus(bool hasFocus)
+        //{  
+        //    if (!hasFocus)
+        //    {
+        //        Save();
+        //    }
+        //}
 
     private void OnApplicationQuit()
     {
