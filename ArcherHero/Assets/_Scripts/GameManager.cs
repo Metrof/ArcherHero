@@ -62,14 +62,32 @@ public class GameManager : MonoBehaviour
 
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(transform);
-            _playerController.SetFirstSkill(new Dash(2));
-            _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
+            
+            //var purchasedPercks = PerkFactory.Instance.GetPurchased();
+
+            //_playerController.SetFirstSkill(new Dash(2, purchasedPercks));
+
+           // _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
+
+
+
 
             _playerController.LvlStart();
 
             UnitManager.Instance.SetPlayerAtUnitManager(_playerController);
         }
     }
+
+    // public void ApplyPerks()
+    // {
+    //     PerkFactory perkFactory = new PerkFactory();
+
+    //     foreach (PerkManager.PerkType perkType in purchasedPerks)
+    //     {
+    //        IPerk perk = perkFactory.CreatePerk(perkType);
+    //        perk.Apply(this);
+    //     }
+    // }
     private void CreateEnemys(float scaleStats)
     {
         if (_currentLvl != null)
