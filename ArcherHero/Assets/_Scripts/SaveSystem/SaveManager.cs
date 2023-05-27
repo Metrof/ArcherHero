@@ -33,15 +33,15 @@ public class SaveManager : MonoBehaviour
     }
 
 
-        //private void  OnApplicationFocus(bool hasFocus)
-        //{  
-        //    if (!hasFocus)
-        //    {
-        //        Save();
-        //    }
-        //}
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus)
+        {
+            Save();
+        }
+    }
 
-    private void OnApplicationQuit()
+        private void OnApplicationQuit()
     {
         Save();
     }

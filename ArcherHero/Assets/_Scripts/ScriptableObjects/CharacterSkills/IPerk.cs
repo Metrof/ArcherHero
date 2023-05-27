@@ -1,4 +1,4 @@
 public interface IPerk
 {
-    void Apply(PlayerModel playerModel);
+    void Apply(PlayerController playerController);
 }

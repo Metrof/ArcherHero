@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,9 +36,11 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
         _view.ChangeMoveDirection(context.ReadValue<Vector2>(), _model.MovementSpeed, Rigidbody);
         _model.ChangeTarget(transform.position);
     }
-    public void SetFirstSkill(Skill skill)
+    public void SetFirstSkill( Skill skill )
     {
         _firstSkill = skill;
+
+
     }
     public void SetSecondSkill(Skill skill)
     {
@@ -61,5 +64,10 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     {
         base.Death();
         SceneManager.LoadScene(1);
+    }
+
+    internal void SetFirstSkill(List<IPerk> purchasedPerks)
+    {
+        throw new NotImplementedException();
     }
 }
