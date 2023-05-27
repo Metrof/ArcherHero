@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using static PerkManager;
 
 [RequireComponent(typeof(ProjectilePull))]
 public class GameManager : MonoBehaviour
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
     private LvlTriggerZone _startTriggerZone;
     private LvlTriggerZone _endTriggerZone;
 
+    Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> _perkStates;
+
     private static int _lvlCount;
     public static int LvlCount { get { return _lvlCount; } }
 
@@ -49,6 +52,34 @@ public class GameManager : MonoBehaviour
         CreateEnemys(_currentLvl.EnemyPower);
         CreatePlayer(DataHolder.PlayerStats);
         _cameraController.SetTarget(_playerController.transform);
+
+        _perkStates = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
+    }
+
+    private void LoadPerkData()
+    {
+        Debug.Log("LoadPD");
+        _perkStates = SaveSystem.SaveSystem.LoadPerkData();
+    }
+
+    public List<IPerk> GetPurchasedPerks()
+    {
+        LoadPerkData();
+
+        List<IPerk> purchasedPerks = new List<IPerk>();
+
+        PerkFactory perkFactory = new PerkFactory();
+
+        foreach (var perkEntry in _perkStates)
+        {
+            if (perkEntry.Value == PerkManager.PerkStatus.Purchased)
+            {
+                IPerk perk = perkFactory.CreatePerk(perkEntry.Key);
+                purchasedPerks.Add(perk);
+            }
+        }
+
+        return purchasedPerks;
     }
 
     private void CreatePlayer(CharacterStatsE playerStats)
@@ -65,7 +96,10 @@ public class GameManager : MonoBehaviour
 
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(_playerController.transform);
-            _playerController.SetFirstSkill(new Dash(2));
+
+            List<IPerk> purchasedPerks = GetPurchasedPerks();
+
+            _playerController.SetFirstSkill(new Dash(2, purchasedPerks));
             _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
 
             _playerController.LvlStart();
