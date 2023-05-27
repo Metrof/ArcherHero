@@ -86,7 +86,7 @@ public class CharacterStats : ScriptableObject
         _maxHP += _hpUpgradeValue;
         _hpUpgradePrice += _hpUpgradeCounter * _hpPriceFactor;
 
-        DataHolder.PlayerStats.AddStats(_hpUp);
+        //DataHolder.PlayerStats.AddStats(_hpUp);
                    
         reaction(CharacterStorePurchaseCallback.Upgraded);
     }
@@ -129,7 +129,7 @@ public class CharacterStats : ScriptableObject
         _speedAttack += _speedAttackUpgradeValue;
         _speedAttackUpgradePrice +=_speedAttackUpgradeCounter * _speedAttackPriceFactor;
 
-        DataHolder.PlayerStats.AddStats(_attackDellayUp);
+        //DataHolder.PlayerStats.AddStats(_attackDellayUp);
 
         reaction(CharacterStorePurchaseCallback.Upgraded);
     }
