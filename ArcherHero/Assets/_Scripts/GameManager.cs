@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,20 +34,78 @@ public class GameManager : MonoBehaviour
     private static int _lvlCount;
     public static int LvlCount { get { return _lvlCount; } }
 
+    [SerializeField] private List<PerkManager.PerkType> purchasedPerks;
+    Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> _perkStates;
+
+
     private void Awake()
     {
         _lvlCount = _levels.Length;
         _cameraController = GetComponent<CameraController>();
         _currentLvl = _levels[DataHolder.LvlStart];
+
+
+        _perkStates = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
+
+        
     }
 
     public void Start()
     {
+        
+        //GetPerk();
         LvlInit();
         CreateEnemys(_currentLvl.EnemyPower);
         CreatePlayer(DataHolder.PlayerStats);
         _cameraController.SetTarget(_playerController.transform);
     }
+
+    private void LoadPerkData()
+    {
+        Debug.Log("LoadPD");
+        _perkStates = SaveSystem.SaveSystem.LoadPerkData();
+    }
+
+    //public void GetPerk()
+    //{
+    //    LoadPerkData();
+    //    PerkFactory perkFactory = new PerkFactory();
+    //    purchasedPerks = new List<PerkManager.PerkType>();
+
+    //    foreach (var perkEntry in _perkStates)
+    //    {
+    //        if (perkEntry.Value == PerkManager.PerkStatus.Purchased)
+    //        {
+    //            IPerk perk = perkFactory.CreatePerk(perkEntry.Key);
+    //            perk.Apply(_playerController);
+    //        }
+    //    }
+
+    //    //_playerController.SetFirstSkill(perkFactory.CreatePerk(perkType);
+    //}
+
+    public List<IPerk> GetPurchasedPerks()
+    {
+        LoadPerkData();
+
+        List<IPerk> purchasedPerks = new List<IPerk>();
+
+        PerkFactory perkFactory = new PerkFactory();
+
+        foreach (var perkEntry in _perkStates)
+        {
+            if (perkEntry.Value == PerkManager.PerkStatus.Purchased)
+            {
+                IPerk perk = perkFactory.CreatePerk(perkEntry.Key);
+                purchasedPerks.Add(perk);
+            }
+        }
+
+        return purchasedPerks;
+    }
+
+
+
 
     private void CreatePlayer(CharacterStatsE playerStats)
     {
@@ -62,12 +121,33 @@ public class GameManager : MonoBehaviour
 
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(transform);
-            
-            //var purchasedPercks = PerkFactory.Instance.GetPurchased();
 
-            //_playerController.SetFirstSkill(new Dash(2, purchasedPercks));
+            //List<IPerk> purchasedPerks = PerkFactory.Instance.GetPurchased();
 
-           // _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
+
+
+            //PerkFactory perkFactory = new PerkFactory();
+            //foreach (PerkManager.PerkType perkType in purchasedPerks)
+            //{
+            //    IPerk perk = perkFactory.CreatePerk(perkType);
+            //    if (perk is Skill skill)
+            //    {
+            //        _playerController.SetFirstSkill(skill);
+            //    }
+            //}
+
+            //List<IPerk> purchasedPerks = GetPurchasedPerks();
+            //
+
+
+            List<IPerk> purchasedPerks = GetPurchasedPerks();
+
+         
+
+            _playerController.SetFirstSkill(new Dash(2, purchasedPerks));
+
+            _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
+
 
 
 
@@ -77,6 +157,8 @@ public class GameManager : MonoBehaviour
             UnitManager.Instance.SetPlayerAtUnitManager(_playerController);
         }
     }
+
+    
 
     // public void ApplyPerks()
     // {

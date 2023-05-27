@@ -6,35 +6,43 @@ public class Dash : Skill
 {
     private float _dashForse = 20;
     private float _dashTime = 0.3f;
-    private  List<IPerk> _purchasedPerks;
+   
+    public List<IPerk> perks;
+    private List<PerkManager.PerkType> purchasedPerks;
+    private List<IPerk> purchasedPerks1;
 
-    public Dash(float colldown, List<IPerk> purchasedPerks) : base(colldown)
+    
+
+    public Dash(float colldown, List<IPerk> purchasedPerks1) : base(colldown)
     {
-        _purchasedPerks = purchasedPerks;
+        this.purchasedPerks1 = purchasedPerks1;
     }
+
+    //public Dash(float colldown, List<IPerk> purchasedPerks) : base(colldown)
+    //{
+    //    _purchasedPerks = purchasedPerks;
+    //}
 
     public override void Action(PlayerController player)
     {
         player.StartCoroutine(DashCorotine(player));
         player.StartStun(_dashTime);
 
+
+       
+        ApplyPerks(player, perks);
         //ApplyPerkModifications(player);
-        ApplyPerks(player);
+        //ApplyPerks(player);
     }
 
-    // private void ApplyPerkModifications(PlayerController player)
-    // {
-    //     IPerk dashPerk = player.GetPe
-    // }
-
-    private void ApplyPerks(PlayerController player)
+    private void ApplyPerks(PlayerController player, List<IPerk> perks)
     {
-        foreach(var perk in _purchasedPerks)
+        
+        foreach (var perk in purchasedPerks1)
         {
             perk.Apply(player);
         }
     }
-
 
     IEnumerator DashCorotine(PlayerController player)
     {

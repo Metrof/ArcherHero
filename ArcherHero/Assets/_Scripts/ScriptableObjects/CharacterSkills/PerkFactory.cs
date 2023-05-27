@@ -5,29 +5,60 @@ using UnityEngine;
 
 public class PerkFactory
 {
+
     public IPerk CreatePerk(PerkManager.PerkType perkType)
     {
-        Debug.Log("factory");
         switch (perkType)
         {
             case PerkManager.PerkType.Perk1:
                 return new Perk1();
-           
-            // Добавьте другие case для каждого типа перка
-
+            case PerkManager.PerkType.Perk2:
+                return new Perk2();
+            case PerkManager.PerkType.Perk3:
+                return new Perk3();
+            case PerkManager.PerkType.Perk4:
+                return new Perk4();
+      
             default:
                 throw new ArgumentException("Unknown perk type: " + perkType);
         }
     }
 }
 
+
+
+
 public class Perk1 : IPerk
 {
     public void Apply(PlayerController playerController)
     {
-        
+        Debug.Log("Perk1 Dash");
+       
     }
 }
+public class Perk2 : IPerk
+{
+    public void Apply(PlayerController playerController)
+    {
+        Debug.Log("Perk2");
+        //playerController.
+    }
+}
+public class Perk3 : IPerk
+{
+    public void Apply(PlayerController playerController)
+    {
+        Debug.Log("Perk3");
+    }
+}
+public class Perk4 : IPerk
+{
+    public void Apply(PlayerController playerController)
+    {
+        Debug.Log("Perk4");
+    }
+}
+
 
 
 
