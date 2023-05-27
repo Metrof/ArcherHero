@@ -416,6 +416,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7772821779554436648, guid: 010ad7c8fb49e87478f42cae9c8fa854, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8931849645201487499, guid: 010ad7c8fb49e87478f42cae9c8fa854, type: 3}
       propertyPath: m_Name
       value: '[ Interface ]'
@@ -714,6 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8d6b74d854503a4eb35fbfced923773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dagger: {fileID: 4891051446219949109, guid: ccff7dac0d9d28440990b81bcc63cd61, type: 3}
   _playerPref: {fileID: 6683611215230000413, guid: 06d6e0c309d33ff4984657482df6767d, type: 3}
   _baseCharacterStats: {fileID: 11400000, guid: d0c2caaf73aafb74293d468538e7c655, type: 2}
   _enemyPref: {fileID: 4153977055588632408, guid: 3f5aeac1457194a43aed8d66797a34c6, type: 3}

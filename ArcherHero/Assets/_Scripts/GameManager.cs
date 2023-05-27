@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             _playerController.SetNewModelParram(playerStats);
 
             Dagger dagger = Instantiate(_dagger);
-            dagger.SetOwner(transform);
+            dagger.SetOwner(_playerController.transform);
             _playerController.SetFirstSkill(new Dash(2));
             _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
 

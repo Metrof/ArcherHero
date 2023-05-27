@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStats", order = 3)]
+[CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStatsE", order = 3)]
 public class CharacterStatsE : ScriptableObject
 {
     [Header("HP")]

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dagger : MonoBehaviour
 {
     [SerializeField] private int _ownerlayer = 6;
-    [SerializeField] private float _zOffset = 1;
+    [SerializeField] private float _zOffset = 0.8f;
 
     private Transform _ownerTrans;
     public int Ownerlayer { get { return _ownerlayer; } }
