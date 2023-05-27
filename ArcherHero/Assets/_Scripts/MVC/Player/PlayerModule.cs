@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PlayerModel : UnitModel
 {
+    public delegate void HPDelegate(float hp);
+    public event HPDelegate OnTakeDamage;
     public PlayerModel(float mapSize, int lauerNum, Material material) : base(mapSize, lauerNum, material)
     {
+    }
+    public override void ChangeStats(CharacterStatsE stats)
+    {
+        base.ChangeStats(stats);
+        OnTakeDamage?.Invoke(_currentHP);
     }
     public override void ChangeTarget(Vector3 myPos)
     {

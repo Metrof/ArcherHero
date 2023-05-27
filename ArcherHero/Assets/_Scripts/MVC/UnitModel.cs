@@ -65,7 +65,7 @@ public class UnitModel
 
         CurrentHP = MaxHP;
     }
-    public void ChangeStats(CharacterStatsE stats)
+    public virtual void ChangeStats(CharacterStatsE stats)
     {
         MaxHP += stats.MaxHp;
         CurrentHP += stats.HPChange;

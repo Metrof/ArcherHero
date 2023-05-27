@@ -30,9 +30,8 @@ public static class DataHolder
     public static CharacterStatsE PlayerStats { get { return _playerStats; } }
     public static PlayerBountyStruct PlayerBounty { get { return _playerBounty; } }
 
-    public static void SetLvlData(int lvlStart, CharacterStatsE playerStats)
+    public static void SetStats(CharacterStatsE playerStats)
     {
-        _lvlStart = lvlStart;
         _playerStats = playerStats;
     }
     public static void AddLvlMinedBounty(PlayerBountyStruct enemyBounty)
