@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> _perkStates;
 
+
+
     private static int _lvlCount;
     public static int LvlCount { get { return _lvlCount; } }
 
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
 
         _perkStates = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
     }
+
 
     private void LoadPerkData()
     {
@@ -82,6 +85,8 @@ public class GameManager : MonoBehaviour
         return purchasedPerks;
     }
 
+
+
     private void CreatePlayer(CharacterStatsE playerStats)
     {
         if (_playerPref != null)
@@ -97,9 +102,11 @@ public class GameManager : MonoBehaviour
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(_playerController.transform);
 
+
             List<IPerk> purchasedPerks = GetPurchasedPerks();
 
             _playerController.SetFirstSkill(new Dash(2, purchasedPerks));
+
             _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
 
             _playerController.LvlStart();

@@ -13,6 +13,7 @@ public class SaveManager : MonoBehaviour
     private void Awake()
     {
         SaveSystem.Initialize();
+        
         _perkManager = FindObjectOfType<PerkManager>();
 
 
