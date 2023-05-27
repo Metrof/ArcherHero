@@ -28,6 +28,10 @@ public class CharacterStats : ScriptableObject
     [SerializeField] private int _speedAttackUpgradeValue;
     [SerializeField] private int _speedAttackPriceFactor;
 
+    [SerializeField] private CharacterStatsE _hpUp;
+    [SerializeField] private CharacterStatsE _speedUp;
+    [SerializeField] private CharacterStatsE _attackDellayUp;
+
 
     [Header("Money")]
     [SerializeField] private int _money;
@@ -75,6 +79,8 @@ public class CharacterStats : ScriptableObject
         _money -= _hpUpgradePrice;
         _maxHP += _hpUpgradeValue;
         _hpUpgradePrice += _hpUpgradeCounter * _hpPriceFactor;
+
+        DataHolder.PlayerStats.AddStats(_hpUp);
                    
         reaction(CharacterStorePurchaseCallback.Upgraded);
     }
@@ -116,7 +122,9 @@ public class CharacterStats : ScriptableObject
         _money -= _speedAttackUpgradePrice;
         _speedAttack += _speedAttackUpgradeValue;
         _speedAttackUpgradePrice +=_speedAttackUpgradeCounter * _speedAttackPriceFactor;
-          
+
+        DataHolder.PlayerStats.AddStats(_attackDellayUp);
+
         reaction(CharacterStorePurchaseCallback.Upgraded);
     }
 

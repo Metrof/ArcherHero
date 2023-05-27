@@ -145,7 +145,6 @@ public class GameManager : MonoBehaviour
          
 
             _playerController.SetFirstSkill(new Dash(2, purchasedPerks));
-
             _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
 
 

@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ownerlayer: 6
-  _zOffset: 1
+  _zOffset: 0.8
 --- !u!65 &6291290550405354128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.65, z: 0.24}
+  m_Size: {x: 1.62, y: 1.65, z: 0.2}
   m_Center: {x: 0, y: 1.09, z: 0}
 --- !u!1 &2477367996115379853
 GameObject:

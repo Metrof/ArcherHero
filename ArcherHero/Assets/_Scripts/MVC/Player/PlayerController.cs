@@ -63,7 +63,7 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     protected override void Death()
     {
         base.Death();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     internal void SetFirstSkill(List<IPerk> purchasedPerks)
