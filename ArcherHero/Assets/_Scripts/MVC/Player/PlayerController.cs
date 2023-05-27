@@ -30,6 +30,10 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
         _controller.Player.SecondSkill.performed -= ActiveSecondSkill;
         _controller.Disable();
     }
+    public void SubscriptionUIForHpUpdate(Action<float> action)
+    {
+        //_model.OnTakeDamage += action;
+    }
     public void Move(InputAction.CallbackContext context)
     {
         if (!_isMoving) return;

@@ -28,6 +28,7 @@ public class CharacterStats : ScriptableObject
     [SerializeField] private int _speedAttackUpgradeValue;
     [SerializeField] private int _speedAttackPriceFactor;
 
+    [SerializeField] private CharacterStatsE _baseStats;
     [SerializeField] private CharacterStatsE _hpUp;
     [SerializeField] private CharacterStatsE _speedUp;
     [SerializeField] private CharacterStatsE _attackDellayUp;
@@ -60,6 +61,11 @@ public class CharacterStats : ScriptableObject
     {
         get => _money;
         set => _money = value;
+    }
+
+    private void Awake()
+    {
+        DataHolder.SetStats(_baseStats);
     }
 
     public void UpgradeHp(UpgradeReaction reaction)
