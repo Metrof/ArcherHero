@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f598ffb282f7324d820c4a7f9a8619a, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  _lvlPref: {fileID: 7419115845735629199, guid: 15dc364f3695cfd4d9ecc536072b72ca, type: 3}
+  _lvlStartTriggerZone: {fileID: 1109740519358537652, guid: 2b9780d4631236b41b8b3d64c985cda6, type: 3}
+  _lvlEndTriggerZone: {fileID: 6266440459227664552, guid: f8c587684772eff4d9699a86611a861f, type: 3}
+  _enemies:
+  - {fileID: 4153977055588632408, guid: 3f5aeac1457194a43aed8d66797a34c6, type: 3}
+  _scaleEnemyPower: 1
+  _lvlNum: 0
+  _enemysCount: 3
