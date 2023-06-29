@@ -34,8 +34,13 @@ public class GameManager : MonoBehaviour
     private LvlTriggerZone _startTriggerZone;
     private LvlTriggerZone _endTriggerZone;
 
+<<<<<<< HEAD
     Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> _perkStates;
 
+
+
+=======
+>>>>>>> parent of d2ab64b (path 2)
     private static int _lvlCount;
     public static int LvlCount { get { return _lvlCount; } }
 
@@ -55,6 +60,8 @@ public class GameManager : MonoBehaviour
 
         _perkStates = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
     }
+
+<<<<<<< HEAD
 
     private void LoadPerkData()
     {
@@ -82,6 +89,10 @@ public class GameManager : MonoBehaviour
         return purchasedPerks;
     }
 
+
+
+=======
+>>>>>>> parent of d2ab64b (path 2)
     private void CreatePlayer(CharacterStatsE playerStats)
     {
         if (_playerPref != null)
@@ -97,10 +108,16 @@ public class GameManager : MonoBehaviour
 
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(_playerController.transform);
+<<<<<<< HEAD
+
 
             List<IPerk> purchasedPerks = GetPurchasedPerks();
 
             _playerController.SetFirstSkill(new Dash(2, purchasedPerks));
+
+=======
+            _playerController.SetFirstSkill(new Dash(2));
+>>>>>>> parent of d2ab64b (path 2)
             _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
 
             _playerController.LvlStart();
