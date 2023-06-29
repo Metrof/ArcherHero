@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6114131, g: 0.5786423, b: 0.6075084, a: 1}
+  m_IndirectSpecularColor: {r: 0.6110326, g: 0.5797211, b: 0.6066183, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2586,6 +2586,7 @@ GameObject:
   - component: {fileID: 536239122}
   - component: {fileID: 536239121}
   - component: {fileID: 536239120}
+  - component: {fileID: 536239123}
   m_Layer: 5
   m_Name: ParryButtonSmall4
   m_TagString: Untagged
@@ -6600,7 +6601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1330334540
 RectTransform:
   m_ObjectHideFlags: 0

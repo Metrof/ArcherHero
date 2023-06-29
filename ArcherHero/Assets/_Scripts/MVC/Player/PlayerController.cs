@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     private Skill _secondSkill;
 
     private Controller _controller;
+
+    private Image _hpImage;
 
 
     private void Awake()
@@ -30,9 +33,14 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
         _controller.Player.SecondSkill.performed -= ActiveSecondSkill;
         _controller.Disable();
     }
-    public void SubscriptionUIForHpUpdate(Action<float> action)
+    public void SubscriptionUIForHpUpdate(Image image)
     {
-        //_model.OnTakeDamage += action;
+        _hpImage = image;
+        _model.OnTakeDamage += UpdateUI;
+    }
+    private void UpdateUI(float hp, float maxHp)
+    {
+        _hpImage.fillAmount = hp / maxHp;
     }
     public void Move(InputAction.CallbackContext context)
     {
@@ -43,8 +51,6 @@ public class PlayerController : UnitController<PlayerView, PlayerModel>
     public void SetFirstSkill( Skill skill )
     {
         _firstSkill = skill;
-
-
     }
     public void SetSecondSkill(Skill skill)
     {

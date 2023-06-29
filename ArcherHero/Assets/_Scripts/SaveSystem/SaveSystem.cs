@@ -102,23 +102,15 @@ public static class SaveSystem
 
     public static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> LoadPerkData()
     {
-        string json = File.ReadAllText(savePathPerk);
-
-        if (json != null)
-        {
             try
             {
+                string json = File.ReadAllText(savePathPerk);
                 return JsonConvert.DeserializeObject<Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>>(json);
             }
             catch (Exception)
             {
                 return GetDefaultPerkData();
             }
-        }
-        else
-        {   
-            return GetDefaultPerkData();
-        }
     }
 
     private static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> GetDefaultPerkData()

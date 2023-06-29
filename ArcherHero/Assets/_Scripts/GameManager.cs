@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
             if (playerStats == null) playerStats = _baseCharacterStats;
             _playerController.Init(playerView, playerModel, _defoltPlayerPos.position);
             _playerController.SetNewModelParram(playerStats);
+            _playerController.SubscriptionUIForHpUpdate(_playerHpBar);
 
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(_playerController.transform);
@@ -132,10 +133,6 @@ public class GameManager : MonoBehaviour
             }
             UnitManager.Instance.SetEnemysAtUnitManager(enemysList);
         }
-    }
-    private void UpdateUI()
-    {
-
     }
     private void LvlInit()
     {

@@ -30,7 +30,8 @@ MonoBehaviour:
   _speedAttackUpgradePrice: 228
   _speedAttackUpgradeValue: 3
   _speedAttackPriceFactor: 3
+  _baseStats: {fileID: 11400000, guid: d0c2caaf73aafb74293d468538e7c655, type: 2}
   _hpUp: {fileID: 11400000, guid: 4ac686246a041d6438a543252954ff05, type: 2}
   _speedUp: {fileID: 11400000, guid: 510688fac2b145d498fe7b071c92d92c, type: 2}
   _attackDellayUp: {fileID: 11400000, guid: d9602c823ee1d5744930c3fd3b62a99f, type: 2}
-  _money: 6360205
+  _money: 40
