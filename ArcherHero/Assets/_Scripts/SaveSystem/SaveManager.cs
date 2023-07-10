@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 
 namespace SaveSystem
@@ -10,6 +11,13 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private CharacterStats _characterStats;
     PerkManager _perkManager;
 
+    private DataHolderTestZ _holderTestZ;
+
+    [Inject]
+    public void Construct(DataHolderTestZ holderTestZ)
+    {
+        _holderTestZ = holderTestZ;
+    }
     private void Awake()
     {
         SaveSystem.Initialize();
@@ -17,9 +25,9 @@ public class SaveManager : MonoBehaviour
         _perkManager = FindObjectOfType<PerkManager>();
 
 
-        _characterSkills.GainExperience(DataHolder.PlayerBounty.MinedExp);
-        _characterStats.Money += DataHolder.PlayerBounty.MinedGold;
-        DataHolder.PlayerBounty.ClearStruct();
+        _characterSkills.GainExperience(_holderTestZ.PlayerBounty.MinedExp);
+        _characterStats.Money += _holderTestZ.PlayerBounty.MinedGold;
+        _holderTestZ.PlayerBounty.ClearStruct();
        
 
         //Save();

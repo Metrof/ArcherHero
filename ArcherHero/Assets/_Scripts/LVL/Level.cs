@@ -8,10 +8,11 @@ public class Level : ScriptableObject
     [SerializeField] private GameObject _lvlPref;
     [SerializeField] private LvlTriggerZone _lvlStartTriggerZone;
     [SerializeField] private LvlTriggerZone _lvlEndTriggerZone;
-    [SerializeField] private List<EnemyController> _enemies;
     [SerializeField] private float _scaleEnemyPower;
     [SerializeField] private int _lvlNum = 0;
     [SerializeField] private int _enemysCount = 7;
+
+    [SerializeField] private List<EnemyTypes> _enemyTypes;
 
     private Wave[] _waves;
     private int _currentWave;
@@ -26,7 +27,7 @@ public class Level : ScriptableObject
         }
     }
     public float EnemyPower { get { return _scaleEnemyPower; } }
-    public List<EnemyController> Enemies { get { return _enemies; } }
+    public List<EnemyTypes> EnemyTypes { get { return _enemyTypes; } }
     public LvlTriggerZone LvlStartTriggerZone { get { return _lvlStartTriggerZone; } }
     public LvlTriggerZone LvlEndTriggerZone { get { return _lvlEndTriggerZone; } }
     public GameObject LvlPref { get { return _lvlPref; } }

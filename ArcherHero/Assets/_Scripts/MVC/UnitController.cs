@@ -32,6 +32,10 @@ public class UnitController<V, M> : MonoBehaviour
         _model.OnStartAttack += StartAttacking;
     }
 
+    public bool CheckModel()
+    {
+        return _model != null;
+    }
     protected virtual void ModelAttack()
     {
         _model.ChangeTarget(transform.position);
@@ -109,6 +113,7 @@ public class UnitController<V, M> : MonoBehaviour
     }
     public void ChangeModelParram(CharacterStatsE stats)
     {
+        Debug.Log(_model);
         _model.ChangeStats(stats);
     }
 

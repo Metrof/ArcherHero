@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 [CreateAssetMenu(fileName = "CharacterStats", menuName = "ScriptableObjects/CharacterStats")]
 public class CharacterStats : ScriptableObject
@@ -37,6 +38,15 @@ public class CharacterStats : ScriptableObject
     [Header("Money")]
     [SerializeField] private int _money;
 
+
+    private DataHolderTestZ _holderTestZ;
+
+    [Inject]
+    public void Construct(DataHolderTestZ holderTestZ)
+    {
+        _holderTestZ = holderTestZ;
+    }
+
     public int HpUpgradeCounter => _hpUpgradeCounter;
     public int HpUpgradePrice => _hpUpgradePrice;
     public int HpUpgradeLimit => _hpUpgradeLimit;
@@ -65,7 +75,7 @@ public class CharacterStats : ScriptableObject
 
     private void Awake()
     {
-        DataHolder.SetStats(_baseStats);
+        _holderTestZ.SetStats(_baseStats);
     }
 
     public void UpgradeHp(UpgradeReaction reaction)
@@ -86,7 +96,7 @@ public class CharacterStats : ScriptableObject
         _maxHP += _hpUpgradeValue;
         _hpUpgradePrice += _hpUpgradeCounter * _hpPriceFactor;
 
-        DataHolder.PlayerStats.AddStats(_hpUp);
+        _holderTestZ.PlayerStats.AddStats(_hpUp);
                    
         reaction(CharacterStorePurchaseCallback.Upgraded);
     }
@@ -129,7 +139,7 @@ public class CharacterStats : ScriptableObject
         _speedAttack += _speedAttackUpgradeValue;
         _speedAttackUpgradePrice +=_speedAttackUpgradeCounter * _speedAttackPriceFactor;
 
-        DataHolder.PlayerStats.AddStats(_attackDellayUp);
+        _holderTestZ.PlayerStats.AddStats(_attackDellayUp);
 
         reaction(CharacterStorePurchaseCallback.Upgraded);
     }

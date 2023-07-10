@@ -44,9 +44,8 @@ public class UnitModel
     public float RotationSpeed { get { return _rotationSpeed; } private set { _rotationSpeed = value; } }
     public bool ThereIsTarget { get { return _currentTarget != null; } }
 
-    public UnitModel(float mapSize, int layerNum, Material material)
+    public UnitModel(int layerNum, Material material)
     {
-        _mapDiagonalSize = mapSize;
         _layerNum = layerNum;
         _material = material;
     }

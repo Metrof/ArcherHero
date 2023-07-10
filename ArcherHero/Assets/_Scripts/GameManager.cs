@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static PerkManager;
+using Zenject;
 
 [RequireComponent(typeof(ProjectilePull))]
 public class GameManager : MonoBehaviour
@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Dagger _dagger;
     [SerializeField] private PlayerController _playerPref;
     [SerializeField] private CharacterStatsE _baseCharacterStats;
-    [SerializeField] private EnemyController _enemyPref;
+    [SerializeField] private GameObject _enemyPref;
 
     [SerializeField] private Transform _defoltPlayerPos;
     [SerializeField] private Transform _enemyAnchor;
@@ -34,13 +34,22 @@ public class GameManager : MonoBehaviour
     private LvlTriggerZone _startTriggerZone;
     private LvlTriggerZone _endTriggerZone;
 
-<<<<<<< HEAD
+    private Dictionary<EnemyTypes, AbstractEnemyFactory> _enemyfactoryDic = new();
+
+    private DataHolderTestZ _holderTestZ;
+
+    [Inject] private DiContainer _diContainer;
+    [Inject]
+    private void Construct(DataHolderTestZ holderTestZ)
+    {
+        _holderTestZ = holderTestZ;
+    }
+
+    // тестовый вариант с конструктором
+
+
     Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> _perkStates;
 
-
-
-=======
->>>>>>> parent of d2ab64b (path 2)
     private static int _lvlCount;
     public static int LvlCount { get { return _lvlCount; } }
 
@@ -48,20 +57,21 @@ public class GameManager : MonoBehaviour
     {
         _lvlCount = _levels.Length;
         _cameraController = GetComponent<CameraController>();
-        _currentLvl = _levels[DataHolder.LvlStart];
+        _currentLvl = _levels[_holderTestZ.LvlStart];
+
+        _enemyfactoryDic.Add(EnemyTypes.DefoltRobot, new DefoltEnemyFactory(EnemyTypes.DefoltRobot, _enemyPullPos));
     }
 
     public void Start()
     {
         LvlInit();
         CreateEnemys(_currentLvl.EnemyPower);
-        CreatePlayer(DataHolder.PlayerStats);
+        CreatePlayer(_holderTestZ.PlayerStats);
+        UnitManager.Instance.OnLastEnemyDeath += StartNewWave;
         _cameraController.SetTarget(_playerController.transform);
 
         _perkStates = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
     }
-
-<<<<<<< HEAD
 
     private void LoadPerkData()
     {
@@ -85,21 +95,16 @@ public class GameManager : MonoBehaviour
                 purchasedPerks.Add(perk);
             }
         }
-
         return purchasedPerks;
     }
 
-
-
-=======
->>>>>>> parent of d2ab64b (path 2)
     private void CreatePlayer(CharacterStatsE playerStats)
     {
         if (_playerPref != null)
         {
             _playerController = Instantiate(_playerPref, _defoltPlayerPos.position, Quaternion.identity);
             var playerView = _playerController.GetComponent<PlayerView>();
-            var playerModel = new PlayerModel(_mapDiagonalSize, _playerController.gameObject.layer, _playerController.GetComponent<Renderer>().material);
+            var playerModel = new PlayerModel(_playerController.gameObject.layer, _playerController.GetComponent<Renderer>().material);
 
             if (playerStats == null) playerStats = _baseCharacterStats;
             _playerController.Init(playerView, playerModel, _defoltPlayerPos.position);
@@ -108,16 +113,11 @@ public class GameManager : MonoBehaviour
 
             Dagger dagger = Instantiate(_dagger);
             dagger.SetOwner(_playerController.transform);
-<<<<<<< HEAD
-
 
             List<IPerk> purchasedPerks = GetPurchasedPerks();
 
             _playerController.SetFirstSkill(new Dash(2, purchasedPerks));
 
-=======
-            _playerController.SetFirstSkill(new Dash(2));
->>>>>>> parent of d2ab64b (path 2)
             _playerController.SetSecondSkill(new Parry(dagger.gameObject, 2));
 
             _playerController.LvlStart();
@@ -130,22 +130,20 @@ public class GameManager : MonoBehaviour
         if (_currentLvl != null)
         {
             var enemysList = new List<EnemyController>();
-            for (int i = 0; i < _currentLvl.Enemies.Count; i++)
+            for (int i = 0; i < _currentLvl.EnemyTypes.Count; i++) // пон€ть зачем € оставил _currentLvl.EnemyTypes пустым
             {
                 for (int f = 0; f < _currentLvl.EnemyCount; f++)
                 {
-                    var enemyController = Instantiate(_currentLvl.Enemies[i], _enemyAnchor);
-                    var model = new EnemyModel(_mapDiagonalSize, enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
-                    var enemyView = enemyController.GetComponent<EnemyView>();
-                    var enemyStats = _baseCharacterStats;
-                    enemyStats.ScaleStats(scaleStats);
-
-                    enemyController.Init(enemyView, model, _enemyPullPos);
-                    enemyController.SetEnemyType(_currentLvl.Enemies[i].Type);
-                    enemyController.SetNewModelParram(enemyStats);
-                    enemyController.OnLastEnemyDeath += StartNewWave;
-                    enemyController.LvlStart();
-                    enemysList.Add(enemyController);
+                    // вместе с параметрами, во врага будет также передаватс€ его моделька
+                    // изменить лист _currentLvl.EnemyTypes[i] на лист голых префабов врагов, без скриптов
+                    var enemyController = _diContainer.InstantiatePrefab(_enemyPref, _enemyAnchor);
+                    EnemyTypes type = _currentLvl.EnemyTypes[i]; 
+                    _enemyfactoryDic[type].CreateEnemy(enemyController, _baseCharacterStats, scaleStats);
+                    enemysList.Add(_enemyfactoryDic[type].GetEnemy());
+                    foreach (var enemy in enemysList)
+                    {
+                        Debug.Log(enemy.CheckModel());
+                    }
                 }
             }
             UnitManager.Instance.SetEnemysAtUnitManager(enemysList);
