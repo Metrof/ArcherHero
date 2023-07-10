@@ -6,7 +6,7 @@ public class PlayerModel : UnitModel
 {
     public delegate void HPDelegate(float hp, float maxHp);
     public event HPDelegate OnTakeDamage;
-    public PlayerModel(float mapSize, int lauerNum, Material material) : base(mapSize, lauerNum, material)
+    public PlayerModel(int lauerNum, Material material) : base(lauerNum, material)
     {
     }
     public override void ChangeStats(CharacterStatsE stats)
