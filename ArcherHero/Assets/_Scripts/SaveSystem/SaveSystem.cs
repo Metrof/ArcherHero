@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
 using System;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 
 namespace SaveSystem
 {
@@ -89,29 +89,31 @@ public static class SaveSystem
    public static void SavePerkData(Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> perkData)
    {
 
-        if(perkData != null)
-        {
-            string json = JsonConvert.SerializeObject(perkData);
-            File.WriteAllText(savePathPerk, json);
-        }
-        else
-        {
-            Debug.LogError("PerkData is null. Unable to save.");
-        }
+        //if(perkData != null)
+        //{
+        //    string json = JsonConvert.SerializeObject(perkData);
+        //    File.WriteAllText(savePathPerk, json);
+        //}
+        //else
+        //{
+        //    Debug.LogError("PerkData is null. Unable to save.");
+        //}
    }
 
     public static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> LoadPerkData()
     {
-            try
-            {
-                string json = File.ReadAllText(savePathPerk);
-                return JsonConvert.DeserializeObject<Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>>(json);
-            }
-            catch (Exception)
-            {
-                return GetDefaultPerkData();
-            }
-    }
+            //try
+            //{
+            //    string json = File.ReadAllText(savePathPerk);
+            //    return JsonConvert.DeserializeObject<Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>>(json);
+            //}
+            //catch (Exception)
+            //{
+            //    return GetDefaultPerkData();
+            //}
+
+            return GetDefaultPerkData();
+        }
 
     private static Dictionary<PerkManager.PerkType, PerkManager.PerkStatus> GetDefaultPerkData()
     {
