@@ -140,10 +140,6 @@ public class GameManager : MonoBehaviour
                     EnemyTypes type = _currentLvl.EnemyTypes[i]; 
                     _enemyfactoryDic[type].CreateEnemy(enemyController, _baseCharacterStats, scaleStats);
                     enemysList.Add(_enemyfactoryDic[type].GetEnemy());
-                    foreach (var enemy in enemysList)
-                    {
-                        Debug.Log(enemy.CheckModel());
-                    }
                 }
             }
             UnitManager.Instance.SetEnemysAtUnitManager(enemysList);

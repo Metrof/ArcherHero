@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Zenject;
 
 public class DefoltEnemyFactory : AbstractEnemyFactory
 {
@@ -12,7 +13,8 @@ public class DefoltEnemyFactory : AbstractEnemyFactory
 
     public override void CreateEnemy(GameObject enemyPref, CharacterStatsE stats, float scaleStats)
     {
-        var enemyController = enemyPref.AddComponent<EnemyController>();
+        EnemyController enemyController;
+        enemyPref.TryGetComponent(out enemyController);
         var model = new EnemyModel(enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
         var view = enemyController.GetComponent<EnemyView>();
         var enemyStats = stats;

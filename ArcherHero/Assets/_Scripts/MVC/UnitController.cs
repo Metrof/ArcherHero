@@ -113,7 +113,6 @@ public class UnitController<V, M> : MonoBehaviour
     }
     public void ChangeModelParram(CharacterStatsE stats)
     {
-        Debug.Log(_model);
         _model.ChangeStats(stats);
     }
 

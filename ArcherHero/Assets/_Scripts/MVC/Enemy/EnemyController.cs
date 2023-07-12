@@ -17,6 +17,7 @@ public class EnemyController : UnitController<EnemyView, EnemyModel>
     private void Construct(DataHolderTestZ holderTestZ)
     {
         _holderTestZ = holderTestZ;
+        Debug.Log(_holderTestZ.LvlStart);
     }
 
     public void SetEnemyType(EnemyTypes type)
