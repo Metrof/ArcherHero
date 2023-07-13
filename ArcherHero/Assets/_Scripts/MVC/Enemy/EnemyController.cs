@@ -12,12 +12,15 @@ public class EnemyController : UnitController<EnemyView, EnemyModel>
     public EnemyTypes EnemyType { get { return _type; } }
 
     private DataHolderTestZ _holderTestZ;
+    private UnitManager _unitManager;
+
+    public UnitManager UnitManager { get { return _unitManager; } }
 
     [Inject]
-    private void Construct(DataHolderTestZ holderTestZ)
+    private void Construct(DataHolderTestZ holderTestZ, UnitManager unitManager)
     {
         _holderTestZ = holderTestZ;
-        Debug.Log(_holderTestZ.LvlStart);
+        _unitManager = unitManager;
     }
 
     public void SetEnemyType(EnemyTypes type)
@@ -34,6 +37,6 @@ public class EnemyController : UnitController<EnemyView, EnemyModel>
         base.Death();
         TransformToDefoltPos();
         _holderTestZ.AddLvlMinedBounty(GetBounty());
-        UnitManager.Instance.CheckLastEnemy();
+        _unitManager.CheckLastEnemy();
     }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyModel : UnitModel
 {
-    public EnemyModel(int lauerNum, Material material) : base(lauerNum, material)
+    public EnemyModel(UnitManager unitManager, int lauerNum, Material material) : base(unitManager, lauerNum, material)
     {
-
+        _unitManager = unitManager;
     }
     public override void ChangeTarget(Vector3 myPos)
     {
-        _currentTarget = UnitManager.Instance.PlayerTransform;
+        _currentTarget = _unitManager.PlayerTransform;
     }
 }

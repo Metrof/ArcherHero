@@ -23,6 +23,8 @@ public class UnitModel
     protected Transform _currentTarget;
     protected Material _material;
 
+    protected UnitManager _unitManager;
+
     protected CharacterStatsE _spawnStats;
     public float MaxHP { get { return _maxHP; } private set { _maxHP = value; } }
     public float CurrentHP
@@ -44,8 +46,9 @@ public class UnitModel
     public float RotationSpeed { get { return _rotationSpeed; } private set { _rotationSpeed = value; } }
     public bool ThereIsTarget { get { return _currentTarget != null; } }
 
-    public UnitModel(int layerNum, Material material)
+    public UnitModel(UnitManager unitManager, int layerNum, Material material)
     {
+        _unitManager = unitManager;
         _layerNum = layerNum;
         _material = material;
     }

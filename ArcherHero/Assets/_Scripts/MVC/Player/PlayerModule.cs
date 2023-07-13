@@ -6,7 +6,7 @@ public class PlayerModel : UnitModel
 {
     public delegate void HPDelegate(float hp, float maxHp);
     public event HPDelegate OnTakeDamage;
-    public PlayerModel(int lauerNum, Material material) : base(lauerNum, material)
+    public PlayerModel(UnitManager unitManager, int lauerNum, Material material) : base(unitManager, lauerNum, material)
     {
     }
     public override void ChangeStats(CharacterStatsE stats)
@@ -16,6 +16,6 @@ public class PlayerModel : UnitModel
     }
     public override void ChangeTarget(Vector3 myPos)
     {
-        _currentTarget = FindNearestTarget.GetNearestTarget(myPos, UnitManager.Instance.WaveEnemiesTransforms);
+        _currentTarget = FindNearestTarget.GetNearestTarget(myPos, _unitManager.WaveEnemiesTransforms);
     }
 }

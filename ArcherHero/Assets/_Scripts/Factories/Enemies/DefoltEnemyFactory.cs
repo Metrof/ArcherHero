@@ -11,11 +11,10 @@ public class DefoltEnemyFactory : AbstractEnemyFactory
 
     }
 
-    public override void CreateEnemy(GameObject enemyPref, CharacterStatsE stats, float scaleStats)
+    public override EnemyController CreateEnemy(DiContainer container, EnemyController enemyPref, Transform enemyAnchor, CharacterStatsE stats, float scaleStats)
     {
-        EnemyController enemyController;
-        enemyPref.TryGetComponent(out enemyController);
-        var model = new EnemyModel(enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
+        EnemyController enemyController = container.InstantiatePrefabForComponent<EnemyController>(enemyPref, enemyAnchor);
+        var model = new EnemyModel(enemyController.UnitManager, enemyController.gameObject.layer, enemyController.GetComponent<Renderer>().material);
         var view = enemyController.GetComponent<EnemyView>();
         var enemyStats = stats;
         enemyStats.ScaleStats(scaleStats);
@@ -24,11 +23,7 @@ public class DefoltEnemyFactory : AbstractEnemyFactory
         enemyController.SetEnemyType(enemyController.EnemyType);
         enemyController.SetNewModelParram(enemyStats);
         enemyController.LvlStart();
-        _createdEnemy = enemyController;
-    }
 
-    public override EnemyController GetEnemy()
-    {
-        return _createdEnemy;
+        return enemyController;
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UnitManager : Singleton<UnitManager>
+public class UnitManager : MonoBehaviour
 {
     public delegate void LvlFinishDelegate();
     public event LvlFinishDelegate OnLastEnemyDeath;

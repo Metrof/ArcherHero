@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public abstract class AbstractEnemyFactory 
 {
@@ -17,6 +18,5 @@ public abstract class AbstractEnemyFactory
         _pullPos = enemyPullPos;
         _enemyType = factoryType;
     }
-    public abstract void CreateEnemy(GameObject enemyPref, CharacterStatsE stats, float scaleStats);
-    public abstract EnemyController GetEnemy();
+    public abstract EnemyController CreateEnemy(DiContainer container, EnemyController enemyPref, Transform enemyAnchor, CharacterStatsE stats, float scaleStats);
 }

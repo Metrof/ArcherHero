@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Dagger _dagger;
     [SerializeField] private PlayerController _playerPref;
     [SerializeField] private CharacterStatsE _baseCharacterStats;
-    [SerializeField] private GameObject _enemyPref;
+    [SerializeField] private EnemyController _enemyPref;
 
     [SerializeField] private Transform _defoltPlayerPos;
     [SerializeField] private Transform _enemyAnchor;
@@ -36,13 +36,16 @@ public class GameManager : MonoBehaviour
 
     private Dictionary<EnemyTypes, AbstractEnemyFactory> _enemyfactoryDic = new();
 
+    private DiContainer _diContainer;
     private DataHolderTestZ _holderTestZ;
+    private UnitManager _unitManager;
 
-    [Inject] private DiContainer _diContainer;
     [Inject]
-    private void Construct(DataHolderTestZ holderTestZ)
+    private void Construct(DiContainer container, DataHolderTestZ holderTestZ, UnitManager unitManager)
     {
+        _diContainer = container;
         _holderTestZ = holderTestZ;
+        _unitManager = unitManager;
     }
 
     // тестовый вариант с конструктором
@@ -67,7 +70,7 @@ public class GameManager : MonoBehaviour
         LvlInit();
         CreateEnemys(_currentLvl.EnemyPower);
         CreatePlayer(_holderTestZ.PlayerStats);
-        UnitManager.Instance.OnLastEnemyDeath += StartNewWave;
+        _unitManager.OnLastEnemyDeath += StartNewWave;
         _cameraController.SetTarget(_playerController.transform);
 
         _perkStates = new Dictionary<PerkManager.PerkType, PerkManager.PerkStatus>();
@@ -104,7 +107,7 @@ public class GameManager : MonoBehaviour
         {
             _playerController = Instantiate(_playerPref, _defoltPlayerPos.position, Quaternion.identity);
             var playerView = _playerController.GetComponent<PlayerView>();
-            var playerModel = new PlayerModel(_playerController.gameObject.layer, _playerController.GetComponent<Renderer>().material);
+            var playerModel = new PlayerModel(_unitManager, _playerController.gameObject.layer, _playerController.GetComponent<Renderer>().material);
 
             if (playerStats == null) playerStats = _baseCharacterStats;
             _playerController.Init(playerView, playerModel, _defoltPlayerPos.position);
@@ -122,7 +125,7 @@ public class GameManager : MonoBehaviour
 
             _playerController.LvlStart();
 
-            UnitManager.Instance.SetPlayerAtUnitManager(_playerController);
+            _unitManager.SetPlayerAtUnitManager(_playerController);
         }
     }
     private void CreateEnemys(float scaleStats)
@@ -130,19 +133,16 @@ public class GameManager : MonoBehaviour
         if (_currentLvl != null)
         {
             var enemysList = new List<EnemyController>();
-            for (int i = 0; i < _currentLvl.EnemyTypes.Count; i++) // пон€ть зачем € оставил _currentLvl.EnemyTypes пустым
+            for (int i = 0; i < _currentLvl.EnemyTypes.Count; i++)
             {
                 for (int f = 0; f < _currentLvl.EnemyCount; f++)
                 {
-                    // вместе с параметрами, во врага будет также передаватс€ его моделька
-                    // изменить лист _currentLvl.EnemyTypes[i] на лист голых префабов врагов, без скриптов
-                    var enemyController = _diContainer.InstantiatePrefab(_enemyPref, _enemyAnchor);
                     EnemyTypes type = _currentLvl.EnemyTypes[i]; 
-                    _enemyfactoryDic[type].CreateEnemy(enemyController, _baseCharacterStats, scaleStats);
-                    enemysList.Add(_enemyfactoryDic[type].GetEnemy());
+                    enemysList.Add(_enemyfactoryDic[type]
+                        .CreateEnemy(_diContainer, _enemyPref, _enemyAnchor, _baseCharacterStats, scaleStats));
                 }
             }
-            UnitManager.Instance.SetEnemysAtUnitManager(enemysList);
+            _unitManager.SetEnemysAtUnitManager(enemysList);
         }
     }
     private void LvlInit()
@@ -165,10 +165,10 @@ public class GameManager : MonoBehaviour
         if (_currentWave > _waves.Length - 1)
         {
             LvlDoor.OpenDoor();
-            UnitManager.Instance.LvlEnd();
+            _unitManager.LvlEnd();
             return;
         }
-        UnitManager.Instance.TeleportWaveEnemys(_waves[_currentWave].Points);
+        _unitManager.TeleportWaveEnemys(_waves[_currentWave].Points);
         _currentWave++;
     }
     private void LvlEnd()
