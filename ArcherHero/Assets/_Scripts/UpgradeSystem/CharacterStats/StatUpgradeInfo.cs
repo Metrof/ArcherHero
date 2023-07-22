@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 [System.Serializable]
 public class StatUpgradeInfo
 {
@@ -7,5 +8,6 @@ public class StatUpgradeInfo
     [SerializeField] private int _unlockCost;
 
     public int Value => _value;
+
     public int UnlockedCost => _unlockCost;
 }

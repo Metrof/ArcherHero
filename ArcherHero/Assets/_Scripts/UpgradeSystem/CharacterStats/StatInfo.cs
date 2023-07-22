@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using PlayerStats;
 
 [Serializable]
-public class StatInfo
+public class StatInfo 
 {
     public event Action<StatInfo> OnChangeUpgradeLvlEvent;
 
