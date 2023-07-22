@@ -34,7 +34,7 @@
             "id": "f65f655f-7c59-40bc-8ca9-6034813b99b8",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "ClickButton",
                     "type": "Button",
                     "id": "0b9d9292-025a-4c9f-aad6-1d4a4ef1e3ea",
                     "expectedControlType": "Button",
@@ -47,11 +47,11 @@
                 {
                     "name": "",
                     "id": "5b5cb3a4-d033-4fff-8b1b-8dd03422fdf2",
-                    "path": "",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "ClickButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

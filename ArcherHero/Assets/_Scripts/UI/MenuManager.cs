@@ -1,20 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
 
-public class NewBehaviorScript : MonoBehaviour
+
+
+public class MenuManager : MonoBehaviour
 {   
-    [SerializeField] private Button button;
     [SerializeField] private List<GameObject> objectOn;
     [SerializeField] private List<GameObject> objectOff;
 
-    void Start()
-    {
-        button.onClick.AddListener(OnClickButton);
-    }
-
-    void OnClickButton()
+    public void OnClickButton()
     {
         if(objectOff != null)
         {
@@ -29,6 +23,6 @@ public class NewBehaviorScript : MonoBehaviour
             {
                 onObject.gameObject.SetActive(true);
             }
-        }       
+        }   
     }
 }
