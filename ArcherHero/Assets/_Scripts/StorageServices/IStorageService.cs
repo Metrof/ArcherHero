@@ -1,8 +1,10 @@
 using System;
 
-public interface IStorageService
+namespace SurvivalWizard
 {
-    void Save(string key, object data, Action<bool> callback = null);
-    void Load<T>(string key, Action<T> callback);
+    public interface IStorageService
+    {
+        void Save(string key, object data, Action<bool> callback = null);
+        void Load<T>(string key, Action<T> callback);
+    }
 }
-
