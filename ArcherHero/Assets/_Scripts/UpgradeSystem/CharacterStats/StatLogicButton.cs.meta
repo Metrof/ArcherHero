@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:ArcherHero/Assets/_Scripts/UpgradeSystem/CharacterStats/StatLogicButton.cs.meta
+guid: c9814d9296c13ac4193ed598e256d237
+========
+guid: 63ee02b49a058954da7acab692981fac
+>>>>>>>> Master2.0:ArcherHero/Assets/_Scripts/UpgradeSystem/CharacterStats/StatInfo.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
