@@ -1,9 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ArcherHero/Assets/Resorses.meta
 <<<<<<<< HEAD:ArcherHero/Assets/Resorses.meta
 guid: 4a556d25f2315874aa397f2b4dee0802
 ========
 guid: 6d8c95579152a8f4d9118066eb6e766c
 >>>>>>>> Master2.0:ArcherHero/Assets/_Scripts/ResourcesScripts.meta
+=======
+guid: db4889a8e55a3074980191893fe35e69
+>>>>>>> parent of 0abb490 (perk 5):ArcherHero/Assets/InputSystem.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

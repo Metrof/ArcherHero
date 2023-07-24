@@ -22,9 +22,13 @@ public class StatInfo
     public int UnlockedLvl { get => _unlockedLvl; }
     public int MaxUpgradeLvl { get => _upgradeList.Count - 1; }
     public int CurrentValue { get => GetValue(_unlockedLvl); }
-    public int NextValue { get => IsUnlocked ? CurrentValue : GetValue(_unlockedLvl + 1); } 
+    public int NextValue { get => IsUnlocked ? CurrentValue : GetValue(_unlockedLvl + 1); }
     public int UpgradePrice { get => IsUnlocked ? -1 : _upgradeList[_unlockedLvl + 1].UnlockedCost; }
+<<<<<<< HEAD:ArcherHero/Assets/_Scripts/UpgradeSystem/CharacterStats/StatInfo.cs
    
+=======
+
+>>>>>>> parent of 0abb490 (perk 5):ArcherHero/Assets/_Scripts/PlayerScripts/CharacterUpSystem/StatInfo.cs
     public void InitializeUnlockedLvl(int value)
     {
         if (value < 0)
@@ -46,7 +50,6 @@ public class StatInfo
         if (!IsUnlocked)
         {
             _unlockedLvl++;
-            
             OnChangeUpgradeLvlEvent?.Invoke(this);
         }
     }

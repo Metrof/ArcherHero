@@ -537,11 +537,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97408262}
   m_CullTransparentMesh: 1
---- !u!1 &119600107 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6026187219420558752, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-  m_PrefabInstance: {fileID: 588295237}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &125451579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,11 +1797,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 800535254099626322, guid: 6a0f931a883c9384ebb28e5335d0ee96, type: 3}
   m_PrefabInstance: {fileID: 145278701}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &299584789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6026187219420558752, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-  m_PrefabInstance: {fileID: 1948407580}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &367362695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,13 +1941,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 381656895}
+  - component: {fileID: 381656896}
   m_Layer: 5
   m_Name: UpgradeMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &381656895
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1985,6 +1976,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 1545.8}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &381656896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381656894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 800e79b91eff7b04582e8742e4f4f733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpUpgradeText: {fileID: 0}
+  _damageUpgradeText: {fileID: 0}
+  _speedAttackUpgradeText: {fileID: 0}
+  _hpPriceText: {fileID: 0}
+  _hpValueText: {fileID: 0}
+  _damagePriceText: {fileID: 0}
+  _damageValueText: {fileID: 0}
+  _speedAttackPriceText: {fileID: 0}
+  _speedAttackValueText: {fileID: 0}
+  _hpCurrentText: {fileID: 0}
+  _damageCurrentText: {fileID: 0}
+  _speedAttackCurrentText: {fileID: 0}
+  _warningText: {fileID: 0}
+  _hpButton: {fileID: 1795962699}
+  _speedAttack: {fileID: 0}
+  _damageButton: {fileID: 0}
+  _statInfo:
+    _icon: {fileID: 0}
+    _name: 
+    _description: 
+    _unlockedLvl: 0
+    _upgradeList: []
 --- !u!1 &441238077
 GameObject:
   m_ObjectHideFlags: 0
@@ -2800,10 +2825,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8898338124729853620, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 604404173}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6026187219420558752, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1191752660}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
 --- !u!1 &604404172
 GameObject:
@@ -3609,10 +3631,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8898338124729853620, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1850790047}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6026187219420558752, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1795962702}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
 --- !u!1 &703488271
 GameObject:
@@ -5318,7 +5337,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 102.96312, y: 91.566826, z: 112.800766, w: 112.37444}
+  m_margin: {x: 82.50603, y: 91.566826, z: 88.067856, w: 112.37444}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5732,58 +5751,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6304967893155890454, guid: e857cc4fe9f65b64a89fb1bca2aed598, type: 3}
   m_PrefabInstance: {fileID: 1159636651}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1184706517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6026187219420558752, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-  m_PrefabInstance: {fileID: 697607543}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1191752656 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8898338124729853620, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
   m_PrefabInstance: {fileID: 588295237}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1191752657 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7949882582274797411, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-  m_PrefabInstance: {fileID: 588295237}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119600107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1191752660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119600107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9814d9296c13ac4193ed598e256d237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hpButton: {fileID: 1191752657}
-  _priceText: {fileID: 97408264}
-  _currentText: {fileID: 604404174}
-  _upgradeText: {fileID: 36286946}
-  _nextValueText: {fileID: 1347342044}
-  _statInfo:
-    _icon: {fileID: 0}
-    _name: SpeedAtack
-    _description: 
-    _unlockedLvl: 0
-    _upgradeList:
-    - _value: 1
-      _unlockCost: 0
-    - _value: 2
-      _unlockCost: 100
-    - _value: 3
-      _unlockCost: 300
-    - _value: 4
-      _unlockCost: 800
 --- !u!224 &1223795014 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 155942846331173222, guid: 330cd48add29885458966791e45f3abe, type: 3}
@@ -6546,9 +6518,15 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
+<<<<<<< HEAD
   m_IsActive: 1
 --- !u!224 &1330334540
 RectTransform:
+=======
+  m_IsActive: 0
+--- !u!4 &1330334540
+Transform:
+>>>>>>> parent of 0abb490 (perk 5)
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7049,7 +7027,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -79.915726, y: 158.12871, z: -33.66176, w: 53.976593}
+  m_margin: {x: -106.96597, y: 158.12871, z: -55.554047, w: 53.976593}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7897,54 +7875,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8898338124729853620, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
   m_PrefabInstance: {fileID: 1948407580}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1584892291 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7949882582274797411, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-  m_PrefabInstance: {fileID: 1948407580}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299584789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1584892294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299584789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9814d9296c13ac4193ed598e256d237, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hpButton: {fileID: 1584892291}
-  _priceText: {fileID: 1395240854}
-  _currentText: {fileID: 441238079}
-  _upgradeText: {fileID: 1648570017}
-  _nextValueText: {fileID: 757740936}
-  _statInfo:
-    _icon: {fileID: 0}
-    _name: Damage
-    _description: 333
-    _unlockedLvl: 0
-    _upgradeList:
-    - _value: 5
-      _unlockCost: 0
-    - _value: 10
-      _unlockCost: 50
-    - _value: 15
-      _unlockCost: 150
-    - _value: 20
-      _unlockCost: 300
-    - _value: 25
-      _unlockCost: 500
-    - _value: 30
-      _unlockCost: 800
-    - _value: 35
-      _unlockCost: 1100
 --- !u!1 &1648570015
 GameObject:
   m_ObjectHideFlags: 0
@@ -9545,6 +9475,20 @@ PrefabInstance:
       addedObject: {fileID: 1230049210}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 330cd48add29885458966791e45f3abe, type: 3}
+<<<<<<< HEAD
+=======
+--- !u!114 &1795962699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7949882582274797411, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
+  m_PrefabInstance: {fileID: 697607543}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> parent of 0abb490 (perk 5)
 --- !u!224 &1802579789 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 155942846331173222, guid: 330cd48add29885458966791e45f3abe, type: 3}
@@ -10071,10 +10015,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8898338124729853620, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 441238078}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6026187219420558752, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1584892294}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 426eefc76e89dd54d8fb8233c8adbdb8, type: 3}
 --- !u!1 &1968118421
 GameObject:

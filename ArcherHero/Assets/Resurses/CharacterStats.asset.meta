@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:ArcherHero/Assets/Resorses/CharacterStats.asset.meta
 <<<<<<<< HEAD:ArcherHero/Assets/Resorses/CharacterStats.asset.meta
 guid: 67fef8afa2f8bdd40abe92aa24309511
+=======
+guid: aa484bd91988ce94482cfd4df5751a3b
+>>>>>>> parent of 0abb490 (perk 5):ArcherHero/Assets/Resurses/CharacterStats.asset.meta
 NativeFormatImporter:
 ========
 guid: eabce07d04a9f884db459fd52e3845ab
