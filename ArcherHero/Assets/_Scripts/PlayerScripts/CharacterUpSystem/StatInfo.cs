@@ -24,8 +24,7 @@ public class StatInfo
     public int CurrentValue { get => GetValue(_unlockedLvl); }
     public int NextValue { get => IsUnlocked ? CurrentValue : GetValue(_unlockedLvl + 1); } 
     public int UpgradePrice { get => IsUnlocked ? -1 : _upgradeList[_unlockedLvl + 1].UnlockedCost; }
-    //public int UpgradeValue { get => IsUnlocked ? -1 : _upgradeList[_unlockedLvl + 1].Value; }
-
+   
     public void InitializeUnlockedLvl(int value)
     {
         if (value < 0)
