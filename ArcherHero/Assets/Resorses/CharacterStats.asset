@@ -17,13 +17,7 @@ MonoBehaviour:
     _name: 
     _description: 
     _unlockedLvl: 0
-    _upgradeList:
-    - _value: 0
-      _unlockCost: 0
-    - _value: 10
-      _unlockCost: 100
-    - _value: 20
-      _unlockCost: 200
+    _upgradeList: []
   _damage:
     _icon: {fileID: 0}
     _name: 
