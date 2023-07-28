@@ -510,6 +510,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 171489586794737215, guid: 2cc766d7be903bc4ebf6651e29372a48, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1889620916931456342, guid: 2cc766d7be903bc4ebf6651e29372a48, type: 3}
       propertyPath: m_Name
       value: UI
@@ -596,6 +600,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3479644534406215998, guid: 2cc766d7be903bc4ebf6651e29372a48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878664164545890567, guid: 2cc766d7be903bc4ebf6651e29372a48, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3878664164545890567, guid: 2cc766d7be903bc4ebf6651e29372a48, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
