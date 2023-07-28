@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using PlayerStats;
+
 
 [Serializable]
-public class StatInfo
+public class StatInfo 
 {
     public event Action<StatInfo> OnChangeUpgradeLvlEvent;
 
@@ -22,9 +22,9 @@ public class StatInfo
     public int UnlockedLvl { get => _unlockedLvl; }
     public int MaxUpgradeLvl { get => _upgradeList.Count - 1; }
     public int CurrentValue { get => GetValue(_unlockedLvl); }
-    public int NextValue { get => IsUnlocked ? CurrentValue : GetValue(_unlockedLvl + 1); }
+    public int NextValue { get => IsUnlocked ? CurrentValue : GetValue(_unlockedLvl + 1); } 
     public int UpgradePrice { get => IsUnlocked ? -1 : _upgradeList[_unlockedLvl + 1].UnlockedCost; }
-
+   
     public void InitializeUnlockedLvl(int value)
     {
         if (value < 0)
@@ -46,6 +46,7 @@ public class StatInfo
         if (!IsUnlocked)
         {
             _unlockedLvl++;
+            
             OnChangeUpgradeLvlEvent?.Invoke(this);
         }
     }

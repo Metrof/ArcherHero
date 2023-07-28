@@ -102,7 +102,7 @@ public class PerkManager : MonoBehaviour
            
         _perkStates[perk] = PerkStatus.Purchased;  
 
-        _xpCounter.UpdateXPCounter();
+        //_xpCounter.UpdateXPCounter();    
     }
 
 

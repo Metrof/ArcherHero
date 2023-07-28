@@ -12,7 +12,9 @@ namespace PlayerStats
         [SerializeField] private StatInfo _attackSpeed;
         [SerializeField] private StatInfo _movementSpeed;
 
-        private List<StatInfo> _stats;
+
+        private IEnumerable<StatInfo> _stats;
+
 
         public StatInfo MaxHP => _maxHP;
         public StatInfo Damage => _damage;
