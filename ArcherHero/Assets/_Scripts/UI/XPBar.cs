@@ -7,7 +7,7 @@ using Zenject;
 
 public class XPBar : MonoBehaviour
 {   
-    [SerializeField] private Button _button;
+    [SerializeField] private Button _button;    
     [SerializeField] private TextMeshProUGUI _carrentXPText;
     [SerializeField] private TextMeshProUGUI _carrentLevelText;
     private HeroLVL _heroLvl;
@@ -30,7 +30,7 @@ public class XPBar : MonoBehaviour
        ChangeBar();
        _heroLvl.OnExperienceAddedEvent += ChangeXP;
        _heroLvl.OnIncreasedLevelEvent += ChangeLvl;
-       _button.onClick.AddListener(AddXP);       
+       _button.onClick.AddListener(AddXP);          
     }
 
     private void ChangeXP(int changeXP)
@@ -51,7 +51,7 @@ public class XPBar : MonoBehaviour
         slider.value = (float)_heroLvl.CurrentExperience / _heroLvl.ToLevelUP;
     }   
 
-    public void AddXP()
+    public void AddXP()    // тестовый
     {
         _heroLvl.AddExperience( 123 );
     }
