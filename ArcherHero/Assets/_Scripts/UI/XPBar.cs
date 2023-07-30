@@ -4,9 +4,10 @@ using UnityEngine.UI;
 using TMPro;
 using Zenject;
 
+
 public class XPBar : MonoBehaviour
 {   
-    //[SerializeField] private CharacterSkills _characterSkills;
+    [SerializeField] private Button _button;
     [SerializeField] private TextMeshProUGUI _carrentXPText;
     [SerializeField] private TextMeshProUGUI _carrentLevelText;
     private HeroLVL _heroLvl;
@@ -26,23 +27,32 @@ public class XPBar : MonoBehaviour
     }
     void Start()
     {
-       // UpgradeText();
        ChangeBar();
+       _heroLvl.OnExperienceAddedEvent += ChangeXP;
+       _heroLvl.OnIncreasedLevelEvent += ChangeLvl;
+       _button.onClick.AddListener(AddXP);       
     }
-   /* public void UpgradeText()
+
+    private void ChangeXP(int changeXP)
     {
-        _carrentLevelText.text = $"{_carrentLevelText}";
-        _carrentLevelText.text =$"{_characterSkills.CurrentLevel}";
-        _carrentXPText.text =  $"{_characterSkills.CurrentXP} / {_characterSkills.XPToLevelUp}";
-    }*/
-    
+        _carrentXPText.text = $"{ changeXP.ToString()} / {_heroLvl.ToLevelUP}";
+        slider.value = (float)_heroLvl.CurrentExperience / _heroLvl.ToLevelUP;
+    }
+    private void ChangeLvl(int changeLvl)
+    {
+        _carrentLevelText.text = changeLvl.ToString();
+    }
+
     public void ChangeBar()
     {   
         _carrentLevelText.text =$"{_heroLvl.CurrentLvl}";
-        _carrentXPText.text =  $"{_heroLvl.CurrentLvl} / {_heroLvl.ToLevelUP}";
+        _carrentXPText.text =  $"{_heroLvl.CurrentExperience} / {_heroLvl.ToLevelUP}";
         
-        //slider.value = (float)_characterSkills.CurrentXP / _characterSkills.XPToLevelUp;
-
-        //_characterSkills.GainExperience(5);  // прибавляю опыт
+        slider.value = (float)_heroLvl.CurrentExperience / _heroLvl.ToLevelUP;
     }   
+
+    public void AddXP()
+    {
+        _heroLvl.AddExperience( 123 );
+    }
 }
