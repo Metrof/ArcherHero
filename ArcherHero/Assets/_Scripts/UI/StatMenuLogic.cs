@@ -1,12 +1,18 @@
 using PlayerStats;
 using UnityEngine;
-
+using Zenject;
 
 public class StatMenuLogic : MonoBehaviour
 {
     [SerializeField] private StatButton _prefabButton;
     [SerializeField] private RectTransform _containerButtons;
-    [SerializeField] private CharacterStats _characterStats;
+    private CharacterStats _characterStats;
+    
+    [Inject]
+    void Construct(CharacterStats characterStats)
+    { 
+        _characterStats = characterStats;  
+    }
 
     void Start()
     {
