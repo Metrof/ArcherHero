@@ -1,22 +1,26 @@
 using PlayerStats;
-using UnityEngine;
+using Zenject;
 
-public class UpgradeSystems
+public class SaveLoadUpgradeSystems
 {
-    private const string _characterStatsPath = "CharacterStats";
     private const string _statsPathFolder = "Stats/";
+    private const string _nameSaveHeroLvl = "HeroLVL";
 
-    private readonly IStorageService _storageService;
+    private IStorageService _storageService;
+    private DiContainer _container;
 
     public HeroLVL HeroLvl { get; private set; }
     public CharacterStats CharacterStats { get; private set; }
 
-    public UpgradeSystems(IStorageService storageService)
+    public SaveLoadUpgradeSystems(IStorageService storageService, CharacterStats characterStats, DiContainer diContainer)
     {
         _storageService = storageService;
+        CharacterStats = characterStats;
+        _container = diContainer;
 
         LoadData();
     }
+
     public void Save()
     {
         SaveHeroLvl();
@@ -31,13 +35,12 @@ public class UpgradeSystems
 
     private void LoadHeroLvl()
     {
-        _storageService.Load<int>(HeroLvl.ToString(), LoadHeroLvlCallBack);
+        _storageService.Load<int>(_nameSaveHeroLvl, LoadHeroLvlCallBack);
+        _container.Bind<HeroLVL>().FromInstance(HeroLvl).AsSingle();
     }
 
     private void LoadCharacterStats()
     {
-        CharacterStats = Resources.Load<CharacterStats>(_characterStatsPath);
-
         foreach (StatInfo stat in CharacterStats.Stats)
         {
             _storageService.Load<int>(_statsPathFolder + stat.Name, LoadStatLvl);
@@ -69,6 +72,6 @@ public class UpgradeSystems
 
     private void SaveHeroLvl()
     {
-        _storageService.Save(HeroLvl.ToString(), HeroLvl.CurrentLvl);
+        _storageService.Save(_nameSaveHeroLvl, HeroLvl.CurrentLvl);
     }
 }
