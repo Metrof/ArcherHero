@@ -6,6 +6,7 @@ public class HeroLVL
     public event Action<int> OnExperienceAddedEvent;
 
     public int CurrentLvl { get; private set; }
+    public int CurrentExperience { get => _experience; }
     public int ToLevelUP { get => CurrentLvl * _lvlBoostFactor; }
 
     private readonly int _lvlBoostFactor;
