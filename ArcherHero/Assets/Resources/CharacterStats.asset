@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19d034c6a66a5e46a978aeea589ed0d, type: 3}
+  m_Name: CharacterStats
+  m_EditorClassIdentifier: 
+  _maxHP:
+    _icon: {fileID: 0}
+    _name: ' HP'
+    _description: 
+    _unlockedLvl: 1
+    _upgradeList:
+    - _value: 100
+      _unlockCost: 0
+    - _value: 200
+      _unlockCost: 100
+    - _value: 250
+      _unlockCost: 200
+    - _value: 300
+      _unlockCost: 350
+    - _value: 350
+      _unlockCost: 600
+    - _value: 400
+      _unlockCost: 800
+  _damage:
+    _icon: {fileID: 0}
+    _name: Damage
+    _description: 
+    _unlockedLvl: 1
+    _upgradeList:
+    - _value: 10
+      _unlockCost: 0
+    - _value: 20
+      _unlockCost: 100
+    - _value: 30
+      _unlockCost: 200
+    - _value: 35
+      _unlockCost: 350
+    - _value: 40
+      _unlockCost: 500
+    - _value: 45
+      _unlockCost: 800
+  _attackSpeed:
+    _icon: {fileID: 0}
+    _name: Attack Speed
+    _description: 
+    _unlockedLvl: 1
+    _upgradeList:
+    - _value: 1
+      _unlockCost: 0
+    - _value: 2
+      _unlockCost: 200
+    - _value: 3
+      _unlockCost: 400
+    - _value: 4
+      _unlockCost: 700
+  _movementSpeed:
+    _icon: {fileID: 0}
+    _name: Movement Speed
+    _description: 
+    _unlockedLvl: 1
+    _upgradeList:
+    - _value: 1
+      _unlockCost: 0
+    - _value: 2
+      _unlockCost: 200
+    - _value: 3
+      _unlockCost: 500
