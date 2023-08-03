@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletExp : MonoBehaviour
 {
     [SerializeField] private int _damage = 20;
-    [SerializeField] private DamageType _damageType;
+    [SerializeField] private TypeDamage _damageType;
 
     [SerializeField] private int _bulletSpeed;
     private Vector3 moveDirection;
@@ -18,7 +18,7 @@ public class BulletExp : MonoBehaviour
 
         if (damageable != null)
         {
-            damageable.TakeDamage(_damage, _damageType);
+            damageable.TakeDamage( _damageType, _damage);
         }
         //Destroy(gameObject);
     }
