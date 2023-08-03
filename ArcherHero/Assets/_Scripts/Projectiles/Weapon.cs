@@ -47,6 +47,7 @@ public class Weapon
 
         _ = InstantiateSpellAsync(attackSpeedPerMinute, damage, pointSpawnProjectile, target, _cancellationTokenSource.Token);
     }
+
     public void StopAttack()
     {
         _cancellationTokenSource.Cancel();
@@ -56,12 +57,19 @@ public class Weapon
     {
         while (!token.IsCancellationRequested)
         {
-            Projectile newSpell = GameObject.Instantiate(_projectilesDictionary[_currentTypeDamage], pointSpawnSpell.position, pointSpawnSpell.rotation, null);
-            newSpell.Initialize(damage, _currentMovement);
-            newSpell.transform.LookAt(target);
+            Projectile newProjectile = GameObject.Instantiate(_projectilesDictionary[_currentTypeDamage], pointSpawnSpell.position, pointSpawnSpell.rotation, null);
+            newProjectile.Initialize(damage, _currentMovement, target.position);
+            SetRotation(target, newProjectile);
 
             await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow();
         }
+    }
+
+    private void SetRotation(Transform target, Projectile newProjectile)
+    {
+        Vector3 targetPosition = target.position;
+        targetPosition.y = newProjectile.transform.position.y;
+        newProjectile.transform.LookAt(targetPosition);
     }
 
     private void CompletingDictionary()

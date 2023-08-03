@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private TypeDamage _typeDamage;
     [SerializeField] private int _moveSpeedProjectile;
+    [SerializeField] protected LayerMask _targetLayer;
 
     private int _damage;
     private Vector3 _targetPosition;
@@ -24,7 +25,6 @@ public class Projectile : MonoBehaviour
     {
         get
         {
-            CheckNull(_projectileMovement);
             return _projectileMovement;
         }
         set
@@ -34,10 +34,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(int damage, IProjectileMovement projectileMovement)
+    public void Initialize(int damage, IProjectileMovement projectileMovement, Vector3 targetPosition)
     {
-        ProjectileMovement = projectileMovement;
+        _projectileMovement = projectileMovement;
         Damage = damage;
+        _targetPosition = targetPosition;
     }
 
     private void Update()

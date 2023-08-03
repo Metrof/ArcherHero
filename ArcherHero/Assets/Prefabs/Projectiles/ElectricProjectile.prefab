@@ -120,7 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeDamage: 3
-  _moveSpeedProjectile: 10
+  _moveSpeedProjectile: 5
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &-3911408241481620841
 Rigidbody:
   m_ObjectHideFlags: 0

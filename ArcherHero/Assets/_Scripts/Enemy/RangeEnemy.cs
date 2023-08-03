@@ -28,7 +28,7 @@ public class RangeEnemy : Enemy
         StartRandomMovement().Forget();
         _weapon = new Weapon();
 
-        //_weapon.StartAttack(player, enemyBulletSpawnPoint, _bulletType, 10, 60);
+        _weapon.StartAttack(player, enemyBulletSpawnPoint, _bulletType, 10, 60);
     }
     
     private async UniTaskVoid StartRandomMovement()
