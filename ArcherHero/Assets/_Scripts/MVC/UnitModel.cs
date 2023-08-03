@@ -52,11 +52,11 @@ public class UnitModel
         _layerNum = layerNum;
         _material = material;
     }
-    public void SetPull(List<Transform> lvlEnemyPull)
-    {
-        _lvlEnemyPull = lvlEnemyPull;
-        OnStartAttack?.Invoke();
-    }
+    //public void SetPull(List<Transform> lvlEnemyPull)
+    //{
+    //    _lvlEnemyPull = lvlEnemyPull;
+    //    OnStartAttack?.Invoke();
+    //}
     public void SetStats(CharacterStatsE stats)
     {
         _spawnStats = stats;

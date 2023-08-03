@@ -14,7 +14,7 @@ public class UnitController<V, M> : MonoBehaviour
 
     protected V _view;
     protected M _model;
-    protected Vector3 _defoltPosition;
+    protected Vector3 _defaultPosition;
 
     protected bool _isMoving = true;
     protected Rigidbody _rigidbody;
@@ -23,30 +23,30 @@ public class UnitController<V, M> : MonoBehaviour
    {
         _view = view;
         _model = model;
-        _defoltPosition = startPos;
+        _defaultPosition = startPos;
 
 
         _model.OnDeath += Death;
-        _model.OnAttackModel += ModelAttack;
+        _model.OnAttackModel += FindNewTarget;
         _model.OnStopAttack += StopAttacking;
         _model.OnStartAttack += StartAttacking;
     }
 
-    public bool CheckModel()
-    {
-        return _model != null;
-    }
-    protected virtual void ModelAttack()
+    //public bool CheckModel()
+    //{
+    //    return _model != null;
+    //}
+    protected virtual void FindNewTarget()
     {
         _model.ChangeTarget(transform.position);
     }
 
-    protected virtual void EnableUnit()
+    protected virtual void StunDisable()
     {
         _isMoving = true;
         StartAttacking();
     }
-    protected virtual void DisableUnit()
+    protected virtual void StunEnable()
     {
         _isMoving = false;
         StopAttacking();
@@ -78,13 +78,13 @@ public class UnitController<V, M> : MonoBehaviour
     }
     IEnumerator StunCorotine(float enableTime)
     {
-        DisableUnit();
+        StunEnable();
         float endEnableTime = Time.time + enableTime;
         while (endEnableTime > Time.time)
         {
             yield return null;
         }
-        EnableUnit();
+        StunDisable();
     }
 
 
@@ -103,7 +103,7 @@ public class UnitController<V, M> : MonoBehaviour
     }
     public void TransformToDefoltPos()
     {
-        Teleportation(_defoltPosition);
+        Teleportation(_defaultPosition);
     }
 
 
@@ -125,7 +125,7 @@ public class UnitController<V, M> : MonoBehaviour
         _model.Restats();
         OnEnablePerson?.Invoke(transform);
         StopAttacking();
-        DisableUnit();
+        StunEnable();
     }
 
     private void OnTriggerEnter(Collider other)
