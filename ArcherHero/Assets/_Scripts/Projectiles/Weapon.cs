@@ -28,6 +28,8 @@ public class Weapon
             _projectiles = Resources.Load<ProjectilePrefabsScriptable>(_pathDefaultProjectiles).ProjectilesPrefabs;
         }
 
+        _currentMovement = new DefaultProjectileMovement();
+
         _projectilesDictionary = new Dictionary<TypeDamage, Projectile>();
 
         CompletingDictionary();
