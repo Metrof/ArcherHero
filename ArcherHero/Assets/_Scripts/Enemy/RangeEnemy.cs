@@ -1,18 +1,17 @@
-
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class RangeEnemy : Enemy
 {
+    [SerializeField] private TypeDamage _bulletType;
     [SerializeField] private GameObject enemyBulletPrefab; 
     [SerializeField] private Transform enemyBulletSpawnPoint; 
     [SerializeField] private float shootInterval = 2.0f;
     [SerializeField] private Transform player;
     
     private float _timer = 0.0f;
-    
-    
+
     public float _waitTime = 5f;
     public float movementBoundsX = 10f;
     public float movementBoundsZ = 5f;
@@ -21,10 +20,15 @@ public class RangeEnemy : Enemy
     private Vector3 _targetPosition;
     private bool isMoving = false;
 
+    private Weapon _weapon;
+
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
+        _weapon = new Weapon();
+
+        //_weapon.StartAttack(player, enemyBulletSpawnPoint, _bulletType, 10, 60);
     }
     
     private async UniTaskVoid StartRandomMovement()
