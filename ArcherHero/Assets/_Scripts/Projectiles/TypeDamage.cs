@@ -1,7 +1,7 @@
 public enum TypeDamage
 {
+    physic,
     frost,
     fire,
-    physic,
     electric
 }
