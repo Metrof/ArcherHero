@@ -6,6 +6,6 @@ public class DefaultProjectileMovement : IProjectileMovement
 {
     public void Move(Transform projectile, Vector3 direction, float speed)
     {
-        projectile.position += direction * Time.deltaTime * speed;
+        projectile.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 }
