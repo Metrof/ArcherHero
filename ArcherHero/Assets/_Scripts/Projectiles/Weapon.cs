@@ -35,7 +35,7 @@ public class Weapon
         CompletingDictionary();
     }
 
-    public void StartAttack(Transform target, Transform pointSpawnProjectile, TypeDamage typeDamage, int damage, float attackSpeedPerMinute)
+    public void StartAttack(Transform target, Transform pointSpawnProjectile, TypeDamage typeDamage, int damage, int attackSpeedPerMinute)
     {
         _currentTypeDamage = typeDamage;
         _cancellationTokenSource = new CancellationTokenSource();
@@ -52,7 +52,7 @@ public class Weapon
         _cancellationTokenSource.Cancel();
     }
 
-    private async UniTaskVoid InstantiateSpellAsync(float attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Transform target, CancellationToken token)
+    private async UniTaskVoid InstantiateSpellAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Transform target, CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
