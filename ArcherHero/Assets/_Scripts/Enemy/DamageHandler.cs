@@ -13,7 +13,7 @@ public static class DamageHandler
         /* RoboArmor */      {  1.0f,    1.0f,  1.0f,   3.0f }
     };
 
-    public static int CalculateDamage(int damageAmount, DamageTypeExp damageType, ArmorTypeExp armorType)
+    public static int CalculateDamage(int damageAmount, DamageType damageType, ArmorTypeExp armorType)
     {
         int damageTypeIndex = (int)damageType;
         int armorTypeIndex = (int)armorType;

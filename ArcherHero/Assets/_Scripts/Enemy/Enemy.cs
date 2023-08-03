@@ -7,13 +7,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private ArmorTypeExp _armorTypeExp;
     //private IDamageable _damageableImplementation;
     
-    public void TakeDamage(int damageAmount, DamageTypeExp damageTypeExp)
+    public void TakeDamage(int damageAmount, DamageType damageType)
     {
-        int damage = DamageHandler.CalculateDamage(damageAmount, damageTypeExp, _armorTypeExp);
+        int damage = DamageHandler.CalculateDamage(damageAmount, damageType, _armorTypeExp);
         
         _currentHealth -= damage;
         
-        Debug.Log($"Enemy took {damage} damage. Current health: {_currentHealth}. Damage Type: {damageTypeExp}. Armor Type: {_armorTypeExp}");
+        Debug.Log($"Enemy took {damage} damage. Current health: {_currentHealth}. Damage Type: {damageType}. Armor Type: {_armorTypeExp}");
 
         if (_currentHealth <= 0)
         {
