@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4188d020-dc80-451d-8b9f-c32764d37dcd" name="Changes" comment="" />
+    <list default="true" id="4188d020-dc80-451d-8b9f-c32764d37dcd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +47,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "CodeLensConfigurable",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
     "settings.editor.splitter.proportion": "0.24120083",
     "vue.rearranger.settings.migration": "true"
   },
@@ -117,6 +121,7 @@
       <updated>1690998306959</updated>
       <workItem from="1690998308290" duration="11874000" />
       <workItem from="1691046186274" duration="18172000" />
+      <workItem from="1691129490846" duration="8583000" />
     </task>
     <servers />
   </component>
