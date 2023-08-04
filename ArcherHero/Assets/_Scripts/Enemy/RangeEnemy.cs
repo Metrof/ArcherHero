@@ -1,21 +1,21 @@
+
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class RangeEnemy : Enemy
 {
     [SerializeField] private TypeDamage _bulletType;
-    [SerializeField] private GameObject enemyBulletPrefab; 
-    [SerializeField] private Transform enemyBulletSpawnPoint; 
-    [SerializeField] private float shootInterval = 2.0f;
-    [SerializeField] private Transform player;
+    [SerializeField] private Transform _enemyBulletSpawnPoint; 
+    [SerializeField] private Transform _targetAttack;
+    [SerializeField] private float _timeToChangeDirection = 5f;
+    [SerializeField] private float _movementBoundsX = 10f;
+    [SerializeField] private float _movementBoundsZ = 5f;
     
-    private float _timer = 0.0f;
-
-    public float _waitTime = 5f;
-    public float movementBoundsX = 10f;
-    public float movementBoundsZ = 5f;
-    
+    private CancellationToken _cancellationToken;
     private NavMeshAgent _agent;
     private Vector3 _targetPosition;
     private bool isMoving = false;
@@ -27,32 +27,29 @@ public class RangeEnemy : Enemy
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
         _weapon = new Weapon();
-
-        _weapon.StartAttack(player, enemyBulletSpawnPoint, _bulletType, 10, 60);
+        _weapon.StartAttack(_targetAttack, _enemyBulletSpawnPoint, _bulletType, 10, 60);
     }
     
     private async UniTaskVoid StartRandomMovement()
-    {
-        while (true)
+    {   
+        _cancellationToken = new CancellationToken();
+        while (!_cancellationToken.IsCancellationRequested)
         {
-            _targetPosition = new Vector3(Random.Range(-movementBoundsX, movementBoundsX), 0f, Random.Range(-movementBoundsZ, movementBoundsZ));
-            
+            _targetPosition = new Vector3(Random.Range(-_movementBoundsX, _movementBoundsX), 0f, Random.Range(-_movementBoundsZ, _movementBoundsZ));
+
             isMoving = true;
             _agent.SetDestination(_targetPosition);
             
-            while (isMoving)
-            {
-                await UniTask.Yield();
-            }
-            
-            await UniTask.Delay((int)(_waitTime * 1000)); 
+            await UniTask.WaitUntil(() => !isMoving);
+
+            await UniTask.Delay((int)(_timeToChangeDirection * 1000), cancellationToken: _cancellationToken). SuppressCancellationThrow(); 
         }
     }
-    private void RotateTowardsPlayer()
+    private void RotateTowardsTargetAttack()
     {
-        if (player == null) return;
+        if (_targetAttack == null) return;
         
-        Vector3 direction = player.position - transform.position;
+        Vector3 direction = _targetAttack.position - transform.position;
         direction.y = 0f;
             
         Quaternion rotation = Quaternion.LookRotation(direction);
@@ -60,9 +57,6 @@ public class RangeEnemy : Enemy
         transform.rotation = rotation;
     }
     
-
-   
-
     private void Update()
     {
         
@@ -70,44 +64,7 @@ public class RangeEnemy : Enemy
         {
             isMoving = false; 
             
-            RotateTowardsPlayer();
-            TimerShoot(); 
+            RotateTowardsTargetAttack();
         }
-    }
-
-    private void TimerShoot()
-    {
-        if (player != null)
-        {
-            _timer += Time.deltaTime;
-            if (_timer >= shootInterval)
-            {
-                ShootAtPlayer();
-                _timer = 0.0f;
-            }
-        }
-    }
-
-    private void ShootAtPlayer()
-    {
-        
-        GameObject bullet = Instantiate(enemyBulletPrefab, enemyBulletSpawnPoint.position, Quaternion.identity);
-        
-        
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        
-        BulletExp bulletMovement = bullet.GetComponent<BulletExp>();
-        if (bulletMovement != null)
-        {
-            bulletMovement.SetMoveDirection(directionToPlayer);
-        }
-        
-        //Vector3 direction = (player.position - enemyBulletSpawnPoint.position).normalized;
-
-        
-        //bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
-
-        
-        //Destroy(bullet, 3.0f);
     }
 }
