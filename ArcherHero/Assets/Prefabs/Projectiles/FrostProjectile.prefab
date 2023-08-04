@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4121746855583967548}
   - component: {fileID: -3051091850083453401}
   - component: {fileID: -436841296914681400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FrostProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,9 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeDamage: 1
   _moveSpeedProjectile: 5
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!54 &-436841296914681400
 Rigidbody:
   m_ObjectHideFlags: 0

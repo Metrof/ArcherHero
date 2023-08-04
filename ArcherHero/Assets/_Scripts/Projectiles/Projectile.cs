@@ -5,10 +5,11 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private TypeDamage _typeDamage;
     [SerializeField] private int _moveSpeedProjectile;
-    [SerializeField] protected LayerMask _targetLayer;
 
     private int _damage;
     private Vector3 _targetPosition;
+    [SerializeField]
+    private DefaultProjectileMovement defaultProjectileMovement;
     private IProjectileMovement _projectileMovement;
 
     public TypeDamage TypeDamage { get => _typeDamage; }

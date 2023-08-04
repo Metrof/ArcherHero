@@ -20,14 +20,16 @@ public class RangeEnemy : Enemy
     private Vector3 _targetPosition;
     private bool isMoving = false;
 
+    [SerializeField] Projectile _projectile;
+
     private Weapon _weapon;
 
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
-        _weapon = new Weapon();
-        _weapon.StartAttack(_targetAttack, _enemyBulletSpawnPoint, _bulletType, 10, 60);
+        //_weapon = new Weapon();
+        //_weapon.StartAttack(_targetAttack, _enemyBulletSpawnPoint, _bulletType, 10, 60);
     }
     
     private async UniTaskVoid StartRandomMovement()

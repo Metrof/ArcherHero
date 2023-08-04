@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4121746855583967548}
   - component: {fileID: -3051091850083453401}
   - component: {fileID: -3911408241481620841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ElectricProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,9 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeDamage: 3
   _moveSpeedProjectile: 5
-  _targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!54 &-3911408241481620841
 Rigidbody:
   m_ObjectHideFlags: 0
