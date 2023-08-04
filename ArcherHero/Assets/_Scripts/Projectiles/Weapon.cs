@@ -45,7 +45,7 @@ public class Weapon
             throw new Exception("TypeDamage is not in the _projectileDictionary");
         }
 
-        _ = InstantiateSpellAsync(attackSpeedPerMinute, damage, pointSpawnProjectile, target, _cancellationTokenSource.Token);
+        _ = InstantiateProjectileAsync(attackSpeedPerMinute, damage, pointSpawnProjectile, target, _cancellationTokenSource.Token);
     }
 
     public void StopAttack()
@@ -53,7 +53,7 @@ public class Weapon
         _cancellationTokenSource.Cancel();
     }
 
-    private async UniTaskVoid InstantiateSpellAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Transform target, CancellationToken token)
+    private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Transform target, CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
