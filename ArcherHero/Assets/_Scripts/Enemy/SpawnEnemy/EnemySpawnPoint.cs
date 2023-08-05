@@ -4,14 +4,14 @@ using UnityEngine;
 public class EnemySpawnPoint : MonoBehaviour
 {
     
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private Enemy _enemyPrefab;
     
     public Vector3 GetSpawnPosition()
     {
         return transform.position;
     }
 
-    public GameObject GetEnemyPrefab()
+    public Enemy GetEnemyPrefab()
     {
         return _enemyPrefab;
     }

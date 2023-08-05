@@ -448,10 +448,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1740935401566582745, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
-      propertyPath: m_GenerateLinks
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7062730259729290624, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
       propertyPath: m_Name
       value: Plane
@@ -733,22 +729,6 @@ PrefabInstance:
     - target: {fileID: 3724461575768911283, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6335791900565929724, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
-      propertyPath: _currentLevel
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6335791900565929724, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
-      propertyPath: _lvl.Array.data[0]._statMultiplier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6335791900565929724, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
-      propertyPath: _lvl.Array.data[1]._statMultiplier
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6335791900565929724, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
-      propertyPath: _lvl.Array.data[2]._statMultiplier
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

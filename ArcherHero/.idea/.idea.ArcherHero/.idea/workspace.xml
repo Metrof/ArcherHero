@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4188d020-dc80-451d-8b9f-c32764d37dcd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/EnemySpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/EnemySpawnManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/EnemySpawnPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/EnemySpawnPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/LevelMultiplier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/LevelMultiplier.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +125,7 @@
       <workItem from="1691046186274" duration="18172000" />
       <workItem from="1691129490846" duration="8583000" />
       <workItem from="1691176267388" duration="115000" />
-      <workItem from="1691230518484" duration="6610000" />
+      <workItem from="1691230518484" duration="12742000" />
     </task>
     <servers />
   </component>
