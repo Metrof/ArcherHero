@@ -1,5 +1,5 @@
 ﻿
-public enum ArmorTypeExp
+public enum ArmorType
 {
     Default,
     FireArmor,

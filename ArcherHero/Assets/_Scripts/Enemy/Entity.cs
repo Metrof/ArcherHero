@@ -1,11 +1,10 @@
 using PlayerStats;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Entity : MonoBehaviour, IMovable, IDamageable
 {
-    [SerializeField] private ArmorTypeExp _armorTypeExp;
+    [FormerlySerializedAs("_armorTypeExp")] [SerializeField] private ArmorType armorType;
 
     private CharacterStats _stats;
 
@@ -21,11 +20,11 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
 
     public void TakeDamage(TypeDamage typeDamage, int damage)
     {
-        int finaleDamage = DamageHandler.CalculateDamage(damage, typeDamage, _armorTypeExp);
+        int finaleDamage = DamageHandler.CalculateDamage(damage, typeDamage, armorType);
 
         _currentHealth -= finaleDamage;
 
-        Debug.Log($"Enemy took {finaleDamage} damage. Current health: {_currentHealth}. Damage Type: {typeDamage}. Armor Type: {_armorTypeExp}");
+        Debug.Log($"Enemy took {finaleDamage} damage. Current health: {_currentHealth}. Damage Type: {typeDamage}. Armor Type: {armorType}");
 
         if (_currentHealth <= 0)
         {
