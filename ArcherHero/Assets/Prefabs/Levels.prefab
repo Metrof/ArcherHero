@@ -93,22 +93,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lvl:
-  - _statMultiplier: 0
+  - _statMultiplier: 1
     _enemySpawnPoints:
     - {fileID: 7489923614232789048}
     - {fileID: 4160649981550155223}
-  - _statMultiplier: 0
+  - _statMultiplier: 2
     _enemySpawnPoints:
     - {fileID: 8425704295448975168}
     - {fileID: 5459844197323410913}
     - {fileID: 7673644121911218347}
-  - _statMultiplier: 0
+  - _statMultiplier: 3
     _enemySpawnPoints:
     - {fileID: 7140259898428627102}
     - {fileID: 211096445081054022}
     - {fileID: 6226432067215131640}
     - {fileID: 255106162713111420}
-  _currentLevel: 0
+  _currentLevel: 3
 --- !u!1 &1747223828744391101
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,8 @@ public class RangeEnemy : Enemy
     [SerializeField] Projectile _projectile;
 
     private Weapon _weapon;
+    
+    
 
     private void Start()
     {
