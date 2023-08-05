@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4145358535919949411}
   - component: {fileID: 4121746855583967548}
   - component: {fileID: -3051091850083453401}
-  - component: {fileID: -436841296914681400}
+  - component: {fileID: -3911408241481620841}
   m_Layer: 8
-  m_Name: FrostProjectile
+  m_Name: PlayerElectricProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0df13216649480140bb3c56df259e4f6, type: 2}
+  - {fileID: 2100000, guid: 2600903168e327040a9145339506c071, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372beb3b2394c3342a5164255816db32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _typeDamage: 1
+  _typeDamage: 3
   _moveSpeedProjectile: 5
---- !u!54 &-436841296914681400
+--- !u!54 &-3911408241481620841
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

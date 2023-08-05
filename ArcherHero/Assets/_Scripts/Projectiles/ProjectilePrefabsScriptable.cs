@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ProjectilePrefabsScriptable", menuName = "ScriptableObjects/ProjectilePrefabsScriptable")]
 public class ProjectilePrefabsScriptable : ScriptableObject
 {
-    [SerializeField] private List<Projectile> _projectilePrefabs;
+    [SerializeField] private List<KeyValuePair<string, Projectile>> _projectilesData;
 
-    public List<Projectile> ProjectilesPrefabs => _projectilePrefabs;
+    public List<KeyValuePair<string, Projectile>> ProjectilesData => _projectilesData;
 }

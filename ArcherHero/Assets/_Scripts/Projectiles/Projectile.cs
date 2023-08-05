@@ -8,8 +8,6 @@ public class Projectile : MonoBehaviour
 
     private int _damage;
     private Vector3 _targetPosition;
-    [SerializeField]
-    private DefaultProjectileMovement defaultProjectileMovement;
     private IProjectileMovement _projectileMovement;
 
     public TypeDamage TypeDamage { get => _typeDamage; }
