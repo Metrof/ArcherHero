@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 
 public class EnemySpawnManager : MonoBehaviour
@@ -8,7 +9,13 @@ public class EnemySpawnManager : MonoBehaviour
     public LevelMultiplier[] _lvl;
     private int _currentLevel;
     public LvlSwithcManager lvlSwithcManager;
-   
+    public DiContainer _diContainer;
+
+    [Inject]
+    private void Construct(DiContainer diContainer)
+    {
+        _diContainer = diContainer;
+    }
     
     private void Start()
     {   
@@ -37,7 +44,8 @@ public class EnemySpawnManager : MonoBehaviour
             
             Vector3 spawnPosition = spawnPoint.GetSpawnPosition();
             
-            Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            Enemy enemy =
+                _diContainer.InstantiatePrefabForComponent<Enemy>(enemyPrefab, spawnPosition, Quaternion.identity, null);
             
             ApplyStatsMultiplier(enemy,  _lvl[currentLevel]._statMultiplier);
         }

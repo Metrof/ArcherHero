@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+using Zenject;
 
 public class RangeEnemy : Enemy
 {
@@ -12,25 +13,32 @@ public class RangeEnemy : Enemy
     [SerializeField] private float _timeToChangeDirection = 5f;
     [SerializeField] private float _movementBoundsX = 10f;
     [SerializeField] private float _movementBoundsZ = 5f;
+    [SerializeField] private Transform _spawnProjectile;
     
     private CancellationTokenSource _cancellationToken;
     private NavMeshAgent _agent;
     private Vector3 _targetPosition;
     private bool isMoving = false;
-
-    [SerializeField] Projectile _projectile;
-
+    
     private Weapon _weapon;
     
-    
+    private ProjectilePool _projectilePool;
 
+    public TypeDamage _typeDamage;
+
+    [Inject]
+    private void Construct(ProjectilePool projectilePool)
+    {
+        _projectilePool = projectilePool;
+    }
+    
     private void Start()
     {
         
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
-        //_weapon = new Weapon();
-        //_weapon.StartAttack(_targetAttack, _enemyBulletSpawnPoint, _bulletType, 10, 60);
+        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
+        _weapon.StartAttack(() => _targetAttack, _spawnProjectile, 30 , 30);
     }
     
     private async UniTaskVoid StartRandomMovement()
