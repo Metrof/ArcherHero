@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2507571068248949879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9166707878504873440}
+  - component: {fileID: 2433039291464483364}
+  m_Layer: 0
+  m_Name: ProjectilesPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9166707878504873440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507571068248949879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5000787, y: 4.5424733, z: -11.937144}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2433039291464483364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507571068248949879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85d5d20eab336ea46b6b6358b42402ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ownerPoolData:
+  - ProjectileOwner: 0
+    Pools:
+    - TypeDamage: 0
+      Prefab: {fileID: 8054889517613177753, guid: b33449fb4cf9c0b49aab93264af4054b, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+    - TypeDamage: 1
+      Prefab: {fileID: -3051091850083453401, guid: 3788eda4867e0d74d91730383fc02bee, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+    - TypeDamage: 2
+      Prefab: {fileID: -7577275901323794193, guid: 0a2f6785812f25f49b6149270e8f832e, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+    - TypeDamage: 3
+      Prefab: {fileID: -3051091850083453401, guid: 3680203e328d2384c9cf228ba7447b45, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+  - ProjectileOwner: 1
+    Pools:
+    - TypeDamage: 0
+      Prefab: {fileID: 8054889517613177753, guid: 94619b1031f0de44e8ddee296a72e0a2, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+    - TypeDamage: 1
+      Prefab: {fileID: -3051091850083453401, guid: e0b81ded1645caa439c56021881e508f, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+    - TypeDamage: 2
+      Prefab: {fileID: -7577275901323794193, guid: a7fb16ae7aa4e0b4c9dc422940d56d54, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50
+    - TypeDamage: 3
+      Prefab: {fileID: -3051091850083453401, guid: b0ab3e8c64e40f14c96f169831c2feb7, type: 3}
+      PoolCount: 30
+      PoolMaxCount: 50

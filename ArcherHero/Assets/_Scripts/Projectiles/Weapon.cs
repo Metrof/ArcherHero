@@ -2,26 +2,27 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Weapon
 {
-    private Projectile _currentProjectile;
+    private ObjectPool<Projectile> _currentProjectiles;
 
     private CancellationTokenSource _cancellationTokenSource;
 
     private IProjectileMovement _currentMovement;
 
-    public Weapon(Projectile defaultProjectile)
+    public Weapon(ObjectPool<Projectile> defaultProjectiles)
     {
-        _currentProjectile = defaultProjectile;
+        _currentProjectiles = defaultProjectiles;
         _currentMovement = new DefaultProjectileMovement();
     }
 
-    public void StartAttack(Transform target, Transform pointSpawnProjectile, int damage, int attackSpeedPerMinute)
+    public void StartAttack(Func<Transform> nearestTarget, Transform pointSpawnProjectile, int damage, int attackSpeedPerMinute)
     {
         _cancellationTokenSource = new CancellationTokenSource();
 
-        _ = InstantiateProjectileAsync(attackSpeedPerMinute, damage, pointSpawnProjectile, target, _cancellationTokenSource.Token);
+        _ = InstantiateProjectileAsync(attackSpeedPerMinute, damage, pointSpawnProjectile, nearestTarget, _cancellationTokenSource.Token);
     }
 
     public void StopAttack()
@@ -29,20 +30,38 @@ public class Weapon
         _cancellationTokenSource.Cancel();
     }
 
-    public void ChangeProjectile(Projectile projectile)
+    public void ChangeProjectiles(ObjectPool<Projectile> projectiles)
     {
-        _currentProjectile = projectile;
+        _currentProjectiles = projectiles;
     }
 
-    private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Transform target, CancellationToken token)
+    private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Func<Transform> getTarget, CancellationToken token)
     {
+        Transform currentTarget = getTarget();
+
+        if (currentTarget == null)
+        {
+            return;
+        }
+
         while (!token.IsCancellationRequested)
         {
-            Projectile newProjectile = GameObject.Instantiate(_currentProjectile, pointSpawnSpell.position, pointSpawnSpell.rotation, null);
-            newProjectile.Initialize(damage, _currentMovement, target.position);
-            SetRotation(target, newProjectile);
+            Projectile newProjectile = _currentProjectiles.Get();
+            newProjectile.transform.position = pointSpawnSpell.position;
+            newProjectile.Initialize(damage, _currentMovement, currentTarget.position);
+            SetRotation(currentTarget, newProjectile);
 
-            await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow();
+            if(await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow())
+            {
+                return;
+            }
+
+            currentTarget ??= getTarget();
+
+            if(currentTarget == null)
+            {
+                StopAttack();
+            }
         }
     }
 
