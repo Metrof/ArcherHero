@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 using Zenject;
+using Zenject.SpaceFighter;
 
 public class RangeEnemy : Enemy
 {
@@ -25,6 +26,8 @@ public class RangeEnemy : Enemy
     private ProjectilePool _projectilePool;
 
     public TypeDamage _typeDamage;
+    
+    
 
     [Inject]
     private void Construct(ProjectilePool projectilePool)
@@ -33,7 +36,10 @@ public class RangeEnemy : Enemy
     }
     
     private void Start()
-    {
+    {   
+        GameObject gObject = GameObject.FindGameObjectWithTag("Player");
+        _targetAttack = gObject.transform;
+        
         
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
@@ -60,6 +66,7 @@ public class RangeEnemy : Enemy
     protected override void Die()
     {   
         _cancellationToken.Cancel();
+        _weapon.StopAttack();
         base.Die();
     }
 

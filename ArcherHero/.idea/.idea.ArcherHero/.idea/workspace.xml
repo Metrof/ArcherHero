@@ -6,12 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="4188d020-dc80-451d-8b9f-c32764d37dcd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/Source/Zenject.csproj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Buttons/Button 9.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Buttons/Button 9.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Icon Buttons/idea_icon_button.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Icon Buttons/idea_icon_button.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Sliders And Bars/Bar 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Sliders And Bars/Bar 2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/EnemySpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/SpawnEnemy/EnemySpawnManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
