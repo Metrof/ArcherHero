@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdf384e15868e9468761c3a2b104bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabProjectilePool: {fileID: 0}
+  _prefabProjectilePool: {fileID: 2433039291464483364, guid: d5bab9e01dd0c5c43bc721f007662301, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
