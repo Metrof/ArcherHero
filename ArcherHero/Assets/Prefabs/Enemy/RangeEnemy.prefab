@@ -65,7 +65,7 @@ Transform:
   - {fileID: 2797392778191998213}
   - {fileID: 7105005238826007384}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2585785391619759400
 BoxCollider:
@@ -100,14 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1be9149877768345928e996d815970d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: 1000
-  _armorTypeExp: 0
-  _bulletType: 3
-  _enemyBulletSpawnPoint: {fileID: 2797392778191998213}
+  armorType: 0
+  damage: 10
   _targetAttack: {fileID: 0}
   _timeToChangeDirection: 5
   _movementBoundsX: 10
   _movementBoundsZ: 5
+  _projectile: {fileID: 0}
 --- !u!195 &623664203193516463
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -126,10 +125,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1001 &7282520586524171443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +176,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ecfef6a1f3dc46b4c8dc93e4087026a2, type: 3}
       propertyPath: m_RootOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ecfef6a1f3dc46b4c8dc93e4087026a2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ecfef6a1f3dc46b4c8dc93e4087026a2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ecfef6a1f3dc46b4c8dc93e4087026a2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ecfef6a1f3dc46b4c8dc93e4087026a2, type: 3}
       propertyPath: m_LocalPosition.x

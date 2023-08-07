@@ -1,21 +1,19 @@
 
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class RangeEnemy : Enemy
 {
-    [SerializeField] private TypeDamage _bulletType;
-    [SerializeField] private Transform _enemyBulletSpawnPoint; 
     [SerializeField] private Transform _targetAttack;
     [SerializeField] private float _timeToChangeDirection = 5f;
     [SerializeField] private float _movementBoundsX = 10f;
     [SerializeField] private float _movementBoundsZ = 5f;
     
-    private CancellationToken _cancellationToken;
+    private CancellationTokenSource _cancellationToken;
     private NavMeshAgent _agent;
     private Vector3 _targetPosition;
     private bool isMoving = false;
@@ -23,9 +21,12 @@ public class RangeEnemy : Enemy
     [SerializeField] Projectile _projectile;
 
     private Weapon _weapon;
+    
+    
 
     private void Start()
     {
+        
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
         //_weapon = new Weapon();
@@ -34,7 +35,7 @@ public class RangeEnemy : Enemy
     
     private async UniTaskVoid StartRandomMovement()
     {   
-        _cancellationToken = new CancellationToken();
+        _cancellationToken = new CancellationTokenSource();
         while (!_cancellationToken.IsCancellationRequested)
         {
             _targetPosition = new Vector3(Random.Range(-_movementBoundsX, _movementBoundsX), 0f, Random.Range(-_movementBoundsZ, _movementBoundsZ));
@@ -44,9 +45,17 @@ public class RangeEnemy : Enemy
             
             await UniTask.WaitUntil(() => !isMoving);
 
-            await UniTask.Delay((int)(_timeToChangeDirection * 1000), cancellationToken: _cancellationToken). SuppressCancellationThrow(); 
+            await UniTask.Delay(TimeSpan.FromSeconds(_timeToChangeDirection), cancellationToken: _cancellationToken.Token). SuppressCancellationThrow(); 
         }
     }
+
+    protected override void Die()
+    {   
+        _cancellationToken.Cancel();
+        base.Die();
+    }
+
+
     private void RotateTowardsTargetAttack()
     {
         if (_targetAttack == null) return;
