@@ -1,39 +1,53 @@
 
 using UnityEngine;
+using UnityEngine.Serialization;
+using Zenject;
 
 
 public class EnemySpawnManager : MonoBehaviour
 {
     public LevelMultiplier[] _lvl;
-    public int _currentLevel;
-   
+    private int _currentLevel;
+    public LvlSwithcManager lvlSwithcManager;
+    public DiContainer _diContainer;
 
-
+    [Inject]
+    private void Construct(DiContainer diContainer)
+    {
+        _diContainer = diContainer;
+    }
+    
     private void Start()
     {   
         SpawnEnemies(_currentLevel);
     }
+    private void OnEnable()
+    {
+        lvlSwithcManager.OnLevelChanged += OnLevelChangedHandler;
+    }
+
+    private void OnDisable()
+    {
+        lvlSwithcManager.OnLevelChanged -= OnLevelChangedHandler;
+    }
+
+    private void OnLevelChangedHandler(int levelIndex)
+    {
+        SpawnEnemies(levelIndex);
+    }
     
     private void SpawnEnemies(int currentLevel)
     {
-        foreach (EnemySpawnPoint spawnPoint in _lvl[currentLevel - 1]._enemySpawnPoints)
+        foreach (EnemySpawnPoint spawnPoint in _lvl[currentLevel]._enemySpawnPoints)
         {
             Enemy enemyPrefab = spawnPoint.GetEnemyPrefab();
-
-
-            if (enemyPrefab == null)
-            {
-                Debug.LogError("Enemy Prefab is not!");
-            }
-
-            Vector3 spawnPosition = spawnPoint.GetSpawnPosition();
-
-
-
-            Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
             
-            ApplyStatsMultiplier(enemy,  _lvl[currentLevel - 1]._statMultiplier);
+            Vector3 spawnPosition = spawnPoint.GetSpawnPosition();
+            
+            Enemy enemy =
+                _diContainer.InstantiatePrefabForComponent<Enemy>(enemyPrefab, spawnPosition, Quaternion.identity, null);
+            
+            ApplyStatsMultiplier(enemy,  _lvl[currentLevel]._statMultiplier);
         }
     }
 
