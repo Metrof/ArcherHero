@@ -6,9 +6,6 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
-    [SerializeField] private Transform _targetAttack;
-
-
     private void Start()
     {
         GameObject gObject = GameObject.FindGameObjectWithTag("Player");
