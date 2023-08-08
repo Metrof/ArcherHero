@@ -6,12 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4188d020-dc80-451d-8b9f-c32764d37dcd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ArcherHero/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Buttons/Button 9.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Buttons/Button 9.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Icon Buttons/idea_icon_button.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Icon Buttons/idea_icon_button.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Sliders And Bars/Bar 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AssetPack/Gentleland/SteampunkUI/Prefabs/Sliders And Bars/Bar 2.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemy/RangeEnemy.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Levels.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Levels.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/MeleeEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/MeleeEnemy.cs" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Enemy/RangeEnemy.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +47,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
@@ -56,6 +64,24 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.24120083&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "do_not_show_Android_plugin_suggestion": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.build.unityPlugin",
+    "settings.editor.splitter.proportion": "0.24120083",
+    "vue.rearranger.settings.migration": "true"
+>>>>>>> Stashed changes
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
@@ -94,7 +120,11 @@
     </configuration>
     <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
+<<<<<<< Updated upstream
       <option name="listenPortForConnections" value="false" />
+=======
+      <option name="listenPortForConnections" value="true" />
+>>>>>>> Stashed changes
       <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
@@ -130,6 +160,10 @@
       <workItem from="1691129490846" duration="8583000" />
       <workItem from="1691176267388" duration="115000" />
       <workItem from="1691230518484" duration="12742000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1691478516389" duration="20920000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
