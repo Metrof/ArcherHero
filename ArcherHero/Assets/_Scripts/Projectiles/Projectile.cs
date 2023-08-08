@@ -52,7 +52,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (TryGetComponent(out IDamageable damageable))
+        if (other.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(_typeDamage, Damage);
         }
