@@ -1,11 +1,5 @@
-<<<<<<< Updated upstream
-﻿using UnityEngine;
 
-public class Enemy : Entity
-{
-    public float damage;
-=======
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,5 +18,5 @@ public class Enemy : Entity
         base.Die();
         Destroy(gameObject);
     }
->>>>>>> Stashed changes
+
 }

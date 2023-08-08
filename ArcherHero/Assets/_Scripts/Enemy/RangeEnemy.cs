@@ -18,15 +18,8 @@ public class RangeEnemy : Enemy
     private bool isMoving = false;
     private Weapon _weapon;
     private ProjectilePool _projectilePool;
-<<<<<<< Updated upstream
-
-    public TypeDamage _typeDamage;
     
     
-
-=======
-    
->>>>>>> Stashed changes
     [Inject]
     private void Construct(ProjectilePool projectilePool)
     {
@@ -34,22 +27,16 @@ public class RangeEnemy : Enemy
     }
     
     private void Start()
-<<<<<<< Updated upstream
-    {   
-=======
     {
->>>>>>> Stashed changes
         GameObject gObject = GameObject.FindGameObjectWithTag("Player");
         _targetAttack = gObject.transform;
         
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
-<<<<<<< Updated upstream
+
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
-        _weapon.StartAttack(() => _targetAttack, _spawnProjectile, 30 , 30);
-=======
-        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, typeDamage));
->>>>>>> Stashed changes
+        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
+
     }
     
     private async UniTaskVoid StartRandomMovement()
@@ -63,11 +50,8 @@ public class RangeEnemy : Enemy
             _agent.SetDestination(_targetMovePosition);
             
             await UniTask.WaitUntil(() => !isMoving);
-<<<<<<< Updated upstream
 
-=======
-            
->>>>>>> Stashed changes
+
             await UniTask.Delay(TimeSpan.FromSeconds(_timeToChangeDirection), cancellationToken: _cancellationToken.Token). SuppressCancellationThrow(); 
             _weapon.StopAttack();
         }

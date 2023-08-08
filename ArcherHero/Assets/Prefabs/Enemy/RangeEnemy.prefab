@@ -102,12 +102,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorType: 0
   damage: 10
-  _targetAttack: {fileID: 8673544390339888368, guid: 06d6e0c309d33ff4984657482df6767d, type: 3}
+  speedAttack: 60
+  currentHealth: 100
   _timeToChangeDirection: 5
   _movementBoundsX: 5.5
   _movementBoundsZ: 16
   _spawnProjectile: {fileID: 2797392778191998213}
-  _typeDamage: 0
 --- !u!195 &623664203193516463
 NavMeshAgent:
   m_ObjectHideFlags: 0
