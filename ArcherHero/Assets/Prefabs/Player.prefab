@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8673544391391377074}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8673544390339888371
 MeshFilter:
@@ -155,6 +155,7 @@ MonoBehaviour:
   damage: 0
   speedAttack: 0
   currentHealth: 0
+  _spawnProjectile: {fileID: 8673544391391377074}
 --- !u!1 &8673544391391377077
 GameObject:
   m_ObjectHideFlags: 0
