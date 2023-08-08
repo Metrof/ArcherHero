@@ -51,10 +51,10 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
-    private void ApplyStatsMultiplier(Enemy enemy, float value)
+    private void ApplyStatsMultiplier(Enemy enemy, float multiplier)
     {
-        float statMultiplier = value;
-            
-        enemy.damage *= statMultiplier;
+        enemy.damage = Mathf.RoundToInt(enemy.damage * multiplier);
+        enemy.currentHealth = Mathf.RoundToInt(enemy.currentHealth * multiplier);
+        enemy.speedAttack = Mathf.RoundToInt(enemy.speedAttack * multiplier);
     }
 }
