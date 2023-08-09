@@ -47,6 +47,8 @@ public class EnemySpawnManager : MonoBehaviour
             Enemy enemy =
                 _diContainer.InstantiatePrefabForComponent<Enemy>(enemyPrefab, spawnPosition, Quaternion.identity, null);
             
+            
+            
             ApplyStatsMultiplier(enemy,  _lvl[currentLevel]._statMultiplier);
         }
     }
