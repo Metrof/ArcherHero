@@ -9,12 +9,14 @@ public class EnemySpawnManager : MonoBehaviour
     public LevelMultiplier[] _lvl;
     private int _currentLevel;
     public LvlSwithcManager lvlSwithcManager;
-    public DiContainer _diContainer;
-
+    private DiContainer _diContainer;
+    private EnemyPool _enemyPool;
+    
     [Inject]
-    private void Construct(DiContainer diContainer)
+    private void Construct(DiContainer diContainer, EnemyPool enemyPool)
     {
         _diContainer = diContainer;
+        _enemyPool = enemyPool;
     }
     
     private void Start()
@@ -46,6 +48,8 @@ public class EnemySpawnManager : MonoBehaviour
             
             Enemy enemy =
                 _diContainer.InstantiatePrefabForComponent<Enemy>(enemyPrefab, spawnPosition, Quaternion.identity, null);
+            
+            _enemyPool.AddEnemy(enemy);
             
             ApplyStatsMultiplier(enemy,  _lvl[currentLevel]._statMultiplier);
         }

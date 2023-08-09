@@ -35,8 +35,6 @@ public class RangeEnemy : Enemy
         StartRandomMovement().Forget();
 
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
-        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
-
     }
     
     private async UniTaskVoid StartRandomMovement()
@@ -75,6 +73,7 @@ public class RangeEnemy : Enemy
         Quaternion rotation = Quaternion.LookRotation(direction);
             
         transform.rotation = rotation;
+        
         
         _weapon.StartAttack(() => _targetAttack, _spawnProjectile, damage , speedAttack);
     }
