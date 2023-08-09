@@ -66,6 +66,10 @@ public class Weapon
 
     private double ShotDelay(float attackSpeedPerMinute)
     {
+        if (attackSpeedPerMinute <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(attackSpeedPerMinute));
+        }
         return 1 / attackSpeedPerMinute;
     }
 }
