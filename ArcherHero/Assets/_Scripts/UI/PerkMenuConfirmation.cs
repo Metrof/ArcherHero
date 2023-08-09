@@ -14,7 +14,7 @@ public class PerkMenu : MonoBehaviour
 
     private List<Button> _perkButtons;
 
-    [SerializeField] private CharacterSkills _characteSkills;
+    //[SerializeField] private CharacterSkills _characteSkills;
 
     private PerkManager.PerkType _currentPerkType;
    
@@ -31,7 +31,7 @@ public class PerkMenu : MonoBehaviour
     }
    void Start()
     {
-       _purchaseButton.onClick.AddListener(ConfirmPurchase);
+       //_purchaseButton.onClick.AddListener(ConfirmPurchase);
        _exitButton.onClick.AddListener(ClosePerkMenu);
     }
     public void OpenPerkMenu(PerkManager.PerkType perkType, string perkName, string perkDescription, int perkPrice, List<Button> perkButtons)
@@ -51,7 +51,7 @@ public class PerkMenu : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void ConfirmPurchase()
+    /*public void ConfirmPurchase()
     {       
         if (_perkPrice <= _characteSkills.SkillPoints)
         {
@@ -72,7 +72,7 @@ public class PerkMenu : MonoBehaviour
         {
             perkPriceText.text = $" not enough XpPoint ";
         }
-    }
+    }*/
 
     public void ButtonOpen()
     {  
