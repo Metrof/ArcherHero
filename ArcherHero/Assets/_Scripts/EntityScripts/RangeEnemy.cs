@@ -74,6 +74,7 @@ public class RangeEnemy : Enemy
             
         transform.rotation = rotation;
         
+        
         _weapon.StartAttack(() => _targetAttack, _spawnProjectile, damage , speedAttack);
     }
     
