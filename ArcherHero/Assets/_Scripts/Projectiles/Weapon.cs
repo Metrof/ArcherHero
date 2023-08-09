@@ -27,7 +27,7 @@ public class Weapon
 
     public void StopAttack()
     {
-        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource?.Cancel();
     }
 
     public void ChangeProjectiles(ObjectPool<Projectile> projectiles)
