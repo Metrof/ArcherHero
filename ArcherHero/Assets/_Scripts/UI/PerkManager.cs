@@ -39,11 +39,7 @@ public class PerkManager : MonoBehaviour
     [SerializeField] private Sprite _purchasedIkon;
 
     [SerializeField] private TextMeshProUGUI perkPriceText;
-
-    [SerializeField] private CharacterSkills _characteSkills;  
-
-    private XPCounter _xpCounter;  
-
+    
     public Sprite AvailableIkon => _availableIkon;
     public Sprite NotAvailableIkon => _notAvailableIkon;
     public Sprite PurchasedIkon => _purchasedIkon;
@@ -52,24 +48,12 @@ public class PerkManager : MonoBehaviour
     void Awake()
     {   
         _perkStates = new Dictionary<PerkType, PerkStatus>();
-        _xpCounter = FindObjectOfType<XPCounter>();
-        LoadPerkData();
     }
     public Dictionary<PerkType, PerkStatus> GetPerkStates()       //  получение словоря с перками
     {
         return _perkStates;
     }
-   
-    public void SavePerkData()
-    {
-        SaveSystem.SaveSystem.SavePerkData(_perkStates);
-    }
-
-    public void LoadPerkData()
-    {
-       _perkStates = SaveSystem.SaveSystem.LoadPerkData();
-    }
-
+    
     public void InitializedPerk()
     {
         Debug.Log("Init");
@@ -97,12 +81,8 @@ public class PerkManager : MonoBehaviour
     }
 
     public void PurchasePerk(PerkType perk, int perkPrice)
-    {      
-        _characteSkills.PurchasePerk(perkPrice);
-           
-        _perkStates[perk] = PerkStatus.Purchased;  
-
-        //_xpCounter.UpdateXPCounter();    
+    {
+        _perkStates[perk] = PerkStatus.Purchased;
     }
 
 
