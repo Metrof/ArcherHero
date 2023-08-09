@@ -7,7 +7,7 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
     [FormerlySerializedAs("_armorTypeExp")] [SerializeField] private ArmorType armorType;
     [SerializeField] private float _moveSpeed = 1000;
     [SerializeField][Range(0, 1)] private float _rotationSpeed = 0.05f;
-    protected TypeDamage _typeDamage;
+    [SerializeField] protected TypeDamage _typeDamage;
     
     public int damage;
     public int speedAttack;
