@@ -7,6 +7,7 @@ public class GameInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindProjectilePool();
+        BindEnemyPool();
     }
 
     private void BindProjectilePool()
@@ -14,6 +15,13 @@ public class GameInstaller : MonoInstaller
         Container
             .Bind<ProjectilePool>()
             .FromComponentInNewPrefab(_prefabProjectilePool)
+            .AsSingle()
+            .NonLazy();
+    }
+    private void BindEnemyPool()
+    {
+        Container.Bind<EnemyPool>()
+            .FromNew()
             .AsSingle()
             .NonLazy();
     }

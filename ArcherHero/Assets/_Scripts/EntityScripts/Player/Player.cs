@@ -1,40 +1,65 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class Player : Entity
 {
+    [SerializeField] private Transform _spawnProjectile;
+
     Controller _controller;
     private Tween _moveTween;
 
     private Weapon _weapon;
+    private ProjectilePool _projectilePool;
+    private EnemyPool _enemyPool;
 
     Vector2 _contextDir;
-
-    Quaternion _targetRotation;
+    [Inject]
+    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool)
+    {
+        _projectilePool = projectilePool;
+        _enemyPool = enemyPool;
+    }
 
     private void Awake()
     {
         _controller = new Controller();
+        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, _typeDamage));
     }
     private void OnEnable()
     {
         _controller.Enable();
         _controller.Player.Move.performed += Move;
+        _controller.Player.Move.canceled += StartWeaponAttack;
     }
     private void OnDisable()
     {
+        _controller.Player.Move.canceled -= StartWeaponAttack;
         _controller.Player.Move.performed -= Move;
         _controller.Disable();
     }
     public void Move(InputAction.CallbackContext context)
     {
+        _weapon.StopAttack();
         _contextDir = context.ReadValue<Vector2>();
 
         //.OnComplete() => transform.gameObject.SetActive(false); метод отрабатывает при завершении цикла Tweena
     }
+    public void StartWeaponAttack(InputAction.CallbackContext context)
+    {
+        _weapon.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack); // fixThis
+    }
+
+    private Transform GetEnemy()
+    {
+        return _enemyPool.GetNearestEnemy(transform.position);
+    }
+
     private void Update()
     {
         _moveTween.Kill();
@@ -42,15 +67,13 @@ public class Player : Entity
         {
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
             _moveTween = transform.DOMove(moveDir, Time.deltaTime * Speed).SetSpeedBased().SetEase(Ease.Linear).SetRelative();
-            //_characterController.Move(moveDir * Time.deltaTime * Speed);
 
             transform.LookAt(Vector3.LerpUnclamped(transform.forward + transform.position, moveDir + transform.position, RotationSpeed));
-            //Quaternion.LookRotation(new Vector3(moveDir.x, 0, moveDir.y));
-
-            //Vector3 _rotatedMovement = Quaternion.Euler(0.0f, 0, 0.0f) * moveDir;
-            //_rotationAngle = Mathf.Atan2(_rotatedMovement.x, _rotatedMovement.z) * Mathf.Rad2Deg;
-            //_targetRotation = Quaternion.Euler(0.0f, _rotationAngle, 0.0f);
-            //_rotateTween = transform.DORotate(_targetRotation.eulerAngles, 100).SetSpeedBased().SetEase(Ease.Linear).SetRelative();
         }
+    }
+    protected override void Die()
+    {
+        _weapon.StopAttack();
+        base.Die();
     }
 }
