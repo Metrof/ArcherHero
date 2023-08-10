@@ -603,10 +603,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneContext
       objectReference: {fileID: 0}
-    - target: {fileID: 8532677611967626382, guid: f7f12b64c98f6384789b861c288d29ad, type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 4137269806150272714, guid: 06d6e0c309d33ff4984657482df6767d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
