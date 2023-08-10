@@ -30,6 +30,7 @@ public class Player : Entity
     {
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, _typeDamage));
+        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
     }
     private void OnEnable()
     {
@@ -39,20 +40,20 @@ public class Player : Entity
     }
     private void OnDisable()
     {
-        _controller.Player.Move.canceled -= StartWeaponAttack;
         _controller.Player.Move.performed -= Move;
+        _controller.Player.Move.canceled -= StartWeaponAttack;
         _controller.Disable();
     }
     public void Move(InputAction.CallbackContext context)
     {
-        _weapon.StopAttack();
+        _weapon?.StopAttack();
         _contextDir = context.ReadValue<Vector2>();
 
         //.OnComplete() => transform.gameObject.SetActive(false); метод отрабатывает при завершении цикла Tweena
     }
     public void StartWeaponAttack(InputAction.CallbackContext context)
     {
-        _weapon.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack); // fixThis
+        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack); 
     }
 
     private Transform GetEnemy()

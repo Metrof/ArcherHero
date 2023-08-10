@@ -4,24 +4,36 @@ using UnityEngine;
 
 public class EnemyPool 
 {
-    private List<Enemy> _enemyList = new List<Enemy>(); 
+    private List<Enemy> _enemyList = new List<Enemy>();
+    private const int _defaultLayer = 0;
 
+    Transform _nearestEnemy;
     public void AddEnemy(Enemy enemy)
     {
-        _enemyList.Add(enemy);
+        if (enemy != null) _enemyList.Add(enemy);
     }
 
     public Transform GetNearestEnemy(Vector3 playerPos)
     {
         if (_enemyList.Count == 0) return null;
-        Transform nearestEnemy = _enemyList[0].transform;
+        _nearestEnemy = _enemyList[0].transform;
         foreach (var enemy in _enemyList)
         {
-            if (Vector3.Distance(playerPos, enemy.transform.position) < Vector3.Distance(playerPos, nearestEnemy.transform.position))
+            CheckEnemy(enemy, playerPos);
+        }
+        return _nearestEnemy;
+    }
+    private void CheckEnemy(Enemy enemy, Vector3 playerPos)
+    {
+        if (Vector3.Distance(playerPos, enemy.transform.position) < Vector3.Distance(playerPos, _nearestEnemy.transform.position))
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(playerPos, enemy.transform.position - playerPos);
+            Physics.Raycast(ray, out hit);
+            if (hit.collider != null)
             {
-                nearestEnemy = enemy.transform;
+                if (hit.collider.gameObject.layer != _defaultLayer) _nearestEnemy = enemy.transform;
             }
         }
-        return nearestEnemy;
     }
 }

@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     private int _damage;
     private Vector3 _targetPosition;
     private IProjectileMovement _projectileMovement;
+    private IProjectileHit _projectileHit;
 
     public TypeDamage TypeDamage { get => _typeDamage; }
 
@@ -33,13 +34,14 @@ public class Projectile : MonoBehaviour
         }
         set
         {
-            CheckNull(value);
+            CheckMovementNull(value);
             _projectileMovement = value;
         }
     }
 
-    public void Initialize(int damage, IProjectileMovement projectileMovement, Vector3 targetPosition)
+    public void Initialize(int damage, Vector3 targetPosition, IProjectileMovement projectileMovement, IProjectileHit projectileHit )
     {
+        _projectileHit = projectileHit;
         _projectileMovement = projectileMovement;
         Damage = damage;
         _targetPosition = targetPosition;
@@ -52,15 +54,12 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IDamageable damageable))
-        {
-            damageable.TakeDamage(_typeDamage, Damage);
-        }
+        _projectileHit.Hit(other, this);
 
         ProjectilePool.Release(this);
     }
 
-    private void CheckNull(IProjectileMovement projectileMovement)
+    private void CheckMovementNull(IProjectileMovement projectileMovement)
     {
         if (_projectileMovement == null)
         {

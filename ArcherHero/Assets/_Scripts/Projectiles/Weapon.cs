@@ -6,16 +6,13 @@ using UnityEngine.Pool;
 
 public class Weapon
 {
-    private ObjectPool<Projectile> _currentProjectiles;
-
     private CancellationTokenSource _cancellationTokenSource;
 
-    private IProjectileMovement _currentMovement;
+    public ProjectileFactory ProjectileFactory { get; private set; }
 
     public Weapon(ObjectPool<Projectile> defaultProjectiles)
     {
-        _currentProjectiles = defaultProjectiles;
-        _currentMovement = new DefaultProjectileMovement();
+        ProjectileFactory = new ProjectileFactory(defaultProjectiles);
     }
 
     public void StartAttack(Func<Transform> nearestTarget, Transform pointSpawnProjectile, int damage, int attackSpeedPerMinute)
@@ -27,15 +24,20 @@ public class Weapon
 
     public void StopAttack()
     {
-        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource?.Cancel();
     }
 
     public void ChangeProjectiles(ObjectPool<Projectile> projectiles)
     {
-        _currentProjectiles = projectiles;
+        if(projectiles == null)
+        {
+            throw new ArgumentNullException(nameof(projectiles));
+        }
+
+        ProjectileFactory.ProjectilePool = projectiles;
     }
 
-    private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnSpell, Func<Transform> getTarget, CancellationToken token)
+    private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnProjectile, Func<Transform> getTarget, CancellationToken token)
     {
         Transform currentTarget = getTarget();
 
@@ -46,34 +48,28 @@ public class Weapon
 
         while (!token.IsCancellationRequested)
         {
-            Projectile newProjectile = _currentProjectiles.Get();
-            newProjectile.transform.position = pointSpawnSpell.position;
-            newProjectile.Initialize(damage, _currentMovement, currentTarget.position);
-            SetRotation(currentTarget, newProjectile);
+            ProjectileFactory.Create(pointSpawnProjectile, currentTarget, damage);
 
-            if(await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow())
+            if (await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow())
             {
                 return;
             }
 
             currentTarget ??= getTarget();
 
-            if(currentTarget == null)
+            if (currentTarget == null)
             {
                 StopAttack();
             }
         }
     }
 
-    private void SetRotation(Transform target, Projectile newProjectile)
-    {
-        Vector3 targetPosition = target.position;
-        targetPosition.y = newProjectile.transform.position.y;
-        newProjectile.transform.LookAt(targetPosition);
-    }
-
     private double ShotDelay(float attackSpeedPerMinute)
     {
+        if (attackSpeedPerMinute <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(attackSpeedPerMinute));
+        }
         return 1 / attackSpeedPerMinute;
     }
 }
