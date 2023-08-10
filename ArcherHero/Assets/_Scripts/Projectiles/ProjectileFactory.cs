@@ -8,7 +8,7 @@ public class ProjectileFactory
 
     private IProjectileMovement _currentMovement;
     private IProjectileHit _currentHit;
-    private ICreateProjectileBehavior _currentCreationBehavior;
+    private IBehaviorCreateProjectile _currentCreationBehavior;
 
     private readonly Dictionary<ProjectileMovementType, IProjectileMovement> _movementDict = new()
     {
@@ -20,9 +20,10 @@ public class ProjectileFactory
         [ProjectileHitType.Default] = new DefaultProjectileHit(),
     };
 
-    private readonly Dictionary<ProjectileCreationType, ICreateProjectileBehavior> _creationDict = new()
+    private readonly Dictionary<ProjectileCreationType, IBehaviorCreateProjectile> _creationDict = new()
     {
-        [ProjectileCreationType.One] = new OneCreatingProjectile(),
+        [ProjectileCreationType.One] = new OneCreatedProjectile(),
+        [ProjectileCreationType.Three] = new ThreeCreatedProjectile(),
     };
 
     public ProjectileFactory(ObjectPool<Projectile> objectPool)

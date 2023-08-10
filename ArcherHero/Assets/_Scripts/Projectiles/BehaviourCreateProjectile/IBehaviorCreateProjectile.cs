@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public interface ICreateProjectileBehavior
+public interface IBehaviorCreateProjectile
 {
     List<Projectile> Create(Transform pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool);
 }

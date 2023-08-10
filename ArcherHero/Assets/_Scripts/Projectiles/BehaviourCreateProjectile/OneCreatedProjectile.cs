@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class OneCreatingProjectile : ICreateProjectileBehavior
+public class OneCreatedProjectile : IBehaviorCreateProjectile
 {
 
     public List<Projectile> Create(Transform pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool)
