@@ -6,9 +6,9 @@ using Zenject;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public LevelMultiplier[] _lvl;
+    [SerializeField] private LevelMultiplier[] _lvl;
+    [SerializeField] private LvlSwithcManager lvlSwithcManager;
     private int _currentLevel;
-    public LvlSwithcManager lvlSwithcManager;
     private DiContainer _diContainer;
     private EnemyPool _enemyPool;
     
@@ -17,6 +17,7 @@ public class EnemySpawnManager : MonoBehaviour
     {
         _diContainer = diContainer;
         _enemyPool = enemyPool;
+        diContainer.Bind<EnemySpawnManager>().FromInstance(this).AsSingle();
     }
     
     private void Start()
