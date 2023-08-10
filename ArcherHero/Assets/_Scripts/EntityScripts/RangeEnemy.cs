@@ -31,7 +31,7 @@ public class RangeEnemy : Enemy
     {
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
-
+        
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
     }
     

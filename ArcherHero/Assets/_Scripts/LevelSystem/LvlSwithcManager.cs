@@ -44,9 +44,4 @@ public class LvlSwithcManager : MonoBehaviour
         
         OnLevelChanged?.Invoke(_currentLevel);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        throw new NotImplementedException();
-    }
 }
