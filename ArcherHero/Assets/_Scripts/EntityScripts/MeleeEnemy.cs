@@ -34,11 +34,13 @@ public class MeleeEnemy : Enemy
             if (Vector3.Distance( transform.position, _targetAttack.position) <= _attackDistance)
             {   
                 MeleeAttack();
-                await UniTask.Delay(TimeSpan.FromSeconds(AttackDelay(speedAttack)), cancellationToken: _cancellationToken.Token). SuppressCancellationThrow();
+                await UniTask.Delay(TimeSpan.FromSeconds(AttackDelay(speedAttack)), cancellationToken: _cancellationToken.Token). 
+                    SuppressCancellationThrow();
             }
             else
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(_timeToUpdateMoveTarget), cancellationToken: _cancellationToken.Token). SuppressCancellationThrow();
+                await UniTask.Delay(TimeSpan.FromSeconds(_timeToUpdateMoveTarget), cancellationToken: _cancellationToken.Token). 
+                    SuppressCancellationThrow();
             }
         }
     }
