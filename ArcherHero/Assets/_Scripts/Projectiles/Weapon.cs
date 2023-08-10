@@ -8,11 +8,11 @@ public class Weapon
 {
     private CancellationTokenSource _cancellationTokenSource;
 
-    public ProjectileFactory ProjectileFactory { get; private set; }
+    public ProjectilePattern ProjectilePattern { get; private set; }
 
     public Weapon(ObjectPool<Projectile> defaultProjectiles)
     {
-        ProjectileFactory = new ProjectileFactory(defaultProjectiles);
+        ProjectilePattern = new ProjectilePattern(defaultProjectiles);
     }
 
     public void StartAttack(Func<Transform> nearestTarget, Transform pointSpawnProjectile, int damage, int attackSpeedPerMinute)
@@ -34,7 +34,7 @@ public class Weapon
             throw new ArgumentNullException(nameof(projectiles));
         }
 
-        ProjectileFactory.ProjectilePool = projectiles;
+        ProjectilePattern.ProjectilePool = projectiles;
     }
 
     private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnProjectile, Func<Transform> getTarget, CancellationToken token)
@@ -48,7 +48,7 @@ public class Weapon
 
         while (!token.IsCancellationRequested)
         {
-            ProjectileFactory.Create(pointSpawnProjectile, currentTarget, damage);
+            ProjectilePattern.Create(pointSpawnProjectile, currentTarget, damage);
 
             if (await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow())
             {

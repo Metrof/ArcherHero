@@ -9,5 +9,6 @@ public class DefaultProjectileHit : IProjectileHit
         {
             damageable.TakeDamage(projectile.TypeDamage, projectile.Damage);
         }
+        projectile.ProjectilePool.Release(projectile);
     }
 }

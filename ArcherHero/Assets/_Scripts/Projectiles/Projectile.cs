@@ -9,9 +9,22 @@ public class Projectile : MonoBehaviour
 
     private ObjectPool<Projectile> _projectilePool;
     private int _damage;
-    private Vector3 _targetPosition;
+    private Transform _target;
     private IProjectileMovement _projectileMovement;
     private IProjectileHit _projectileHit;
+
+    private int _count = 0;
+    public int Count
+    {
+        get
+        {
+            return _count++; 
+        }
+        set 
+        { 
+            _count = value; 
+        }
+    }
 
     public TypeDamage TypeDamage { get => _typeDamage; }
 
@@ -39,24 +52,22 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(int damage, Vector3 targetPosition, IProjectileMovement projectileMovement, IProjectileHit projectileHit )
+    public void Initialize(int damage, Transform target, IProjectileMovement projectileMovement, IProjectileHit projectileHit )
     {
         _projectileHit = projectileHit;
         _projectileMovement = projectileMovement;
         Damage = damage;
-        _targetPosition = targetPosition;
+        _target = target;
     }
 
     private void Update()
     {
-        ProjectileMovement.Move(transform, _targetPosition, _moveSpeedProjectile);
+        ProjectileMovement.Move(this, _target, _moveSpeedProjectile);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         _projectileHit.Hit(other, this);
-
-        ProjectilePool.Release(this);
     }
 
     private void CheckMovementNull(IProjectileMovement projectileMovement)
@@ -65,5 +76,10 @@ public class Projectile : MonoBehaviour
         {
             throw new ArgumentNullException("ProjectileMovement can not be NULL");
         }
+    }
+
+    private void OnDisable()
+    {
+        Count = 0;
     }
 }

@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ProjectileFactory
+public class ProjectilePattern
 {
     public ObjectPool<Projectile> ProjectilePool;
 
     private IProjectileMovement _currentMovement;
     private IProjectileHit _currentHit;
-    private ICreateProjectileBehavior _currentCreationBehavior;
+    private IBehaviorCreateProjectile _currentCreationBehavior;
 
     private readonly Dictionary<ProjectileMovementType, IProjectileMovement> _movementDict = new()
     {
@@ -18,14 +18,18 @@ public class ProjectileFactory
     private readonly Dictionary<ProjectileHitType, IProjectileHit> _hitDict = new()
     {
         [ProjectileHitType.Default] = new DefaultProjectileHit(),
+        [ProjectileHitType.Ricochet] = new RicochetProjectileHit(),
     };
 
-    private readonly Dictionary<ProjectileCreationType, ICreateProjectileBehavior> _creationDict = new()
+    private readonly Dictionary<ProjectileCreationType, IBehaviorCreateProjectile> _creationDict = new()
     {
-        [ProjectileCreationType.One] = new OneCreatingProjectile(),
+        [ProjectileCreationType.One] = new OneCreatedProjectile(),
+        [ProjectileCreationType.Three] = new ThreeCreatedProjectile(),
+        [ProjectileCreationType.Double] = new DoubleCreatedProjectile(),
+        [ProjectileCreationType.Triple] = new TripleCreatedProjectile(),
     };
 
-    public ProjectileFactory(ObjectPool<Projectile> objectPool)
+    public ProjectilePattern(ObjectPool<Projectile> objectPool)
     {
         ProjectilePool = objectPool;
 
@@ -40,26 +44,26 @@ public class ProjectileFactory
 
         foreach (var projectile in projectiles)
         {
-            projectile.Initialize(damage, target.position, _currentMovement, _currentHit);
+            projectile.Initialize(damage, target, _currentMovement, _currentHit);
         }
     }
 
 
-    public ProjectileFactory SetMovement(ProjectileMovementType moveType)
+    public ProjectilePattern SetMovement(ProjectileMovementType moveType)
     {
         _currentMovement = _movementDict[moveType];
 
         return this;
     }
 
-    public ProjectileFactory SetHit(ProjectileHitType hitType)
+    public ProjectilePattern SetHit(ProjectileHitType hitType)
     {
         _currentHit = _hitDict[hitType];
 
         return this;
     }
 
-    public ProjectileFactory SetAmount(ProjectileCreationType amountType)
+    public ProjectilePattern SetAmount(ProjectileCreationType amountType)
     {
         _currentCreationBehavior = _creationDict[amountType];
 
@@ -83,4 +87,5 @@ public enum ProjectileMovementType
 public enum ProjectileHitType
 {
     Default,
+    Ricochet,
 }

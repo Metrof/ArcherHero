@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IProjectileMovement
 {
-    void Move(Transform projectile, Vector3 direction, float speed);
+    void Move(Projectile projectile, Transform target, float speed);
 }
