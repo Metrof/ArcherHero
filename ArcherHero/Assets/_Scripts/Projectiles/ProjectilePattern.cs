@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ProjectileFactory
+public class ProjectilePattern
 {
     public ObjectPool<Projectile> ProjectilePool;
 
@@ -29,7 +29,7 @@ public class ProjectileFactory
         [ProjectileCreationType.Triple] = new TripleCreatedProjectile(),
     };
 
-    public ProjectileFactory(ObjectPool<Projectile> objectPool)
+    public ProjectilePattern(ObjectPool<Projectile> objectPool)
     {
         ProjectilePool = objectPool;
 
@@ -49,21 +49,21 @@ public class ProjectileFactory
     }
 
 
-    public ProjectileFactory SetMovement(ProjectileMovementType moveType)
+    public ProjectilePattern SetMovement(ProjectileMovementType moveType)
     {
         _currentMovement = _movementDict[moveType];
 
         return this;
     }
 
-    public ProjectileFactory SetHit(ProjectileHitType hitType)
+    public ProjectilePattern SetHit(ProjectileHitType hitType)
     {
         _currentHit = _hitDict[hitType];
 
         return this;
     }
 
-    public ProjectileFactory SetAmount(ProjectileCreationType amountType)
+    public ProjectilePattern SetAmount(ProjectileCreationType amountType)
     {
         _currentCreationBehavior = _creationDict[amountType];
 
