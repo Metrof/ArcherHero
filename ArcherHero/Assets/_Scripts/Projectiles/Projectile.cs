@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
 
     private ObjectPool<Projectile> _projectilePool;
     private int _damage;
-    private Vector3 _targetPosition;
+    private Transform _target;
     private IProjectileMovement _projectileMovement;
     private IProjectileHit _projectileHit;
 
@@ -39,17 +39,17 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    public void Initialize(int damage, Vector3 targetPosition, IProjectileMovement projectileMovement, IProjectileHit projectileHit )
+    public void Initialize(int damage, Transform target, IProjectileMovement projectileMovement, IProjectileHit projectileHit )
     {
         _projectileHit = projectileHit;
         _projectileMovement = projectileMovement;
         Damage = damage;
-        _targetPosition = targetPosition;
+        _target = target;
     }
 
     private void Update()
     {
-        ProjectileMovement.Move(transform, _targetPosition, _moveSpeedProjectile);
+        ProjectileMovement.Move(this, _target, _moveSpeedProjectile);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DefaultProjectileMovement : IProjectileMovement
 {
-    public void Move(Transform projectile, Vector3 direction, float speed)
+    public void Move(Projectile projectile, Transform target, float speed)
     {
-        projectile.Translate(Vector3.forward * Time.deltaTime * speed);
+        projectile.transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 }

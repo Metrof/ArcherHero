@@ -43,7 +43,7 @@ public class ProjectileFactory
 
         foreach (var projectile in projectiles)
         {
-            projectile.Initialize(damage, target.position, _currentMovement, _currentHit);
+            projectile.Initialize(damage, target, _currentMovement, _currentHit);
         }
     }
 
