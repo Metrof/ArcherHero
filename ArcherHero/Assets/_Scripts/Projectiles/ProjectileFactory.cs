@@ -24,6 +24,8 @@ public class ProjectileFactory
     {
         [ProjectileCreationType.One] = new OneCreatedProjectile(),
         [ProjectileCreationType.Three] = new ThreeCreatedProjectile(),
+        [ProjectileCreationType.Double] = new DoubleCreatedProjectile(),
+        [ProjectileCreationType.Triple] = new TripleCreatedProjectile(),
     };
 
     public ProjectileFactory(ObjectPool<Projectile> objectPool)
