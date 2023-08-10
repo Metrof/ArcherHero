@@ -49,6 +49,6 @@ public class MeleeEnemy : Enemy
 
     private void MeleeAttack()
     {
-        TakeDamage(_typeDamage, damage);
+        Debug.Log("MeleeAttack");
     }
 }
