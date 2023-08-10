@@ -153,9 +153,9 @@ MonoBehaviour:
   _moveSpeed: 1000
   _rotationSpeed: 0.05
   _typeDamage: 0
-  damage: 0
-  speedAttack: 0
-  currentHealth: 0
+  damage: 30
+  speedAttack: 30
+  currentHealth: 1000
   _spawnProjectile: {fileID: 8673544391391377074}
 --- !u!1 &8673544391391377077
 GameObject:
