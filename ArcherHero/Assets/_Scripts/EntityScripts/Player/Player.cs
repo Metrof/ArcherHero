@@ -86,7 +86,7 @@ public class Player : Entity
         if (_controller.Player.Move.IsPressed())
         {
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
-            _characterController.Move(moveDir * Time.deltaTime * Speed);
+            CharacterController.Move(moveDir * Time.deltaTime * Speed);
 
             transform.LookAt(Vector3.LerpUnclamped(transform.forward + transform.position, moveDir + transform.position, RotationSpeed));
         }
