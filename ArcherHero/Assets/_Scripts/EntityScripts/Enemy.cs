@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 public class Enemy : Entity
 {   
@@ -13,6 +14,12 @@ public class Enemy : Entity
     protected Transform _targetAttack;
     protected CancellationTokenSource _cancellationToken;
     
+    
+    [Inject]
+    private void Construct(Player player)
+    {
+        _targetAttack = player.transform;
+    }
     protected override void Die()
     {
         OnEnemyDie?.Invoke(this);

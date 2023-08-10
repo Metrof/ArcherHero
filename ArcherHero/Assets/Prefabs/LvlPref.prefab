@@ -350,7 +350,7 @@ Transform:
   - {fileID: 2175418615333107126}
   - {fileID: 2316920399474305666}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &3120100543167776281
 MeshCollider:
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: c30e109f1d612ae4aaa9c442b58c5bd9, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0d98ca7d667ad7d45876e9ebaa799476, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &7627928816748958083
 GameObject:

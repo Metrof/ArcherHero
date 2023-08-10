@@ -20,6 +20,7 @@ public class RangeEnemy : Enemy
     private ProjectilePool _projectilePool;
     
     
+    
     [Inject]
     private void Construct(ProjectilePool projectilePool)
     {
@@ -28,9 +29,6 @@ public class RangeEnemy : Enemy
     
     private void Start()
     {
-        GameObject gObject = GameObject.FindGameObjectWithTag("Player");
-        _targetAttack = gObject.transform;
-        
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
 

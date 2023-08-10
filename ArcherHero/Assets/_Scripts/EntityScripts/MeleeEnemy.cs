@@ -12,9 +12,6 @@ public class MeleeEnemy : Enemy
 
     private void Start()
     {
-        GameObject gObject = GameObject.FindGameObjectWithTag("Player");
-        _targetAttack = gObject.transform;
-        
         _agent = GetComponent<NavMeshAgent>();
         
         MoveToTarget().Forget();
