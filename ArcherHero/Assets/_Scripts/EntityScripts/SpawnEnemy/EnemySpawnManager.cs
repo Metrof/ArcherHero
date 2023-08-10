@@ -20,11 +20,7 @@ public class EnemySpawnManager : MonoBehaviour
         diContainer.Bind<EnemySpawnManager>().FromInstance(this).AsSingle();
     }
     
-    private void Start()
-    {   
-        SpawnEnemies(_currentLevel);
-    }
-    private void OnEnable()
+    /*private void OnEnable()
     {
         lvlSwithcManager.OnLevelChanged += OnLevelChangedHandler;
     }
@@ -37,11 +33,11 @@ public class EnemySpawnManager : MonoBehaviour
     private void OnLevelChangedHandler(int levelIndex)
     {
         SpawnEnemies(levelIndex);
-    }
+    }*/
     
-    private void SpawnEnemies(int currentLevel)
+    public void SpawnEnemies()
     {
-        foreach (EnemySpawnPoint spawnPoint in _lvl[currentLevel]._enemySpawnPoints)
+        foreach (EnemySpawnPoint spawnPoint in _lvl[_currentLevel]._enemySpawnPoints)
         {
             Enemy enemyPrefab = spawnPoint.GetEnemyPrefab();
             
@@ -52,7 +48,7 @@ public class EnemySpawnManager : MonoBehaviour
             
             _enemyPool.AddEnemy(enemy);
             
-            ApplyStatsMultiplier(enemy,  _lvl[currentLevel]._statMultiplier);
+            ApplyStatsMultiplier(enemy,  _lvl[_currentLevel]._statMultiplier);
         }
     }
 
