@@ -15,8 +15,9 @@ public class Enemy : Entity
     
     protected override void Die()
     {
-        base.Die();
+        _cancellationToken.Cancel();
         Destroy(gameObject);
+        base.Die();
     }
 
 }

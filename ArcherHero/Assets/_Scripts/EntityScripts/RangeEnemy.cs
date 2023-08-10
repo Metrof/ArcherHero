@@ -48,16 +48,14 @@ public class RangeEnemy : Enemy
             _agent.SetDestination(_targetMovePosition);
             
             await UniTask.WaitUntil(() => !isMoving);
-
-
+            
             await UniTask.Delay(TimeSpan.FromSeconds(_timeToChangeDirection), cancellationToken: _cancellationToken.Token). SuppressCancellationThrow(); 
             _weapon.StopAttack();
         }
     }
 
     protected override void Die()
-    {   
-        _cancellationToken.Cancel();
+    {
         _weapon.StopAttack();
         base.Die();
     }
@@ -80,7 +78,6 @@ public class RangeEnemy : Enemy
     
     private void Update()
     {
-        
         if (isMoving && !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
         {
             isMoving = false;
