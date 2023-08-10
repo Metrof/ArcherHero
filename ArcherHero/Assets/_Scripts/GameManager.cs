@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform _playerSpawnPoint;
+
+    Player _player;
+
+    [Inject]
+    private void Construct(Player player)
     {
-        
+        _player = player;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _player.transform.position = _playerSpawnPoint.position;
     }
 }
