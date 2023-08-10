@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +10,32 @@ public class Player : Entity
 {
     [SerializeField] private Transform _spawnProjectile;
 
+    CharacterController _characterController;
     Controller _controller;
-    private Tween _moveTween;
 
     private Weapon _weapon;
     private ProjectilePool _projectilePool;
     private EnemyPool _enemyPool;
+
+    private CharacterController CharacterController
+    {
+        get
+        {
+            if (_characterController == null)
+            {
+                if(!TryGetComponent(out _characterController))
+                {
+                    _characterController = gameObject.AddComponent<CharacterController>();
+                    return _characterController;
+                } else 
+                { 
+                    return _characterController; 
+                }
+            }
+            return _characterController;
+        }
+        set { _characterController = value; }
+    }
 
     Vector2 _contextDir;
     [Inject]
@@ -28,6 +47,7 @@ public class Player : Entity
 
     private void Awake()
     {
+        _characterController = GetComponent<CharacterController>();
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, _typeDamage));
         _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
@@ -63,11 +83,10 @@ public class Player : Entity
 
     private void Update()
     {
-        _moveTween.Kill();
         if (_controller.Player.Move.IsPressed())
         {
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
-            _moveTween = transform.DOMove(moveDir, Time.deltaTime * Speed).SetSpeedBased().SetEase(Ease.Linear).SetRelative();
+            _characterController.Move(moveDir * Time.deltaTime * Speed);
 
             transform.LookAt(Vector3.LerpUnclamped(transform.forward + transform.position, moveDir + transform.position, RotationSpeed));
         }

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8673544390339888371}
   - component: {fileID: 8673544390339888370}
   - component: {fileID: 293859640828442225}
-  - component: {fileID: 5552369047464873172}
+  - component: {fileID: 6548473470329803223}
   - component: {fileID: 4137269806150272714}
   m_Layer: 7
   m_Name: Player
@@ -146,8 +146,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!136 &5552369047464873172
-CapsuleCollider:
+--- !u!143 &6548473470329803223
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -164,10 +164,13 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
+  serializedVersion: 3
   m_Height: 2
-  m_Direction: 1
+  m_Radius: 0.5000002
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4137269806150272714
 MonoBehaviour:
@@ -182,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorType: 0
-  _moveSpeed: 1000
+  _moveSpeed: 5
   _rotationSpeed: 0.05
   _typeDamage: 0
   damage: 30
