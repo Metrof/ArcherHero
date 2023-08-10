@@ -18,6 +18,7 @@ public class ProjectileFactory
     private readonly Dictionary<ProjectileHitType, IProjectileHit> _hitDict = new()
     {
         [ProjectileHitType.Default] = new DefaultProjectileHit(),
+        [ProjectileHitType.Ricochet] = new RicochetProjectileHit(),
     };
 
     private readonly Dictionary<ProjectileCreationType, IBehaviorCreateProjectile> _creationDict = new()
@@ -86,4 +87,5 @@ public enum ProjectileMovementType
 public enum ProjectileHitType
 {
     Default,
+    Ricochet,
 }

@@ -13,6 +13,19 @@ public class Projectile : MonoBehaviour
     private IProjectileMovement _projectileMovement;
     private IProjectileHit _projectileHit;
 
+    private int _count = 0;
+    public int Count
+    {
+        get
+        {
+            return _count++; 
+        }
+        set 
+        { 
+            _count = value; 
+        }
+    }
+
     public TypeDamage TypeDamage { get => _typeDamage; }
 
     public ObjectPool<Projectile> ProjectilePool
@@ -55,8 +68,6 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _projectileHit.Hit(other, this);
-
-        ProjectilePool.Release(this);
     }
 
     private void CheckMovementNull(IProjectileMovement projectileMovement)
@@ -65,5 +76,10 @@ public class Projectile : MonoBehaviour
         {
             throw new ArgumentNullException("ProjectileMovement can not be NULL");
         }
+    }
+
+    private void OnDisable()
+    {
+        Count = 0;
     }
 }
