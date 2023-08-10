@@ -10,9 +10,15 @@ public class EnemyPool
     Transform _nearestEnemy;
     public void AddEnemy(Enemy enemy)
     {
-        if (enemy != null) _enemyList.Add(enemy);
+        if (enemy != null)
+        {
+            _enemyList.Add(enemy);
+        }
     }
-
+    private void DeleteEnemy(Enemy enemy)
+    {
+        _enemyList.Remove(enemy);
+    }
     public Transform GetNearestEnemy(Vector3 playerPos)
     {
         if (_enemyList.Count == 0) return null;

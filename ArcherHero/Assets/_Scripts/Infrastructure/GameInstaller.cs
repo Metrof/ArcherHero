@@ -4,10 +4,12 @@ using Zenject;
 public class GameInstaller : MonoInstaller
 {
     [SerializeField] private ProjectilePool _prefabProjectilePool;
+    [SerializeField] private Player _player;
     public override void InstallBindings()
     {
         BindProjectilePool();
         BindEnemyPool();
+        BindPlayer();
     }
 
     private void BindProjectilePool()
@@ -22,6 +24,13 @@ public class GameInstaller : MonoInstaller
     {
         Container.Bind<EnemyPool>()
             .FromNew()
+            .AsSingle()
+            .NonLazy();
+    }
+    private void BindPlayer()
+    {
+        Container.Bind<Player>()
+            .FromComponentInNewPrefab(_player)
             .AsSingle()
             .NonLazy();
     }
