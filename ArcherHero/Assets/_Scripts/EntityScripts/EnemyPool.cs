@@ -12,6 +12,7 @@ public class EnemyPool
     {
         if (enemy != null)
         {
+            enemy.OnEnemyDie += DeleteEnemy;
             _enemyList.Add(enemy);
         }
     }
