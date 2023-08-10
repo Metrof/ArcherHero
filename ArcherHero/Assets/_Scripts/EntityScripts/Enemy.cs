@@ -1,5 +1,5 @@
 
-using Cysharp.Threading.Tasks;
+using System;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Enemy : Entity
 {   
     // перенести сюда targetAttack по игроку (zenject)
-    
+    public event Action<Enemy> OnEnemyDie; 
     protected NavMeshAgent _agent;
     protected Vector3 _targetMovePosition;
     protected Transform _targetAttack;
@@ -15,9 +15,9 @@ public class Enemy : Entity
     
     protected override void Die()
     {
+        OnEnemyDie?.Invoke(this);
         _cancellationToken.Cancel();
         Destroy(gameObject);
         base.Die();
     }
-
 }
