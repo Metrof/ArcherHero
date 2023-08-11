@@ -19,6 +19,7 @@ public class ProjectilePattern
     {
         [ProjectileHitType.Default] = new DefaultProjectileHit(),
         [ProjectileHitType.Ricochet] = new RicochetProjectileHit(),
+        [ProjectileHitType.EightAround] = new EightAroundProjectileHit(),
     };
 
     private readonly Dictionary<ProjectileCreationType, IBehaviorCreateProjectile> _creationDict = new()
@@ -27,6 +28,7 @@ public class ProjectilePattern
         [ProjectileCreationType.Three] = new ThreeCreatedProjectile(),
         [ProjectileCreationType.Double] = new DoubleCreatedProjectile(),
         [ProjectileCreationType.Triple] = new TripleCreatedProjectile(),
+        [ProjectileCreationType.EightAround] = new EightCreatedProjectilesAround(),
     };
 
     public ProjectilePattern(ObjectPool<Projectile> objectPool)
@@ -40,7 +42,7 @@ public class ProjectilePattern
 
     public void Create(Transform pointSpawnProjectile, Transform target, int damage)
     {
-        var projectiles = _currentCreationBehavior.Create(pointSpawnProjectile, target, ProjectilePool);
+        var projectiles = _currentCreationBehavior.Create(pointSpawnProjectile.position, target, ProjectilePool);
 
         foreach (var projectile in projectiles)
         {
@@ -77,6 +79,7 @@ public enum ProjectileCreationType
     Three,
     Double,
     Triple,
+    EightAround,
 }
 
 public enum ProjectileMovementType
@@ -88,4 +91,5 @@ public enum ProjectileHitType
 {
     Default,
     Ricochet,
+    EightAround,
 }

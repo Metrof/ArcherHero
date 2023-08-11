@@ -2,10 +2,10 @@
 using UnityEngine.Pool;
 using UnityEngine;
 
-public abstract class CreateProjectilesAround
+public abstract class CreateProjectilesAround : IBehaviorCreateProjectile
 {
     protected abstract List<float> AnglesRotation { get; }
-    public List<Projectile> Create(Transform pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool)
+    public List<Projectile> Create(Vector3 pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool)
     {
         List<Projectile> _projectiles = new();
 
@@ -13,8 +13,9 @@ public abstract class CreateProjectilesAround
         {
             Projectile newProjectile = pool.Get();
             _projectiles.Add(newProjectile);
-            newProjectile.transform.position = pointSpawnProjectile.position;
+            newProjectile.transform.position = pointSpawnProjectile;
             SetRotation(target, newProjectile, AnglesRotation[i]);
+            newProjectile.transform.Translate(Vector3.forward);
         }
 
         return _projectiles;

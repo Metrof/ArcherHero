@@ -6,7 +6,7 @@ public abstract class TwinProjectiles : IBehaviorCreateProjectile
 {
     protected abstract List<float> ShiftX {  get; }
 
-    public List<Projectile> Create(Transform pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool)
+    public List<Projectile> Create(Vector3 pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool)
     {
         List<Projectile> _projectiles = new();
 
@@ -14,7 +14,7 @@ public abstract class TwinProjectiles : IBehaviorCreateProjectile
         {
             Projectile newProjectile = pool.Get();
             _projectiles.Add(newProjectile);
-            newProjectile.transform.position = pointSpawnProjectile.position;
+            newProjectile.transform.position = pointSpawnProjectile;
             SetRotation(target, newProjectile);
             newProjectile.transform.Translate(ShiftX[i], 0, 0);
         }

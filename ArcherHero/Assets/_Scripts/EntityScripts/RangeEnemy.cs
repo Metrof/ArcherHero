@@ -33,6 +33,7 @@ public class RangeEnemy : Enemy
         StartRandomMovement().Forget();
         
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
+        _weapon.ProjectilePattern.SetHit(ProjectileHitType.EightAround);
     }
     
     private async UniTaskVoid StartRandomMovement()
