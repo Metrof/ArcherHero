@@ -35,7 +35,7 @@ public class ProjectilePattern
 
         SetMovement(ProjectileMovementType.Default)
             .SetHit(ProjectileHitType.Default)
-            .SetAmount(ProjectileCreationType.One);
+            .SetCreation(ProjectileCreationType.One);
     }
 
     public void Create(Transform pointSpawnProjectile, Transform target, int damage)
@@ -63,7 +63,7 @@ public class ProjectilePattern
         return this;
     }
 
-    public ProjectilePattern SetAmount(ProjectileCreationType amountType)
+    public ProjectilePattern SetCreation(ProjectileCreationType amountType)
     {
         _currentCreationBehavior = _creationDict[amountType];
 
