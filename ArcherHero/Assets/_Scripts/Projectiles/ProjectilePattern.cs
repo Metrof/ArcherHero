@@ -21,6 +21,7 @@ public class ProjectilePattern
         [ProjectileHitType.Default] = new DefaultProjectileHit(),
         [ProjectileHitType.Ricochet] = new RicochetProjectileHit(),
         [ProjectileHitType.EightAround] = new EightAroundProjectileHit(),
+        [ProjectileHitType.ShootThrough] = new ShootThroughProjectileHit(),
     };
 
     private readonly Dictionary<ProjectileCreationType, IBehaviorCreateProjectile> _creationDict = new()
@@ -95,4 +96,5 @@ public enum ProjectileHitType
     Default,
     Ricochet,
     EightAround,
+    ShootThrough,
 }

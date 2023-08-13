@@ -11,6 +11,7 @@ public class EightAroundProjectileHit : IProjectileHit
             damageable.TakeDamage(projectile.TypeDamage, projectile.Damage);
 
         }
+
         Vector3 spawnPosition = projectile.transform.position;
         spawnPosition.y = projectile.StartPositionY;
         spawnPosition += projectile.transform.forward;
