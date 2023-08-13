@@ -3,20 +3,19 @@ using UnityEngine;
 
 public class EightAroundProjectileHit : IProjectileHit
 {
-    private EightCreatedProjectilesAround _eightCreatedProjectilesAround = new();
+    private EightCreatedProjectilesAround _eightProjectiles = new();
     public void Hit(Collider collider, Projectile projectile)
     {
         if (collider.TryGetComponent(out IDamageable damageable))
         {
             damageable.TakeDamage(projectile.TypeDamage, projectile.Damage);
-
         }
 
         Vector3 spawnPosition = projectile.transform.position;
         spawnPosition.y = projectile.StartPositionY;
-        spawnPosition += projectile.transform.forward;
+        spawnPosition += projectile.transform.forward * projectile.GetComponent<SphereCollider>().radius * 2;
 
-        List<Projectile> projectiles = _eightCreatedProjectilesAround.Create(spawnPosition, collider.transform, projectile.ProjectilePool);
+        List<Projectile> projectiles = _eightProjectiles.Create(spawnPosition, collider.transform, projectile.ProjectilePool);
 
         foreach (var bullet in projectiles)
         {

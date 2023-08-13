@@ -14,6 +14,7 @@ public class ProjectilePattern
     {
         [ProjectileMovementType.Default] = new DefaultProjectileMovement(),
         [ProjectileMovementType.Hinged] = new MovementHingedTrajectory(),
+        [ProjectileMovementType.Boomerang] = new BoomerangMovement(),
     };
 
     private readonly Dictionary<ProjectileHitType, IProjectileHit> _hitDict = new()
@@ -89,6 +90,7 @@ public enum ProjectileMovementType
 {
     Default,
     Hinged,
+    Boomerang,
 }
 
 public enum ProjectileHitType

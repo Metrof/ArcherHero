@@ -7,7 +7,10 @@ public class DefaultProjectileMovement : IProjectileMovement
     public void Move(Projectile projectile, Transform target, float speed)
     {
         Vector3 movePoint = projectile.transform.position + projectile.transform.forward * moveDistance;
-        projectile.MoveSequence.Append(projectile.transform.DOMove(movePoint, speed).SetEase(Ease.Linear));
-        projectile.MoveSequence.AppendCallback(() => projectile.ProjectilePool.Release(projectile));
+        projectile.MoveSequence
+            .Append(projectile.transform.DOMove(movePoint, speed)
+            .SetEase(Ease.Linear));
+        projectile.MoveSequence
+            .AppendCallback(() => projectile.ProjectilePool.Release(projectile));
     }
 }
