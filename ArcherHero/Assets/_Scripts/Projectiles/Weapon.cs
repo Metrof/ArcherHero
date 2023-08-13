@@ -48,8 +48,6 @@ public class Weapon
 
         while (!token.IsCancellationRequested)
         {
-            ProjectilePattern.Create(pointSpawnProjectile, currentTarget, damage);
-
             if (await UniTask.Delay(TimeSpan.FromMinutes(ShotDelay(attackSpeedPerMinute)), cancellationToken: token).SuppressCancellationThrow())
             {
                 return;
@@ -60,7 +58,10 @@ public class Weapon
             if (currentTarget == null)
             {
                 StopAttack();
+                return;
             }
+
+            ProjectilePattern.Create(pointSpawnProjectile, currentTarget, damage);
         }
     }
 

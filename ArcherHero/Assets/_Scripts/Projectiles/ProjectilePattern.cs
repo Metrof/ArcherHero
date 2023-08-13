@@ -13,6 +13,7 @@ public class ProjectilePattern
     private readonly Dictionary<ProjectileMovementType, IProjectileMovement> _movementDict = new()
     {
         [ProjectileMovementType.Default] = new DefaultProjectileMovement(),
+        [ProjectileMovementType.Hinged] = new MovementHingedTrajectory(),
     };
 
     private readonly Dictionary<ProjectileHitType, IProjectileHit> _hitDict = new()
@@ -47,6 +48,7 @@ public class ProjectilePattern
         foreach (var projectile in projectiles)
         {
             projectile.Initialize(damage, target, _currentMovement, _currentHit);
+            projectile.Move();
         }
     }
 
@@ -85,6 +87,7 @@ public enum ProjectileCreationType
 public enum ProjectileMovementType
 {
     Default,
+    Hinged,
 }
 
 public enum ProjectileHitType
