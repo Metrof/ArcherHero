@@ -8,8 +8,11 @@ public class BoomerangMovement : IProjectileMovement
     public void Move(Projectile projectile, Transform target, float speed)
     {
         Vector3 movePoint = target.transform.position + projectile.transform.forward * moveDistance;
+
+        float time = CalculateMovement.CalculateMoveTime(projectile.transform.position, movePoint, speed);
+
         projectile.MoveSequence
-            .Append(projectile.transform.DOMove(movePoint, speed * 0.5f)
+            .Append(projectile.transform.DOMove(movePoint, time)
             .SetEase(Ease.OutCubic)
             .SetLoops(2, LoopType.Yoyo));
         projectile.MoveSequence
