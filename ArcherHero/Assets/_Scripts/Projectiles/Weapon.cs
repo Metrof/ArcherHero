@@ -39,12 +39,7 @@ public class Weapon
 
     private async UniTaskVoid InstantiateProjectileAsync(int attackSpeedPerMinute, int damage, Transform pointSpawnProjectile, Func<Transform> getTarget, CancellationToken token)
     {
-        Transform currentTarget = getTarget();
-
-        if (currentTarget == null)
-        {
-            return;
-        }
+        Transform currentTarget;
 
         while (!token.IsCancellationRequested)
         {
@@ -53,11 +48,10 @@ public class Weapon
                 return;
             }
 
-            currentTarget ??= getTarget();
+            currentTarget = getTarget();
 
             if (currentTarget == null)
             {
-                StopAttack();
                 return;
             }
 
