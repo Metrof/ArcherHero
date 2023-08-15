@@ -10,7 +10,7 @@ public class LevelTextBar : MonoBehaviour
 
     private void Start()
     {   
-        _lvlText.text = $"Level  {lvlSwithcManager._currentLevel}";
+        _lvlText.text = $"Level  {lvlSwithcManager.CurrentLevel}";
     }
 
     private void OnEnable()
