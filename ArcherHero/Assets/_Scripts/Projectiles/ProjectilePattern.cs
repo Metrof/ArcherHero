@@ -13,12 +13,16 @@ public class ProjectilePattern
     private readonly Dictionary<ProjectileMovementType, IProjectileMovement> _movementDict = new()
     {
         [ProjectileMovementType.Default] = new DefaultProjectileMovement(),
+        [ProjectileMovementType.Hinged] = new MovementHingedTrajectory(),
+        [ProjectileMovementType.Boomerang] = new BoomerangMovement(),
     };
 
     private readonly Dictionary<ProjectileHitType, IProjectileHit> _hitDict = new()
     {
         [ProjectileHitType.Default] = new DefaultProjectileHit(),
         [ProjectileHitType.Ricochet] = new RicochetProjectileHit(),
+        [ProjectileHitType.EightAround] = new EightAroundProjectileHit(),
+        [ProjectileHitType.ShootThrough] = new ShootThroughProjectileHit(),
     };
 
     private readonly Dictionary<ProjectileCreationType, IBehaviorCreateProjectile> _creationDict = new()
@@ -27,6 +31,7 @@ public class ProjectilePattern
         [ProjectileCreationType.Three] = new ThreeCreatedProjectile(),
         [ProjectileCreationType.Double] = new DoubleCreatedProjectile(),
         [ProjectileCreationType.Triple] = new TripleCreatedProjectile(),
+        [ProjectileCreationType.EightAround] = new EightCreatedProjectilesAround(),
     };
 
     public ProjectilePattern(ObjectPool<Projectile> objectPool)
@@ -35,16 +40,17 @@ public class ProjectilePattern
 
         SetMovement(ProjectileMovementType.Default)
             .SetHit(ProjectileHitType.Default)
-            .SetAmount(ProjectileCreationType.One);
+            .SetCreation(ProjectileCreationType.One);
     }
 
     public void Create(Transform pointSpawnProjectile, Transform target, int damage)
     {
-        var projectiles = _currentCreationBehavior.Create(pointSpawnProjectile, target, ProjectilePool);
+        var projectiles = _currentCreationBehavior.Create(pointSpawnProjectile.position, target, ProjectilePool);
 
         foreach (var projectile in projectiles)
         {
             projectile.Initialize(damage, target, _currentMovement, _currentHit);
+            projectile.Move();
         }
     }
 
@@ -63,7 +69,7 @@ public class ProjectilePattern
         return this;
     }
 
-    public ProjectilePattern SetAmount(ProjectileCreationType amountType)
+    public ProjectilePattern SetCreation(ProjectileCreationType amountType)
     {
         _currentCreationBehavior = _creationDict[amountType];
 
@@ -77,15 +83,20 @@ public enum ProjectileCreationType
     Three,
     Double,
     Triple,
+    EightAround,
 }
 
 public enum ProjectileMovementType
 {
     Default,
+    Hinged,
+    Boomerang,
 }
 
 public enum ProjectileHitType
 {
     Default,
     Ricochet,
+    EightAround,
+    ShootThrough,
 }

@@ -4,5 +4,5 @@ using UnityEngine.Pool;
 
 public interface IBehaviorCreateProjectile
 {
-    List<Projectile> Create(Transform pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool);
+    List<Projectile> Create(Vector3 pointSpawnProjectile, Transform target, ObjectPool<Projectile> pool);
 }

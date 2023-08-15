@@ -1,18 +1,20 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
-public class DefaultProjectileMovement : IProjectileMovement
+public class BoomerangMovement : IProjectileMovement
 {
-    private const float moveDistance = 50f;
+    private const float moveDistance = 2;
+
     public void Move(Projectile projectile, Transform target, float speed)
     {
-        Vector3 movePoint = projectile.transform.position + projectile.transform.forward * moveDistance;
+        Vector3 movePoint = target.transform.position + projectile.transform.forward * moveDistance;
 
         float time = CalculateMovement.CalculateMoveTime(projectile.transform.position, movePoint, speed);
 
         projectile.MoveSequence
             .Append(projectile.transform.DOMove(movePoint, time)
-            .SetEase(Ease.Linear));
+            .SetEase(Ease.OutCubic)
+            .SetLoops(2, LoopType.Yoyo));
         projectile.MoveSequence
             .AppendCallback(() => projectile.ProjectilePool.Release(projectile));
     }

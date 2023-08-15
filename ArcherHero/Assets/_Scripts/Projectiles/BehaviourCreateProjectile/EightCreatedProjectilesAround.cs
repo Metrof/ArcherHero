@@ -1,13 +1,17 @@
 ﻿using System.Collections.Generic;
 
-public class ThreeCreatedProjectile : CreateProjectilesAround
+public class EightCreatedProjectilesAround : CreateProjectilesAround
 {
     private readonly List<float> _anglesRotation = new()
     {
         0,
-        15,
-        -15,
+        45,
+        90,
+        135,
+        180,
+        -45,
+        -90,
+        -135,
     };
-
     protected override List<float> AnglesRotation => _anglesRotation;
 }
