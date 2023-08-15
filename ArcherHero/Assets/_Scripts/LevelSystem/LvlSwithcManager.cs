@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 public class LvlSwithcManager : MonoBehaviour
 {
     public event Action<int> OnLevelChanged; 
     [SerializeField] private List<GameObject> lvlObstaclesList = new List<GameObject>();
-    public int _currentLevel;
+    [SerializeField] private int _currentLevel;
+
+    public int CurrentLevel => _currentLevel;
 
     private void Start()
     {
