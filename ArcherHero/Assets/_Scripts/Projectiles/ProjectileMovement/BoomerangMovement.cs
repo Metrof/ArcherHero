@@ -5,9 +5,9 @@ public class BoomerangMovement : IProjectileMovement
 {
     private const float moveDistance = 2;
 
-    public void Move(Projectile projectile, Transform target, float speed)
+    public void Move(Projectile projectile, Vector3 target, float speed)
     {
-        Vector3 movePoint = target.transform.position + projectile.transform.forward * moveDistance;
+        Vector3 movePoint = target + projectile.transform.forward * moveDistance;
 
         float time = CalculateMovement.CalculateMoveTime(projectile.transform.position, movePoint, speed);
 

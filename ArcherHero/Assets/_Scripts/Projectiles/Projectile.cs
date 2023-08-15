@@ -17,20 +17,10 @@ public class Projectile : MonoBehaviour
     private IProjectileMovement _projectileMovement;
     private IProjectileHit _projectileHit;
 
-    private int _count = 0;
+    public int Count = 0;
 
+    public int MoveSpeedProjectile { get => _moveSpeedProjectile; }
     public float StartPositionY { get; private set; }
-    public int Count
-    {
-        get
-        {
-            return _count++;
-        }
-        set
-        {
-            _count = value;
-        }
-    }
 
     public TypeDamage TypeDamage { get => _typeDamage; }
 
@@ -67,14 +57,20 @@ public class Projectile : MonoBehaviour
         _projectileMovement = projectileMovement;
         Damage = damage;
         _target = target;
+
+        StartPositionY = transform.position.y;
     }
 
     public void Move()
     {
-        StartPositionY = transform.position.y;
+        NewMoveSequence();
+        ProjectileMovement.Move(this, _target.position, _moveSpeedProjectile);
+    }
 
-        MoveSequence = DOTween.Sequence();
-        ProjectileMovement.Move(this, _target, _moveSpeedProjectile);
+    public void MoveToPoint(Vector3 endPosition)
+    {
+        NewMoveSequence();
+        ProjectileMovement.Move(this, endPosition, _moveSpeedProjectile);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,5 +90,13 @@ public class Projectile : MonoBehaviour
     {
         MoveSequence?.Kill();
         Count = 0;
+    }
+
+    public Sequence NewMoveSequence()
+    {
+        MoveSequence?.Kill();
+        MoveSequence = DOTween.Sequence();
+
+        return MoveSequence;
     }
 }

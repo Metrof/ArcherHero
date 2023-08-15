@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RicochetProjectileHit : IProjectileHit
 {
+    private const float _distance = 50;
     private const int _maxRicochetCount = 3;
     public void Hit(Collider collider, Projectile projectile)
     {
@@ -17,8 +18,14 @@ public class RicochetProjectileHit : IProjectileHit
                 RaycastHit hit;
                 if (Physics.Raycast(projectile.transform.position, projectile.transform.forward, out hit))
                 {
+                    projectile.Count++;
+
                     Vector3 direction = Vector3.Reflect(projectile.transform.forward, hit.normal);
+                    projectile.NewMoveSequence();
+                    
                     projectile.transform.rotation = Quaternion.LookRotation(direction);
+
+                    projectile.ProjectileMovement.Move(projectile, projectile.transform.forward * _distance, projectile.MoveSpeedProjectile);
                 }
             }
             else
