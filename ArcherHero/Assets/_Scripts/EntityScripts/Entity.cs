@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
 
         currentHealth -= finaleDamage;
 
-        Debug.Log($"Enemy took {finaleDamage} damage. Current health: {currentHealth}. Damage Type: {typeDamage}. Armor Type: {armorType}");
+        //Debug.Log($"Enemy took {finaleDamage} damage. Current health: {currentHealth}. Damage Type: {typeDamage}. Armor Type: {armorType}");
 
         if (currentHealth <= 0)
         {

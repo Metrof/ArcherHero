@@ -77,5 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdf384e15868e9468761c3a2b104bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _door: {fileID: 5641820566342245601, guid: 7dee19f551865e04f958b4ca57a174c4, type: 3}
   _prefabProjectilePool: {fileID: 2433039291464483364, guid: d5bab9e01dd0c5c43bc721f007662301, type: 3}
   _player: {fileID: 4137269806150272714, guid: 06d6e0c309d33ff4984657482df6767d, type: 3}
