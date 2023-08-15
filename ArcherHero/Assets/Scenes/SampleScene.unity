@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.6113865, g: 0.5786337, b: 0.6076173, a: 1}
+  m_IndirectSpecularColor: {r: 0.6109597, g: 0.5789068, b: 0.60681236, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -409,6 +409,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1740935401566582745, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 395a6f8c637df1346b97bb8f9122cc53, type: 2}
     - target: {fileID: 7062730259729290624, guid: e743570677c9c1d4787e58bdc2736f93, type: 3}
       propertyPath: m_Name
       value: Plane
@@ -671,10 +675,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1025133694221981180, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1607493920306482531, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
       propertyPath: m_Name
       value: Levels
       objectReference: {fileID: 0}
+    - target: {fileID: 2868593855868774159, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: navMeshDataList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868593855868774159, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: navMeshDataList.Array.data[0]
+      value: 
+      objectReference: {fileID: 23800000, guid: 35fc35a6e9305c7439a6b8822619b49a, type: 2}
+    - target: {fileID: 2868593855868774159, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: navMeshDataList.Array.data[1]
+      value: 
+      objectReference: {fileID: 23800000, guid: 395a6f8c637df1346b97bb8f9122cc53, type: 2}
+    - target: {fileID: 2868593855868774159, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: navMeshDataList.Array.data[2]
+      value: 
+      objectReference: {fileID: 23800000, guid: 0ce9d3a719be10640a8c18f791f26dd5, type: 2}
     - target: {fileID: 3724461575768911283, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -717,6 +741,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3724461575768911283, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836515775461748266, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288754571207071770, guid: 9eb4c1a40047df8459808cac44531618, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

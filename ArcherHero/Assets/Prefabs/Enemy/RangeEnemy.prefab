@@ -103,6 +103,7 @@ MonoBehaviour:
   armorType: 0
   _moveSpeed: 1000
   _rotationSpeed: 0.05
+  _typeDamage: 0
   damage: 10
   speedAttack: 60
   currentHealth: 100
@@ -131,7 +132,7 @@ NavMeshAgent:
   m_Height: 1.7
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!1001 &7282520586524171443
 PrefabInstance:
   m_ObjectHideFlags: 0
