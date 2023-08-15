@@ -6,8 +6,7 @@ using UnityEngine.AI;
 using Zenject;
 
 public class Enemy : Entity
-{   
-    // перенести сюда targetAttack по игроку (zenject)
+{
     public event Action<Enemy> OnEnemyDie; 
     protected NavMeshAgent _agent;
     protected Vector3 _targetMovePosition;
