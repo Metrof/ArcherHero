@@ -186,10 +186,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorType: 0
   _moveSpeed: 5
-  _rotationSpeed: 0.05
+  _rotationSpeed: 0.1
   _typeDamage: 0
   damage: 30
-  speedAttack: 30
+  speedAttack: 100
   currentHealth: 1000
   _spawnProjectile: {fileID: 825919772246480250}
 --- !u!1 &8673544391391377077

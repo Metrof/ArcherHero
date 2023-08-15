@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPool 
 {
+    public event Action<bool> OnLastEnemyDie;
     private List<Enemy> _enemyList = new List<Enemy>();
     private const int _defaultLayer = 0;
 
@@ -19,6 +21,7 @@ public class EnemyPool
     private void DeleteEnemy(Enemy enemy)
     {
         _enemyList.Remove(enemy);
+        if (_enemyList.Count == 0) OnLastEnemyDie?.Invoke(true);
     }
     public Transform GetNearestEnemy(Vector3 playerPos)
     {

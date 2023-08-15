@@ -8,6 +8,7 @@ using Zenject;
 
 public class Player : Entity
 {
+    public event Action<bool> OnPlayerDie;
     [SerializeField] private Transform _spawnProjectile;
 
     CharacterController _characterController;
@@ -50,6 +51,9 @@ public class Player : Entity
         _characterController = GetComponent<CharacterController>();
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, _typeDamage));
+    }
+    public override void Init()
+    {
         _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
     }
     private void OnEnable()
@@ -68,8 +72,6 @@ public class Player : Entity
     {
         _weapon?.StopAttack();
         _contextDir = context.ReadValue<Vector2>();
-
-        //.OnComplete() => transform.gameObject.SetActive(false); метод отрабатывает при завершении цикла Tweena
     }
     public void StartWeaponAttack(InputAction.CallbackContext context)
     {
@@ -93,6 +95,7 @@ public class Player : Entity
     }
     protected override void Die()
     {
+        OnPlayerDie?.Invoke(false);
         _weapon.StopAttack();
         base.Die();
     }

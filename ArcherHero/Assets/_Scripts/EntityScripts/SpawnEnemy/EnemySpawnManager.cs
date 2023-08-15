@@ -35,6 +35,7 @@ public class EnemySpawnManager : MonoBehaviour
         SpawnEnemies(levelIndex);
     }*/
     
+    public LvlSwithcManager LvlSwithcManager { get { return lvlSwithcManager; } }
     public void SpawnEnemies()
     {
         foreach (EnemySpawnPoint spawnPoint in _lvl[_currentLevel]._enemySpawnPoints)
