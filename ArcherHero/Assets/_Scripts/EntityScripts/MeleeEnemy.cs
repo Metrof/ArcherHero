@@ -48,7 +48,13 @@ public class MeleeEnemy : Enemy
 
     private void MeleeAttack()
     {
-        Debug.Log("MeleeAttack");
-        
+        if (_targetAttack != null)
+        {
+            IDamageable damageable = _targetAttack.GetComponent<IDamageable>();
+            if (damageable != null)
+            {
+                damageable.TakeDamage(_typeDamage, damage);
+            }
+        }
     }
 }
