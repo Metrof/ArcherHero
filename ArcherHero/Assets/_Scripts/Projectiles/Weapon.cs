@@ -47,7 +47,7 @@ public class Weapon
             {
                 return;
             }
-
+            
             currentTarget = getTarget();
 
             if (currentTarget == null)

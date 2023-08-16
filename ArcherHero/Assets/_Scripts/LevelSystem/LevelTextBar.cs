@@ -2,25 +2,32 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class LevelTextBar : MonoBehaviour
 {
-    public LvlSwithcManager lvlSwithcManager;
-    public TextMeshPro _lvlText;
+    [SerializeField] private TextMeshPro _lvlText;
 
+    private LvlSwitchManager _lvlSwitchManager;
+
+    [Inject]
+    private void Construct(LvlSwitchManager lvlSwitchManager)
+    {
+        _lvlSwitchManager = lvlSwitchManager;
+    }
     private void Start()
     {   
-        _lvlText.text = $"Level  {lvlSwithcManager.CurrentLevel}";
+        _lvlText.text = $"Level  {_lvlSwitchManager.CurrentLevel}";
     }
 
     private void OnEnable()
     {
-        lvlSwithcManager.OnLevelChanged += OnLevelChangedHandler;
+        _lvlSwitchManager.OnLevelChanged += OnLevelChangedHandler;
     }
 
     private void OnDisable()
     {
-        lvlSwithcManager.OnLevelChanged -= OnLevelChangedHandler;
+        _lvlSwitchManager.OnLevelChanged -= OnLevelChangedHandler;
     }
 
     private void OnLevelChangedHandler(int currentLvl)

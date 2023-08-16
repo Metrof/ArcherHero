@@ -6,14 +6,15 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private LvlDoor _door;
     [SerializeField] private ProjectilePool _prefabProjectilePool;
     [SerializeField] private Player _player;
+
     public override void InstallBindings()
     {
+        BindLvlSwitchManager();
         BindProjectilePool();
         BindEnemyPool();
         BindPlayer();
         BindDoor();
     }
-
     private void BindProjectilePool()
     {
         Container
@@ -25,6 +26,13 @@ public class GameInstaller : MonoInstaller
     private void BindEnemyPool()
     {
         Container.Bind<EnemyPool>()
+            .FromNew()
+            .AsSingle()
+            .NonLazy();
+    }
+    private void BindLvlSwitchManager()
+    {
+        Container.Bind<LvlSwitchManager>()
             .FromNew()
             .AsSingle()
             .NonLazy();

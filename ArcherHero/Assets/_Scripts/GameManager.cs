@@ -8,19 +8,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _playerSpawnPoint;
     [SerializeField] private LvlSwitchTriggerZone _lvlSwitchTriggerZone;
 
-    private LvlSwithcManager _lvlSwitchManager;
-    private EnemySpawnManager _enemySpawnManager;
+    private LvlSwitchManager _lvlSwitchManager;
 
     Player _player;
     LvlDoor _door;
 
     [Inject]
-    private void Construct(Player player, EnemySpawnManager enemySpawnManager, EnemyPool enemyPool, LvlDoor lvlDoor)
+    private void Construct(Player player, LvlSwitchManager lvlSwitchManager, EnemyPool enemyPool, LvlDoor lvlDoor)
     {
         _door = lvlDoor;
         _player = player;
-        _enemySpawnManager = enemySpawnManager;
-        _lvlSwitchManager = _enemySpawnManager.LvlSwithcManager;
+        _lvlSwitchManager = lvlSwitchManager;
         enemyPool.OnLastEnemyDie += LvlEnd;
         _player.OnPlayerDie += LvlEnd;
     }
@@ -28,15 +26,12 @@ public class GameManager : MonoBehaviour
     {
         if (_lvlSwitchTriggerZone != null)
         {
-            _lvlSwitchTriggerZone.OnPlayerEnter += _lvlSwitchManager.SwitchToNextLevel;
+            _lvlSwitchTriggerZone.OnPlayerEnter += StartNewLvl;
         }
     }
     private void Start()
     {
-        _door.CloseDoor();
-        _enemySpawnManager.SpawnEnemies();
-        _player.transform.position = _playerSpawnPoint.position;
-        _player.Init();
+        StartNewLvl();
     }
 
     private void LvlEnd(bool isPlayerWin)
@@ -45,5 +40,15 @@ public class GameManager : MonoBehaviour
         {
             _door.OpenDoor();
         }
+    }
+    private void StartNewLvl()
+    {
+        _lvlSwitchManager.SwitchLvl();
+
+        _player.transform.position = _playerSpawnPoint.position;
+        Physics.SyncTransforms();
+        _player.Init();
+
+        _door.CloseDoor();
     }
 }

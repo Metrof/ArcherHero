@@ -14,7 +14,6 @@ public class LvlDoor : MonoBehaviour
     private const int _closeDoorState = 0;
 
     private Tween _rotateTween;
-    private CancellationTokenSource _cancellationToken;
 
     public void OpenDoor()
     {
