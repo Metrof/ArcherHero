@@ -122,6 +122,7 @@ MonoBehaviour:
   armorType: 0
   _moveSpeed: 1000
   _rotationSpeed: 0.05
+  _typeDamage: 0
   damage: 10
   speedAttack: 1
   currentHealth: 150

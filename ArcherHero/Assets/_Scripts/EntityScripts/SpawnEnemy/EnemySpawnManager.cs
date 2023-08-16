@@ -7,38 +7,31 @@ using Zenject;
 public class EnemySpawnManager : MonoBehaviour
 {
     [SerializeField] private LevelMultiplier[] _lvl;
-    [SerializeField] private LvlSwithcManager lvlSwithcManager;
-    private int _currentLevel;
     private DiContainer _diContainer;
     private EnemyPool _enemyPool;
-    
+
+    private LvlSwitchManager _lvlSwitchManager;
+
     [Inject]
-    private void Construct(DiContainer diContainer, EnemyPool enemyPool)
+    private void Construct(DiContainer diContainer, EnemyPool enemyPool, LvlSwitchManager lvlSwitchManager)
     {
         _diContainer = diContainer;
         _enemyPool = enemyPool;
-        diContainer.Bind<EnemySpawnManager>().FromInstance(this).AsSingle();
+        _lvlSwitchManager = lvlSwitchManager;
     }
-    
-    /*private void OnEnable()
+    private void OnEnable()
     {
-        lvlSwithcManager.OnLevelChanged += OnLevelChangedHandler;
+        _lvlSwitchManager.OnLevelChanged += SpawnEnemies;
     }
 
     private void OnDisable()
     {
-        lvlSwithcManager.OnLevelChanged -= OnLevelChangedHandler;
+        _lvlSwitchManager.OnLevelChanged -= SpawnEnemies;
     }
 
-    private void OnLevelChangedHandler(int levelIndex)
+    public void SpawnEnemies(int lvl)
     {
-        SpawnEnemies(levelIndex);
-    }*/
-    
-    public LvlSwithcManager LvlSwithcManager { get { return lvlSwithcManager; } }
-    public void SpawnEnemies()
-    {
-        foreach (EnemySpawnPoint spawnPoint in _lvl[_currentLevel]._enemySpawnPoints)
+        foreach (EnemySpawnPoint spawnPoint in _lvl[lvl]._enemySpawnPoints)
         {
             Enemy enemyPrefab = spawnPoint.GetEnemyPrefab();
             
@@ -49,7 +42,7 @@ public class EnemySpawnManager : MonoBehaviour
             
             _enemyPool.AddEnemy(enemy);
             
-            ApplyStatsMultiplier(enemy,  _lvl[_currentLevel]._statMultiplier);
+            ApplyStatsMultiplier(enemy,  _lvl[lvl]._statMultiplier);
         }
     }
 
