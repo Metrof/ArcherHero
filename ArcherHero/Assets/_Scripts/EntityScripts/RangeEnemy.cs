@@ -9,10 +9,13 @@ using Zenject;
 
 
 public class RangeEnemy : Enemy
-{
+{   
+    [Header("Movement Settings")]
     [SerializeField] private float _timeToChangeDirection = 5f;
     [SerializeField] private float _movementBoundsX = 10f;
     [SerializeField] private float _movementBoundsZ = 5f;
+    
+    [Space]
     [SerializeField] private Transform _spawnProjectile;
     
     private bool isMoving = false;
@@ -32,7 +35,7 @@ public class RangeEnemy : Enemy
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
         
-        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, _typeDamage));
+        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.SimpleEnemy, typeDamage));
     }
     
     private async UniTaskVoid StartRandomMovement()

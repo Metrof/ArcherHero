@@ -13,10 +13,10 @@ public static class DamageHandler
         /* RoboArmor */      {  1.0f,    1.0f,  1.0f,   3.0f }
     };
 
-    public static int CalculateDamage(int damageAmount, TypeDamage damageType, ArmorType armorType)
+    public static int CalculateDamage(int damageAmount, TypeDamage damageType, TypeArmor typeArmor)
     {
         int damageTypeIndex = (int)damageType;
-        int armorTypeIndex = (int)armorType;
+        int armorTypeIndex = (int)typeArmor;
 
         
         float vulnerabilityMultiplier = vulnerabilityMultipliers[armorTypeIndex, damageTypeIndex];
