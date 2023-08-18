@@ -1,5 +1,5 @@
 ﻿
-public enum ArmorType
+public enum TypeArmor
 {
     Default,
     FireArmor,

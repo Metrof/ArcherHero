@@ -50,7 +50,7 @@ public class Player : Entity
     {
         _characterController = GetComponent<CharacterController>();
         _controller = new Controller();
-        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, _typeDamage));
+        _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, typeDamage));
     }
     public override void Init()
     {

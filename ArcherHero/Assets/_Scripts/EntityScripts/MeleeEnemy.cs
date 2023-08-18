@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 
 public class MeleeEnemy : Enemy
-{
+{   
+    [Header("Movement Settings")]
     [SerializeField] private int _timeToUpdateMoveTarget;
     [SerializeField] private float _attackDistance;
 
@@ -53,7 +54,7 @@ public class MeleeEnemy : Enemy
             IDamageable damageable = _targetAttack.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.TakeDamage(_typeDamage, damage);
+                damageable.TakeDamage(typeDamage, damage);
             }
         }
     }
