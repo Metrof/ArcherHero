@@ -23,7 +23,11 @@ public class Enemy : Entity
     {
         OnEnemyDie?.Invoke(this);
         _cancellationToken.Cancel();
-        Destroy(gameObject);
         base.Die();
+    }
+
+    protected void DestroyGO()
+    {
+        Destroy(gameObject);
     }
 }

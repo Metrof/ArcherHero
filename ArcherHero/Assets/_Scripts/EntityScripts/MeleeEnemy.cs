@@ -4,12 +4,23 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
-
+[RequireComponent(typeof(Animator))]
 public class MeleeEnemy : Enemy
 {   
     [Header("Movement Settings")]
     [SerializeField] private int _timeToUpdateMoveTarget;
     [SerializeField] private float _attackDistance;
+
+    private const string _animationMove = "Move";
+    private const string _animationAttack = "Attack";
+    private const string _animationDead = "Dead";
+
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
@@ -21,6 +32,9 @@ public class MeleeEnemy : Enemy
     private async UniTaskVoid MoveToTarget()
     {
         _cancellationToken = new CancellationTokenSource();
+
+        _animator.SetBool(_animationMove, true);
+
         while (!_cancellationToken.IsCancellationRequested)
         {
             var position = _targetAttack.position;
@@ -30,13 +44,18 @@ public class MeleeEnemy : Enemy
             _agent.stoppingDistance = _attackDistance;
             
             if (Vector3.Distance( transform.position, _targetAttack.position) <= _attackDistance)
-            {   
+            {
+                _animator.SetBool(_animationMove, false);
+                _animator.SetTrigger(_animationAttack);
+
                 MeleeAttack();
                 await UniTask.Delay(TimeSpan.FromSeconds(AttackDelay(speedAttack)), cancellationToken: _cancellationToken.Token). 
                     SuppressCancellationThrow();
             }
             else
             {
+                _animator.SetBool(_animationMove, true);
+
                 await UniTask.Delay(TimeSpan.FromSeconds(_timeToUpdateMoveTarget), cancellationToken: _cancellationToken.Token). 
                     SuppressCancellationThrow();
             }
@@ -57,5 +76,11 @@ public class MeleeEnemy : Enemy
                 damageable.TakeDamage(typeDamage, damage);
             }
         }
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+        _animator.SetTrigger(_animationDead);
     }
 }
