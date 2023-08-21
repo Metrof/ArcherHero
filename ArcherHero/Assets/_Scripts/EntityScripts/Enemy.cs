@@ -21,13 +21,14 @@ public class Enemy : Entity
     }
     protected override void Die()
     {
-        OnEnemyDie?.Invoke(this);
         _cancellationToken.Cancel();
         base.Die();
     }
 
-    protected void DestroyGO()
+    public void DestroyGO()
     {
+        OnEnemyDie?.Invoke(this);
+
         Destroy(gameObject);
     }
 }

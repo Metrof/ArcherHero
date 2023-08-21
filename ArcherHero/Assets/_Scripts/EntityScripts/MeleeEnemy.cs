@@ -80,6 +80,11 @@ public class MeleeEnemy : Enemy
 
     protected override void Die()
     {
+        if (_cancellationToken.IsCancellationRequested)
+        {
+            return;
+        }
+
         base.Die();
         _animator.SetTrigger(_animationDead);
     }
