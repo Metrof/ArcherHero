@@ -20,9 +20,9 @@ public class ExplosiveEnemy : Enemy
     [SerializeField] private float _attackDuration = 5f;
     [SerializeField] private float _explosionRadius = 3f;
     
-    private const string _animationMove = "Move";
+    private const string _animationPreparation = "Preparation";
     private const string _animationAttack = "Attack";
-    private const string _animationDead = "Dead";
+    private const string _animationExplosion = "Explosion";
 
     private Animator _animator;
     private bool isAttack = false;
@@ -70,10 +70,15 @@ public class ExplosiveEnemy : Enemy
             Vector3 directionToPlayer = _targetAttack.position - transform.position;
             Quaternion rotationToPlayer = Quaternion.LookRotation(directionToPlayer, Vector3.up);
             transform.rotation = rotationToPlayer;
-            
+
+            _animator.SetTrigger(_animationPreparation);
+
             await UniTask.Delay(TimeSpan.FromSeconds(_attackDuration), cancellationToken: _cancellationTokenAttack.Token).SuppressCancellationThrow();
             
             if(_cancellationTokenAttack.IsCancellationRequested) return;
+
+            _animator.SetTrigger(_animationAttack);
+
             _agent.speed = _boostedSpeed;
             _agent.SetDestination(_targetAttack.position);
 
@@ -124,6 +129,6 @@ public class ExplosiveEnemy : Enemy
         _cancellationTokenAttack?.Cancel();
         
         base.Die();
-        DestroyGO();
+        _animator.SetTrigger(_animationExplosion);
     }
 }
