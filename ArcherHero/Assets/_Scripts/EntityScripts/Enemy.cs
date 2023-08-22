@@ -21,7 +21,7 @@ public class Enemy : Entity
     }
     protected override void Die()
     {
-        _cancellationToken.Cancel();
+        _cancellationToken?.Cancel();
         base.Die();
     }
 

@@ -29,6 +29,8 @@ public class ExplosiveEnemy : Enemy
     private float _distanceToTarget;
     private CancellationTokenSource _cancellationTokenAttack;
 
+    private Vector3 _endPoint = Vector3.zero;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -69,12 +71,17 @@ public class ExplosiveEnemy : Enemy
             Quaternion rotationToPlayer = Quaternion.LookRotation(directionToPlayer, Vector3.up);
             transform.rotation = rotationToPlayer;
             
-            await UniTask.Delay(TimeSpan.FromSeconds(_attackDuration));
-        
+            await UniTask.Delay(TimeSpan.FromSeconds(_attackDuration), cancellationToken: _cancellationTokenAttack.Token).SuppressCancellationThrow();
+            
+            if(_cancellationTokenAttack.IsCancellationRequested) return;
             _agent.speed = _boostedSpeed;
             _agent.SetDestination(_targetAttack.position);
+
+            var distanceToTarget = _targetAttack.position;
+            distanceToTarget.y = transform.position.y;
             
-            await UniTask.WaitUntil(() => _distanceToTarget  <= 1f);
+            await UniTask.WaitUntil(() => transform.position == distanceToTarget , cancellationToken: _cancellationTokenAttack.Token).SuppressCancellationThrow();
+            
             
             ExplosiveAttack();
         }
@@ -107,14 +114,16 @@ public class ExplosiveEnemy : Enemy
                 _agent.ResetPath();
                 AttackPlayer().Forget();
             }
+
         }
     }
     
     
     protected override void Die()
     {
-        _cancellationTokenAttack.Cancel();
+        _cancellationTokenAttack?.Cancel();
+        
         base.Die();
-        Destroy(gameObject);
+        DestroyGO();
     }
 }
