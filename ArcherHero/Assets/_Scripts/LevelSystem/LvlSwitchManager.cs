@@ -26,8 +26,12 @@ public class LvlSwitchManager
             }
         }
     }
-    public void SwitchLvl(int value = -1)
+    public void SwitchLvl()
     {
-        CurrentLevel = value != -1 ? value : _currentLvl + 1;
+        CurrentLevel++;
+    }
+    public void StayLvlZero()
+    {
+        _currentLvl = 0;
     }
 }

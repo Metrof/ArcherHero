@@ -86,13 +86,13 @@ public class GameManager : MonoBehaviour
 
         _door.CloseDoor();
         _player.PlayerDisable();
-        _lvlSwitchManager.SwitchLvl(0);
+        _lvlSwitchManager.StayLvlZero();
         _menuButtons.SetActive(true);
         _enemyPool.ClearEnemyList();
         ReturnPlayerToStartPos();
         _player.transform.rotation = Quaternion.Euler(0, 160, 0);
     }
-    private  void StartNewLvl()
+    private void StartNewLvl()
     {
         _lvlSwitchManager.SwitchLvl();
         ReturnPlayerToStartPos();
