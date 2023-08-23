@@ -10,7 +10,7 @@ public class LvlDoor : MonoBehaviour
 {
     [SerializeField] private float _openTime = 1;
 
-    private const int _openDoorState = 110;
+    private const int _openDoorState = -110;
     private const int _closeDoorState = 0;
 
     private Tween _rotateTween;

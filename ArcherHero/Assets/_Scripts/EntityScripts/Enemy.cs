@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : Entity
 {
     public event Action<Enemy> OnEnemyDie; 
@@ -24,11 +25,9 @@ public class Enemy : Entity
         _cancellationToken?.Cancel();
         base.Die();
     }
-
-    public void DestroyGO()
+    public void DestroyEnemy()
     {
-        OnEnemyDie?.Invoke(this);
-
+        _cancellationToken.Cancel();
         Destroy(gameObject);
     }
 }

@@ -36,6 +36,14 @@ public class EnemyPool
         }
         return _nearestEnemy;
     }
+    public void ClearEnemyList()
+    {
+        foreach (var enemy in _enemyList)
+        {
+            enemy.DestroyEnemy();
+        }
+        _enemyList.Clear();
+    }
     private void CheckEnemy(Enemy enemy, Vector3 playerPos)
     {
         Vector3 nearestEnemyPos = _nearestEnemy != null ? _nearestEnemy.position : enemy.transform.position;
