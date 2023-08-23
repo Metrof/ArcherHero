@@ -31,6 +31,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void SpawnEnemies(int lvl)
     {
+        _enemyPool.ClearEnemyList();
         foreach (EnemySpawnPoint spawnPoint in _lvl[lvl]._enemySpawnPoints)
         {
             Enemy enemyPrefab = spawnPoint.GetEnemyPrefab();

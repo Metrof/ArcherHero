@@ -755,7 +755,6 @@ MonoBehaviour:
   perkPriceText: {fileID: 4710035883303916944}
   _purchaseButton: {fileID: 2227918304583312047}
   _exitButton: {fileID: 8317182684078987294}
-  _characteSkills: {fileID: 11400000, guid: ca58592e5525d3346ba6d5762611a87f, type: 2}
 --- !u!1 &1070802004040933969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,7 +1857,7 @@ RectTransform:
   m_Children:
   - {fileID: 7175391821248282994}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3010,7 +3009,6 @@ MonoBehaviour:
   _notAvailableIkon: {fileID: 21300038, guid: 34ecf51bcd3f4424eafda7dafd885bd0, type: 3}
   _purchasedIkon: {fileID: -4374215236208778123, guid: 9291b39306d4ce640bf255c16c6ddf5b, type: 3}
   perkPriceText: {fileID: 8014162670989933329}
-  _characteSkills: {fileID: 11400000, guid: ca58592e5525d3346ba6d5762611a87f, type: 2}
 --- !u!1 &3090577586124875493
 GameObject:
   m_ObjectHideFlags: 0
@@ -6628,6 +6626,18 @@ PrefabInstance:
     - target: {fileID: 155942846331173223, guid: 330cd48add29885458966791e45f3abe, type: 3}
       propertyPath: m_Name
       value: startButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247062030328895784, guid: 330cd48add29885458966791e45f3abe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247062030328895784, guid: 330cd48add29885458966791e45f3abe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1247062030328895784, guid: 330cd48add29885458966791e45f3abe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

@@ -35,6 +35,24 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ActivateFirstSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f7e943a-2a8d-4376-b558-e8a92a1b4e04"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateSecondSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""606800b4-2a57-4b39-93d4-cfd06b973f65"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,28 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ed10689-92aa-4891-a217-cb5e0e4d0531"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateFirstSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fad7357f-e254-4cde-8f9d-0f401520bc84"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActivateSecondSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +141,8 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_ActivateFirstSkill = m_Player.FindAction("ActivateFirstSkill", throwIfNotFound: true);
+        m_Player_ActivateSecondSkill = m_Player.FindAction("ActivateSecondSkill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +205,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_ActivateFirstSkill;
+    private readonly InputAction m_Player_ActivateSecondSkill;
     public struct PlayerActions
     {
         private @Controller m_Wrapper;
         public PlayerActions(@Controller wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @ActivateFirstSkill => m_Wrapper.m_Player_ActivateFirstSkill;
+        public InputAction @ActivateSecondSkill => m_Wrapper.m_Player_ActivateSecondSkill;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +226,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @ActivateFirstSkill.started += instance.OnActivateFirstSkill;
+            @ActivateFirstSkill.performed += instance.OnActivateFirstSkill;
+            @ActivateFirstSkill.canceled += instance.OnActivateFirstSkill;
+            @ActivateSecondSkill.started += instance.OnActivateSecondSkill;
+            @ActivateSecondSkill.performed += instance.OnActivateSecondSkill;
+            @ActivateSecondSkill.canceled += instance.OnActivateSecondSkill;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -187,6 +239,12 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @ActivateFirstSkill.started -= instance.OnActivateFirstSkill;
+            @ActivateFirstSkill.performed -= instance.OnActivateFirstSkill;
+            @ActivateFirstSkill.canceled -= instance.OnActivateFirstSkill;
+            @ActivateSecondSkill.started -= instance.OnActivateSecondSkill;
+            @ActivateSecondSkill.performed -= instance.OnActivateSecondSkill;
+            @ActivateSecondSkill.canceled -= instance.OnActivateSecondSkill;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -207,5 +265,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnActivateFirstSkill(InputAction.CallbackContext context);
+        void OnActivateSecondSkill(InputAction.CallbackContext context);
     }
 }

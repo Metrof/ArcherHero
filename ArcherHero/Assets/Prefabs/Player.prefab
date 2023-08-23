@@ -184,10 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56649bf7285486844aa69a7e200b5b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armorType: 0
+  typeArmor: 0
+  typeDamage: 0
   _moveSpeed: 5
   _rotationSpeed: 0.1
-  _typeDamage: 0
   damage: 30
   speedAttack: 100
   currentHealth: 1000

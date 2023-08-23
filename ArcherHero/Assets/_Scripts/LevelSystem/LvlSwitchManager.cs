@@ -6,6 +6,7 @@ using UnityEngine;
 public class LvlSwitchManager 
 {
     public event Action<int> OnLevelChanged;
+    public event Action OnLevelOver;
     private int _currentLvl;
     public int CurrentLevel
     {
@@ -13,11 +14,20 @@ public class LvlSwitchManager
         private set
         {
             OnLevelChanged?.Invoke(_currentLvl);
-            _currentLvl = _currentLvl >= ObstaclesSwitchManager.LvlCount - 1 ? 0 : value;
+            if (value >= ObstaclesSwitchManager.LvlCount)
+            {
+                OnLevelOver?.Invoke();
+                _currentLvl = 0;
+                return;
+            }
+            else
+            {
+                _currentLvl = value;
+            }
         }
     }
-    public void SwitchLvl()
+    public void SwitchLvl(int value = -1)
     {
-        CurrentLevel++;
+        CurrentLevel = value != -1 ? value : _currentLvl + 1;
     }
 }

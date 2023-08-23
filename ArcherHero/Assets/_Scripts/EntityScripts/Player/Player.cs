@@ -6,13 +6,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class Player : Entity
+public sealed class Player : Entity
 {
     public event Action<bool> OnPlayerDie;
     [SerializeField] private Transform _spawnProjectile;
 
     CharacterController _characterController;
     Controller _controller;
+
+    private Skill _firstSkill;
+    private Skill _secondSkill;
 
     private Weapon _weapon;
     private ProjectilePool _projectilePool;
@@ -39,6 +42,8 @@ public class Player : Entity
     }
 
     Vector2 _contextDir;
+
+    public Vector2 MoveDirection { get {  return new Vector2(_contextDir.x, _contextDir.y); } }
     [Inject]
     private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool)
     {
@@ -61,13 +66,19 @@ public class Player : Entity
         _controller.Enable();
         _controller.Player.Move.performed += Move;
         _controller.Player.Move.canceled += StartWeaponAttack;
+        _controller.Player.ActivateFirstSkill.performed += ActivateFirstSkill;
+        _controller.Player.ActivateSecondSkill.performed += ActivateSecondSkill;
     }
     private void OnDisable()
     {
         _controller.Player.Move.performed -= Move;
         _controller.Player.Move.canceled -= StartWeaponAttack;
+        _controller.Player.ActivateFirstSkill.performed -= ActivateFirstSkill;
+        _controller.Player.ActivateSecondSkill.performed -= ActivateSecondSkill;
         _controller.Disable();
     }
+    public void PlayerEnable() { _controller.Enable(); }
+    public void PlayerDisable() { _controller.Disable(); }
     public void Move(InputAction.CallbackContext context)
     {
         _weapon?.StopAttack();
@@ -75,9 +86,25 @@ public class Player : Entity
     }
     public void StartWeaponAttack(InputAction.CallbackContext context)
     {
+        _contextDir = Vector2.zero;
         _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack); 
     }
-
+    public void ActivateFirstSkill(InputAction.CallbackContext context)
+    {
+        _firstSkill?.Activate(this);
+    }
+    public void ActivateSecondSkill(InputAction.CallbackContext context)
+    {
+        _secondSkill?.Activate(this);
+    }
+    public void SetFirstSkill(Skill skill)
+    {
+        _firstSkill = skill;
+    }
+    public void SetSecondSkill(Skill skill)
+    {
+        _secondSkill = skill;
+    }
     private Transform GetEnemy()
     {
         return _enemyPool.GetNearestEnemy(transform.position);
