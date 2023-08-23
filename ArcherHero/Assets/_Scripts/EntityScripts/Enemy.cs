@@ -23,17 +23,17 @@ public class Enemy : Entity
     protected override void Die()
     {
         _cancellationToken.Cancel();
+        OnEnemyDie?.Invoke(this);
         base.Die();
     }
 
     public void DestroyGO()
     {
-        OnEnemyDie?.Invoke(this);
         Destroy(gameObject);
     }
     public void DestroyEnemy()
     {
         _cancellationToken.Cancel();
-        DestroyGO();
+        Destroy(gameObject);
     }
 }
