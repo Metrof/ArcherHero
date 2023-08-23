@@ -22,12 +22,18 @@ public class Enemy : Entity
     }
     protected override void Die()
     {
-        _cancellationToken?.Cancel();
+        _cancellationToken.Cancel();
         base.Die();
+    }
+
+    public void DestroyGO()
+    {
+        OnEnemyDie?.Invoke(this);
+        Destroy(gameObject);
     }
     public void DestroyEnemy()
     {
         _cancellationToken.Cancel();
-        Destroy(gameObject);
+        DestroyGO();
     }
 }
