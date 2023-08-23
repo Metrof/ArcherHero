@@ -10,14 +10,14 @@ public class Projectile : MonoBehaviour
 
     [NonSerialized]
     public Sequence MoveSequence;
+    [NonSerialized]
+    public int Count = 0;
 
     private ObjectPool<Projectile> _projectilePool;
     private int _damage;
     private Transform _target;
     private IProjectileMovement _projectileMovement;
     private IProjectileHit _projectileHit;
-
-    public int Count = 0;
 
     public int MoveSpeedProjectile { get => _moveSpeedProjectile; }
     public float StartPositionY { get; private set; }
