@@ -6,8 +6,8 @@ public class CubeBoss : ExplosiveEnemy
     [SerializeField] private SpawnChildrenEnemy _spawnChildrenEnemy;
 
     private void Start()
-    {
-        //_spawnChildrenEnemy = gameObject.GetComponent<SpawnChildrenEnemy>();
+    {   
+        base.Start();
     }
     protected override void Attack()
     {

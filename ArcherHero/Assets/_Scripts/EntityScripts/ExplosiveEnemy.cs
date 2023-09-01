@@ -1,8 +1,6 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -37,8 +35,7 @@ public class ExplosiveEnemy : Enemy
     }
 
     protected virtual void Start()
-    {   
-        
+    {
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
     }

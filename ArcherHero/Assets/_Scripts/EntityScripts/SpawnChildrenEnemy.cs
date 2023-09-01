@@ -1,3 +1,4 @@
+
 using Zenject;
 using UnityEngine;
 
@@ -11,8 +12,6 @@ public class SpawnChildrenEnemy : MonoBehaviour
     {
         _enemySpawnManager = enemySpawnManager;
     }
-    
-    
     
     public void OnBossDestroyed()
     {
