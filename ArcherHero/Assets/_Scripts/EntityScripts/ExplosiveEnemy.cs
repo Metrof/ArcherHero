@@ -36,8 +36,9 @@ public class ExplosiveEnemy : Enemy
         _animator = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
+    protected virtual void Start()
+    {   
+        
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
     }
@@ -88,11 +89,11 @@ public class ExplosiveEnemy : Enemy
             await UniTask.WaitUntil(() => transform.position == distanceToTarget , cancellationToken: _cancellationTokenAttack.Token).SuppressCancellationThrow();
             
             
-            ExplosiveAttack();
+            Attack();
         }
     }
 
-    private void ExplosiveAttack()
+    protected virtual void Attack()
     {
         if (_distanceToTarget <= _explosionRadius)
         {   
@@ -115,7 +116,7 @@ public class ExplosiveEnemy : Enemy
             if (_distanceToTarget <= _attackTriggerDistance)
             {
                 isAttack = true;
-                _cancellationToken.Cancel();
+                _cancellationToken?.Cancel();
                 _agent.ResetPath();
                 AttackPlayer().Forget();
             }
