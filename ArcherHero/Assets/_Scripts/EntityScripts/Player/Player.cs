@@ -10,6 +10,7 @@ public sealed class Player : Entity
 {
     public event Action<bool> OnPlayerDie;
     [SerializeField] private Transform _spawnProjectile;
+    [SerializeField] private Skill _dash;
 
     CharacterController _characterController;
     Controller _controller;
@@ -41,9 +42,16 @@ public sealed class Player : Entity
         set { _characterController = value; }
     }
 
+    public float ColliderRadius { get { return CharacterController.radius; } }
+
     Vector2 _contextDir;
 
     public Vector2 MoveDirection { get {  return new Vector2(_contextDir.x, _contextDir.y); } }
+
+    public Weapon Weapon { get { return _weapon; } }
+
+    public ProjectilePool ProjectilePool { get { return _projectilePool; } }
+
     [Inject]
     private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool)
     {
@@ -60,6 +68,7 @@ public sealed class Player : Entity
     public override void Init()
     {
         _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
+        SetFirstSkill(_dash);
     }
     private void OnEnable()
     {
@@ -117,7 +126,8 @@ public sealed class Player : Entity
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
             CharacterController.Move(moveDir * Time.deltaTime * Speed);
 
-            transform.LookAt(Vector3.LerpUnclamped(transform.forward + transform.position, moveDir + transform.position, RotationSpeed));
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, moveDir, RotationSpeed * Time.deltaTime, 0);
+            transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }
     protected override void Die()

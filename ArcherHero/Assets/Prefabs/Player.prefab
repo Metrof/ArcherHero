@@ -166,7 +166,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5000002
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -187,11 +187,12 @@ MonoBehaviour:
   typeArmor: 0
   typeDamage: 0
   _moveSpeed: 5
-  _rotationSpeed: 0.1
+  _rotationSpeed: 4.5
   damage: 30
   speedAttack: 100
   currentHealth: 1000
   _spawnProjectile: {fileID: 825919772246480250}
+  _dash: {fileID: 11400000, guid: bf33e28f75d990644afac8551bb4a96d, type: 2}
 --- !u!1 &8673544391391377077
 GameObject:
   m_ObjectHideFlags: 0
