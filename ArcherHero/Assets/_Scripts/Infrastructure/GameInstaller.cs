@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -14,7 +15,9 @@ public class GameInstaller : MonoInstaller
         BindEnemyPool();
         BindPlayer();
         BindDoor();
+        
     }
+
     private void BindProjectilePool()
     {
         Container
