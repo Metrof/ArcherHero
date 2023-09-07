@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2898354584033245028}
   - component: {fileID: 880055750030448063}
   m_Layer: 6
-  m_Name: CanvasHPBar
+  m_Name: CanvasHPBarEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,34 +115,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bar_3
       objectReference: {fileID: 0}
-    - target: {fileID: 114860394311012990, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Color.b
-      value: 0.49840006
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860394311012990, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Color.g
-      value: 0.32156864
-      objectReference: {fileID: 0}
-    - target: {fileID: 114860394311012990, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Color.r
-      value: 0.9137255
-      objectReference: {fileID: 0}
-    - target: {fileID: 114958415113853462, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300032, guid: 34ecf51bcd3f4424eafda7dafd885bd0, type: 3}
-    - target: {fileID: 114958415113853462, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Color.b
-      value: 0.051992167
-      objectReference: {fileID: 0}
-    - target: {fileID: 114958415113853462, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Color.g
-      value: 0.025631882
-      objectReference: {fileID: 0}
-    - target: {fileID: 114958415113853462, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_Color.r
-      value: 0.18867922
-      objectReference: {fileID: 0}
     - target: {fileID: 224420688952146012, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -178,14 +150,6 @@ PrefabInstance:
     - target: {fileID: 224420688952146012, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
       propertyPath: m_SizeDelta.y
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224420688952146012, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.008
-      objectReference: {fileID: 0}
-    - target: {fileID: 224420688952146012, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.007
       objectReference: {fileID: 0}
     - target: {fileID: 224420688952146012, guid: c50c512aa19fa40719a893c3e8d42022, type: 3}
       propertyPath: m_LocalPosition.x
