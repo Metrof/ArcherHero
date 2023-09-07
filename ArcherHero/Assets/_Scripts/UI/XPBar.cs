@@ -28,9 +28,19 @@ public class XPBar : MonoBehaviour
     void Start()
     {
        ChangeBar();
-       _heroLvl.OnExperienceAddedEvent += ChangeXP;
-       _heroLvl.OnIncreasedLevelEvent += ChangeLvl;
+       
        _button.onClick.AddListener(AddXP);          
+    }
+
+    void OnEnable()
+    {
+        _heroLvl.OnExperienceAddedEvent += ChangeXP;
+        _heroLvl.OnIncreasedLevelEvent += ChangeLvl;
+    }
+    void OnDisable()
+    {
+        _heroLvl.OnExperienceAddedEvent -= ChangeXP;
+        _heroLvl.OnIncreasedLevelEvent -= ChangeLvl;
     }
 
     private void ChangeXP(int changeXP)

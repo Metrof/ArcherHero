@@ -1,9 +1,12 @@
-using PlayerStats;
+
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 
 public class Entity : MonoBehaviour, IMovable, IDamageable
-{
+{   
+    public event Action<int> OnTakeDamage;
+
     [Header("Type Armament")]
     [SerializeField] private TypeArmor typeArmor;
     [SerializeField] protected TypeDamage typeDamage;
@@ -30,6 +33,8 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
     {
         int finaleDamage = DamageHandler.CalculateDamage(damage, typeDamage, typeArmor);
         currentHealth -= finaleDamage;
+        OnTakeDamage?.Invoke(currentHealth);
+
         if (currentHealth <= 0)
         {
             Die();
