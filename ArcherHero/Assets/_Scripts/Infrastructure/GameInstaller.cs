@@ -7,7 +7,6 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private LvlDoor _door;
     [SerializeField] private ProjectilePool _prefabProjectilePool;
     [SerializeField] private Player _player;
-    [SerializeField] private Camera _camera;
 
     public override void InstallBindings()
     {
@@ -16,15 +15,7 @@ public class GameInstaller : MonoInstaller
         BindEnemyPool();
         BindPlayer();
         BindDoor();
-        BindCamera();
-    }
-
-    private void BindCamera()
-    {
-        Container.Bind<Camera>()
-            .FromComponentInNewPrefab(_camera)
-            .AsSingle()
-            .NonLazy();
+        
     }
 
     private void BindProjectilePool()
