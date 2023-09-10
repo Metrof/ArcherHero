@@ -25,17 +25,13 @@ public sealed class Dash : Skill
         RaycastHit hit;
 
         Ray ray = new Ray(player.transform.position, dashTargetDir);
-        Debug.Log(player.transform.position + dashTargetDis);
-        Debug.DrawLine(player.transform.position, player.transform.position + dashTargetDis, Color.red, _distance);
         Physics.Raycast(ray, out hit, _distance);
         if (hit.collider != null)
         {
             if ((_checkLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)
             {
-                Debug.Log(hit.collider.gameObject.name);
                 float distanceToWall = Vector3.Distance(player.transform.position, hit.point);
                 distanceToWall -= player.ColliderRadius;
-                Debug.Log(distanceToWall);
                 dashTargetDis = dashTargetDir * distanceToWall;
             }
         }
