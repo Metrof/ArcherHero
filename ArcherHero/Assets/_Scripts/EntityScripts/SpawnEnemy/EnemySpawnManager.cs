@@ -18,6 +18,7 @@ public class EnemySpawnManager : MonoBehaviour
         _diContainer = diContainer;
         _enemyPool = enemyPool;
         _lvlSwitchManager = lvlSwitchManager;
+        _diContainer.Bind<EnemySpawnManager>().FromInstance(this).AsSingle();
     }
     private void OnEnable()
     {
@@ -44,6 +45,24 @@ public class EnemySpawnManager : MonoBehaviour
             _enemyPool.AddEnemy(enemy);
             
             ApplyStatsMultiplier(enemy,  _lvl[lvl]._statMultiplier);
+        }
+    }
+
+    public void SpawnEnemies(LevelMultiplier bossEnemy)
+    {
+        _enemyPool.ClearEnemyList();
+        foreach (EnemySpawnPoint spawnPoint in bossEnemy._enemySpawnPoints)
+        {
+            Enemy enemyPrefab = spawnPoint.GetEnemyPrefab();
+            
+            Vector3 spawnPosition = spawnPoint.GetSpawnPosition();
+            
+            Enemy enemy =
+                _diContainer.InstantiatePrefabForComponent<Enemy>(enemyPrefab, spawnPosition, Quaternion.identity, null);
+            
+            _enemyPool.AddEnemy(enemy);
+            
+            ApplyStatsMultiplier(enemy,  bossEnemy._statMultiplier);
         }
     }
 
