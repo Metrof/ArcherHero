@@ -18,28 +18,31 @@ public sealed class Dash : Skill
     {
         s = DOTween.Sequence();
         Vector3 dashTargetDir = new Vector3(player.MoveDirection.x, 0, player.MoveDirection.y);
-        if (dashTargetDir == Vector3.zero) dashTargetDir = player.transform.forward;
+        if (dashTargetDir == Vector3.zero) dashTargetDir = player.transform.forward * -1;
 
-        Vector3 dashTargetPos = dashTargetDir * _distance;
+        Vector3 dashTargetDis = dashTargetDir * _distance;
 
         RaycastHit hit;
 
-        Ray ray = new Ray(player.transform.position, dashTargetPos - player.transform.position);
+        Ray ray = new Ray(player.transform.position, dashTargetDir);
+        Debug.Log(player.transform.position + dashTargetDis);
+        Debug.DrawLine(player.transform.position, player.transform.position + dashTargetDis, Color.red, _distance);
         Physics.Raycast(ray, out hit, _distance);
         if (hit.collider != null)
         {
             if ((_checkLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)
             {
+                Debug.Log(hit.collider.gameObject.name);
                 float distanceToWall = Vector3.Distance(player.transform.position, hit.point);
                 distanceToWall -= player.ColliderRadius;
                 Debug.Log(distanceToWall);
-                dashTargetPos = dashTargetDir * distanceToWall;
+                dashTargetDis = dashTargetDir * distanceToWall;
             }
         }
 
-        float finalSpeed = CalculateMovement.CalculateMoveTime(player.transform.position, dashTargetPos, _dashSpeed);
+        float finalSpeed = CalculateMovement.CalculateMoveTime(player.transform.position, dashTargetDis, _dashSpeed);
 
-        s.Append(player.transform.DOMove(dashTargetPos, _dashSpeed)).SetRelative() 
+        s.Append(player.transform.DOMove(dashTargetDis, _dashSpeed)).SetRelative() 
             .OnStart(player.PlayerDisable)
             .OnComplete(player.PlayerEnable);
         s.Insert(0, player.transform.DOLocalRotate(player.transform.up * 360, _dashSpeed, RotateMode.FastBeyond360)
