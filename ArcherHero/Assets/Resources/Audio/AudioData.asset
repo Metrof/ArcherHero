@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75393ec568fb2d046a61718d8a96a61a, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: hit 0
+    clip: {fileID: 8300000, guid: 62c475073d978fe44910130a7d2decab, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: shot 1
+    clip: {fileID: 8300000, guid: 53ef7bdb58249c04cb3890a258c7a6b9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: die 2
+    clip: {fileID: 8300000, guid: c4a07c32711df3548b6ef8c748261173, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: player win 3
+    clip: {fileID: 8300000, guid: 44b0ec808868cba448365c66053fbaeb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: teleport player 4
+    clip: {fileID: 8300000, guid: 28c4be5ca05d7ff4bb0b8f4baa72afdd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
