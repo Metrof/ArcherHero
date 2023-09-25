@@ -63,8 +63,7 @@ public class ExplosiveEnemy : Enemy
     {   
         _cancellationTokenAttack = new CancellationTokenSource();
         while (!_cancellationTokenAttack.IsCancellationRequested)
-        {   
-            Debug.Log("preparation for attack");
+        {             
             Vector3 directionToPlayer = _targetAttack.position - transform.position;
             Quaternion rotationToPlayer = Quaternion.LookRotation(directionToPlayer, Vector3.up);
             transform.rotation = rotationToPlayer;
@@ -93,8 +92,7 @@ public class ExplosiveEnemy : Enemy
     protected virtual void Attack()
     {
         if (_distanceToTarget <= _explosionRadius)
-        {   
-            Debug.Log("Boom");
+        {            
             IDamageable damageable = _targetAttack.GetComponent<IDamageable>();
             if (damageable != null)
             {

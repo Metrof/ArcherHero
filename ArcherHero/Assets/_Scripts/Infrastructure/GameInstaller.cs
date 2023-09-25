@@ -7,6 +7,7 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private LvlDoor _door;
     [SerializeField] private ProjectilePool _prefabProjectilePool;
     [SerializeField] private Player _player;
+    [SerializeField] private AudioManager _audioManager;
 
     public override void InstallBindings()
     {
@@ -15,7 +16,16 @@ public class GameInstaller : MonoInstaller
         BindEnemyPool();
         BindPlayer();
         BindDoor();
-        
+        BindAudioManager();
+    }
+
+    private void BindAudioManager()
+    {
+        Container
+            .Bind<AudioManager>()
+            .FromInstance(_audioManager)
+            .AsSingle()
+            .NonLazy();       
     }
 
     private void BindProjectilePool()

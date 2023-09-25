@@ -31,7 +31,7 @@ public class RangeEnemy : Enemy
     [Inject]
     private void Construct(ProjectilePool projectilePool)
     {
-        _projectilePool = projectilePool;
+        _projectilePool = projectilePool;         
     }
     
     private void Start()
