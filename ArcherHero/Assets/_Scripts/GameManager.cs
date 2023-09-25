@@ -96,7 +96,6 @@ public class GameManager : MonoBehaviour
     {
         _lvlSwitchManager.SwitchLvl();
         ReturnPlayerToStartPos();
-        _player.Init();
 
         _door.CloseDoor();
     }

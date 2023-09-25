@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 623664203193516463}
   - component: {fileID: 5050589514683667295}
   - component: {fileID: 4594203325981259848}
+  - component: {fileID: -7847595499719528954}
   m_Layer: 6
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -293,6 +294,28 @@ MonoBehaviour:
   _filler: {fileID: 5838544087965332712}
   _entity: {fileID: 8154993833063171704}
   _canvas: {fileID: 2656916637619577570}
+--- !u!114 &-7847595499719528954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768765938164037417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780e2b73ec04c694da7e4cfb26b7c4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+  - _dropItemPrefab: {fileID: -8137173113293147979, guid: d1aa131fed2de354fa4b007660ecc119, type: 3}
+    _dropChance: 0.1
+  - _dropItemPrefab: {fileID: -8137173113293147979, guid: 9aa7e9913f9207240bc0b9733446b272, type: 3}
+    _dropChance: 0.1
+  - _dropItemPrefab: {fileID: -8137173113293147979, guid: dbe19a6d2ad996b498867453db4fb1b8, type: 3}
+    _dropChance: 0.1
+  - _dropItemPrefab: {fileID: -8137173113293147979, guid: 92effd4a9469ebc46aac3c34e4f228bc, type: 3}
+    _dropChance: 0.1
+  _owner: {fileID: 8154993833063171704}
 --- !u!1 &5980697457540158316
 GameObject:
   m_ObjectHideFlags: 0

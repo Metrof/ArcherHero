@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd8e0c78997f124c8c2663541f30203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifeTime: 5
+  _timeActionInSeconds: 15
   _rotationAngle: {x: 0, y: 360, z: 0}
   _timeRotation: 2
 --- !u!1001 &1631411597192227669
