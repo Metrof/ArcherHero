@@ -99,7 +99,6 @@ public class GameManager : MonoBehaviour
     {
         _lvlSwitchManager.SwitchLvl();
         ReturnPlayerToStartPos();
-        _player.Init();
 
         _audioManager.Play(4);
 

@@ -8,10 +8,7 @@ public class ItemRandomProjectilePattern : DropItem
     {
         SetRandomValue();
 
-        player.Weapon.ProjectilePattern
-            .SetCreation(_creation)
-            .SetMovement(_movement)
-            .SetHit(_hit);
+        player.SetProjectilePattern(_creation, _movement, _hit, _timeActionInSeconds);
 
         Destroy(gameObject);
     }
