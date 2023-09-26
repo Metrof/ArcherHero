@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
         _gameVirtualCamera.Priority = 1;
         StartNewLvl();
 
+        _player.Init();
         _player.PlayerEnable();
         _menuButtons.SetActive(false);
     }
