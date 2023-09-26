@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6881204451212848988}
   - component: {fileID: 4568933671292554042}
   - component: {fileID: -4049204059886921771}
+  - component: {fileID: 4256051720695907596}
   m_Layer: 6
   m_Name: MeleeEnemy
   m_TagString: Untagged
@@ -222,6 +223,22 @@ MonoBehaviour:
   _filler: {fileID: 762525654574529500}
   _entity: {fileID: 8552606418658011184}
   _canvas: {fileID: 9172959953421069782}
+--- !u!114 &4256051720695907596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8128553914536212428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780e2b73ec04c694da7e4cfb26b7c4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+  - _dropItemPrefab: {fileID: -5641156679358764944, guid: 14388b7ba17a05e41a43c86122eb3aeb, type: 3}
+    _dropChance: 0.1
+  _owner: {fileID: 8552606418658011184}
 --- !u!1001 &2974266132044335321
 PrefabInstance:
   m_ObjectHideFlags: 0

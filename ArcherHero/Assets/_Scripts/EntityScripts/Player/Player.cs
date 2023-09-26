@@ -1,7 +1,5 @@
+using PlayerStats;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -21,6 +19,9 @@ public sealed class Player : Entity
     private Weapon _weapon;
     private ProjectilePool _projectilePool;
     private EnemyPool _enemyPool;
+    private ChangeProjectileType _changeProjectile;
+    private ChangeProjectilePattern _changeProjectilePattern;
+    private CharacterStats _defaultStats;
 
     private CharacterController CharacterController
     {
@@ -28,13 +29,14 @@ public sealed class Player : Entity
         {
             if (_characterController == null)
             {
-                if(!TryGetComponent(out _characterController))
+                if (!TryGetComponent(out _characterController))
                 {
                     _characterController = gameObject.AddComponent<CharacterController>();
                     return _characterController;
-                } else 
-                { 
-                    return _characterController; 
+                }
+                else
+                {
+                    return _characterController;
                 }
             }
             return _characterController;
@@ -46,15 +48,12 @@ public sealed class Player : Entity
 
     Vector2 _contextDir;
 
-    public Vector2 MoveDirection { get {  return new Vector2(_contextDir.x, _contextDir.y); } }
-
-    public Weapon Weapon { get { return _weapon; } }
-
-    public ProjectilePool ProjectilePool { get { return _projectilePool; } }
+    public Vector2 MoveDirection { get { return new Vector2(_contextDir.x, _contextDir.y); } }
 
     [Inject]
-    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool)
+    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool, CharacterStats stats)
     {
+        _defaultStats = stats;
         _projectilePool = projectilePool;
         _enemyPool = enemyPool;
     }
@@ -64,12 +63,17 @@ public sealed class Player : Entity
         _characterController = GetComponent<CharacterController>();
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, typeDamage));
-    }
-    public override void Init()
-    {
-        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
         SetFirstSkill(_dash);
     }
+
+    private void Start()
+    {
+        damage = _defaultStats.Damage.CurrentValue;
+        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
+        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
+    }
+
     private void OnEnable()
     {
         _controller.Enable();
@@ -90,14 +94,32 @@ public sealed class Player : Entity
     public void PlayerDisable() { _controller.Disable(); }
     public void Move(InputAction.CallbackContext context)
     {
-        _weapon?.StopAttack();
+        StopAttack();
         _contextDir = context.ReadValue<Vector2>();
     }
     public void StartWeaponAttack(InputAction.CallbackContext context)
     {
         _contextDir = Vector2.zero;
-        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack); 
+        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
     }
+
+    public void StopAttack()
+    {
+        _weapon.StopAttack();
+    }
+
+    public void SetProjectilePattern(ProjectileCreationType creation, ProjectileMovementType movement, ProjectileHitType hit, float second = 0)
+    {
+        _changeProjectilePattern?.Stop();
+        _changeProjectilePattern = new ChangeProjectilePattern(_weapon, creation, movement, hit, second);
+    }
+
+    public void SetNewProjectile(TypeDamage type, float seconds = 0)
+    {
+        _changeProjectile?.Stop();
+        _changeProjectile = new ChangeProjectileType(ProjectileOwner.Player, _weapon, _projectilePool, typeDamage, type, seconds);
+    }
+
     public void ActivateFirstSkill(InputAction.CallbackContext context)
     {
         _firstSkill?.Activate(this);
@@ -124,7 +146,7 @@ public sealed class Player : Entity
         if (_controller.Player.Move.IsPressed())
         {
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
-            CharacterController.Move(moveDir * Time.deltaTime * Speed);
+            CharacterController.Move(moveDir * Time.deltaTime * _moveSpeed);
 
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, moveDir, RotationSpeed * Time.deltaTime, 0);
             transform.rotation = Quaternion.LookRotation(newDirection);
@@ -132,8 +154,11 @@ public sealed class Player : Entity
     }
     protected override void Die()
     {
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
+        _changeProjectilePattern?.Stop();
+        _changeProjectile?.Stop();
         OnPlayerDie?.Invoke(false);
-        _weapon.StopAttack();
+        StopAttack();
         base.Die();
     }
 }
