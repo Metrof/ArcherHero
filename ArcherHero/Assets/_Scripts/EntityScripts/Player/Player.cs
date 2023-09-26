@@ -66,8 +66,9 @@ public sealed class Player : Entity
         SetFirstSkill(_dash);
     }
 
-    private void Start()
+    public override void Init()
     {
+        base.Init();
         damage = _defaultStats.Damage.CurrentValue;
         speedAttack = _defaultStats.AttackSpeed.CurrentValue;
         currentHealth = _defaultStats.MaxHP.CurrentValue;
@@ -154,7 +155,6 @@ public sealed class Player : Entity
     }
     protected override void Die()
     {
-        currentHealth = _defaultStats.MaxHP.CurrentValue;
         _changeProjectilePattern?.Stop();
         _changeProjectile?.Stop();
         OnPlayerDie?.Invoke(false);
