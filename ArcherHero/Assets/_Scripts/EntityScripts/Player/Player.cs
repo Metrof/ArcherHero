@@ -1,3 +1,4 @@
+using PlayerStats;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +21,7 @@ public sealed class Player : Entity
     private EnemyPool _enemyPool;
     private ChangeProjectileType _changeProjectile;
     private ChangeProjectilePattern _changeProjectilePattern;
+    private CharacterStats _defaultStats;
 
     private CharacterController CharacterController
     {
@@ -49,8 +51,9 @@ public sealed class Player : Entity
     public Vector2 MoveDirection { get { return new Vector2(_contextDir.x, _contextDir.y); } }
 
     [Inject]
-    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool)
+    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool, CharacterStats stats)
     {
+        _defaultStats = stats;
         _projectilePool = projectilePool;
         _enemyPool = enemyPool;
     }
@@ -61,6 +64,14 @@ public sealed class Player : Entity
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, typeDamage));
         SetFirstSkill(_dash);
+    }
+
+    private void Start()
+    {
+        damage = _defaultStats.Damage.CurrentValue;
+        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
+        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
     }
 
     private void OnEnable()
@@ -135,7 +146,7 @@ public sealed class Player : Entity
         if (_controller.Player.Move.IsPressed())
         {
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
-            CharacterController.Move(moveDir * Time.deltaTime * Speed);
+            CharacterController.Move(moveDir * Time.deltaTime * _moveSpeed);
 
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, moveDir, RotationSpeed * Time.deltaTime, 0);
             transform.rotation = Quaternion.LookRotation(newDirection);
@@ -143,6 +154,7 @@ public sealed class Player : Entity
     }
     protected override void Die()
     {
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
         _changeProjectilePattern?.Stop();
         _changeProjectile?.Stop();
         OnPlayerDie?.Invoke(false);

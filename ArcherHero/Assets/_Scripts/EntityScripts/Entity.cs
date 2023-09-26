@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
     [SerializeField] protected TypeDamage typeDamage;
     
     [Header("Movement")]
-    [SerializeField] private float _moveSpeed = 1000;
+    [SerializeField] protected float _moveSpeed = 1000;
     [SerializeField] private float _rotationSpeed = 0.05f;
     
     [Header("Stats")]
