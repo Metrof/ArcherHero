@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 using Zenject;
@@ -20,8 +19,8 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
     public int damage;
     public int speedAttack;
     public int currentHealth;
-    
 
+    public bool IsImmortal { get ; protected set; }
     public float Speed { get { return _moveSpeed; } private set { _moveSpeed = value; } }
     public float RotationSpeed { get { return _rotationSpeed; } private set { _rotationSpeed = value; } }
 
@@ -39,6 +38,11 @@ public class Entity : MonoBehaviour, IMovable, IDamageable
 
     public void TakeDamage(TypeDamage typeDamage, int damage)
     {
+        if (IsImmortal)
+        {
+            return;
+        }
+
         int finaleDamage = DamageHandler.CalculateDamage(damage, typeDamage, typeArmor);
         currentHealth -= finaleDamage;
         OnTakeDamage?.Invoke(currentHealth);

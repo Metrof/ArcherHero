@@ -247,7 +247,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -297,7 +297,8 @@ MonoBehaviour:
   speedAttack: 100
   currentHealth: 1000
   _spawnProjectile: {fileID: 825919772246480250}
-  _dash: {fileID: 11400000, guid: bf33e28f75d990644afac8551bb4a96d, type: 2}
+  _skills:
+  - {fileID: 11400000, guid: bf33e28f75d990644afac8551bb4a96d, type: 2}
 --- !u!114 &6365060250154946111
 MonoBehaviour:
   m_ObjectHideFlags: 0
