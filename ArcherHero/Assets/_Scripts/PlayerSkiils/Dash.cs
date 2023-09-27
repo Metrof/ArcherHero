@@ -1,10 +1,5 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using static UnityEngine.EventSystems.EventTrigger;
 
 [CreateAssetMenu(fileName = "PlayerSkills", menuName = "createSkill/Dash")]
 public sealed class Dash : Skill
@@ -18,31 +13,39 @@ public sealed class Dash : Skill
     {
         s = DOTween.Sequence();
         Vector3 dashTargetDir = new Vector3(player.MoveDirection.x, 0, player.MoveDirection.y);
-        if (dashTargetDir == Vector3.zero) dashTargetDir = player.transform.forward * -1;
+        if (dashTargetDir == Vector3.zero)
+        {
+            return;
+        }
 
         Vector3 dashTargetDis = dashTargetDir * _distance;
 
-        RaycastHit hit;
+        RaycastHit[] hits;
 
         Ray ray = new Ray(player.transform.position, dashTargetDir);
-        Physics.Raycast(ray, out hit, _distance);
-        if (hit.collider != null)
+        hits = Physics.RaycastAll(ray, _distance);
+
+        if (hits.Length > 0)
         {
-            if ((_checkLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)
+            foreach (RaycastHit hit in hits)
             {
-                float distanceToWall = Vector3.Distance(player.transform.position, hit.point);
-                distanceToWall -= player.ColliderRadius;
-                dashTargetDis = dashTargetDir * distanceToWall;
+                if ((_checkLayerMask.value & (1 << hit.collider.gameObject.layer)) != 0)
+                {
+                    float distanceToWall = Vector3.Distance(player.transform.position, hit.point);
+                    distanceToWall -= player.ColliderRadius;
+                    dashTargetDis = dashTargetDir * distanceToWall;
+                    break;
+                }
             }
         }
 
         float finalSpeed = CalculateMovement.CalculateMoveTime(player.transform.position, dashTargetDis, _dashSpeed);
 
-        s.Append(player.transform.DOMove(dashTargetDis, _dashSpeed)).SetRelative() 
+        s.Append(player.transform.DOMove(dashTargetDis, _dashSpeed)).SetRelative()
             .OnStart(player.PlayerDisable)
             .OnComplete(player.PlayerEnable);
-        s.Insert(0, player.transform.DOLocalRotate(player.transform.up * 360, _dashSpeed, RotateMode.FastBeyond360)
+        s.Insert(0, player.transform.DOPunchScale(new Vector3(-0.6f, -0.6f, -0.6f), _dashSpeed, 2)
             .SetRelative(true)
-        .SetEase(Ease.InOutQuint));
+            .SetEase(Ease.Linear));
     }
 }
