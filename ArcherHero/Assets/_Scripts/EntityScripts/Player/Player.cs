@@ -1,6 +1,7 @@
 using PlayerStats;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -66,6 +67,7 @@ public sealed class Player : Entity
 
     public override void Init()
     {
+        _playerSkills.ResetDelay();
         base.Init();
         damage = _defaultStats.Damage.CurrentValue;
         speedAttack = _defaultStats.AttackSpeed.CurrentValue;
@@ -83,6 +85,7 @@ public sealed class Player : Entity
 
     private void OnDisable()
     {
+        _playerSkills.StopDelay();
         _playerSkills.UnsubscribeToSkills();
         _controller.Player.Move.performed -= Move;
         _controller.Player.Move.canceled -= StartWeaponAttack;
@@ -151,6 +154,7 @@ public sealed class Player : Entity
 
     protected override void Die()
     {
+        _playerSkills.StopDelay();
         _changeProjectilePattern?.Stop();
         _changeProjectile?.Stop();
         OnPlayerDie?.Invoke(false);

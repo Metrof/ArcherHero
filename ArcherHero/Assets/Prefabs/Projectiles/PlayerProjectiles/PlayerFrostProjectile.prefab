@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeDamage: 1
-  _moveSpeedProjectile: 5
+  _moveSpeedProjectile: 10
 --- !u!54 &-436841296914681400
 Rigidbody:
   m_ObjectHideFlags: 0
