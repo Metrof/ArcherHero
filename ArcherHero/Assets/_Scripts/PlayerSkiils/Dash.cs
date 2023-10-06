@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class Dash : Skill
 {
     [SerializeField] private float _distance = 1f;
-    [SerializeField] private float _dashSpeed = 1f;
+    [SerializeField] private float _dashTime = 1f;
 
     private LayerMask _checkLayerMask = 1 << 0;
     Sequence s;
@@ -39,12 +39,12 @@ public sealed class Dash : Skill
             }
         }
 
-        float finalSpeed = CalculateMovement.CalculateMoveTime(player.transform.position, dashTargetDis, _dashSpeed);
-
-        s.Append(player.transform.DOMove(dashTargetDis, _dashSpeed)).SetRelative()
+        s.Append(player.transform.DOMove(dashTargetDis, _dashTime))
+            .SetRelative()
+            .SetEase(Ease.InQuad)
             .OnStart(player.PlayerDisable)
             .OnComplete(player.PlayerEnable);
-        s.Insert(0, player.transform.DOPunchScale(new Vector3(-0.6f, -0.6f, -0.6f), _dashSpeed, 2)
+        s.Insert(0, player.transform.DOPunchScale(new Vector3(-0.6f, -0.6f, -0.6f), _dashTime, 2)
             .SetRelative(true)
             .SetEase(Ease.Linear));
     }
