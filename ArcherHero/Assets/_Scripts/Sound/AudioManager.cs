@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {  
     [SerializeField] private AudioData audioData;
+    [SerializeField] private AudioMixerGroup audioMixerGroupEffects;
     
     void Awake()
     {           
@@ -13,6 +15,7 @@ public class AudioManager : MonoBehaviour
             s.source.clip = s.clip;
             s.source.volume = s.volume;          
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = audioMixerGroupEffects;
         }
     }
   
