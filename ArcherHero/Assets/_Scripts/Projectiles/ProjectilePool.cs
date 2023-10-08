@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -39,7 +40,7 @@ public partial class ProjectilePool : MonoBehaviour
             {
                 GameObject childrenGo = CreateGOAndSetParent(parentGo.transform, pool.TypeDamage);
 
-                _poolDictionary[owner.ProjectileOwner].Add(pool.TypeDamage, CreatePool(pool, childrenGo.transform));
+                _poolDictionary[owner.ProjectileOwner].Add(pool.TypeDamage, CreatePool(pool, childrenGo.transform, owner.ProjectileOwner));
             }
         }
     }
@@ -51,20 +52,23 @@ public partial class ProjectilePool : MonoBehaviour
         return childrenGo;
     }
 
-    private ObjectPool<Projectile> CreatePool(ProjectilePoolData data, Transform container)
+    private ObjectPool<Projectile> CreatePool(ProjectilePoolData data, Transform container, ProjectileOwner owner)
     {
+        ProjectileSounds sound = new(owner);
+
         ObjectPool<Projectile> projectilePool = null;
         ObjectPool<Projectile> pool = new(
                     () =>
                     {
                         Projectile projectile = Instantiate(data.Prefab, container);
-                        projectile.OnHitEvent += ProjectileHit;
+                        projectile.OnHitEvent += () => _audioManager.Play(sound.NumSoundHit);
+                        projectile.OnEnabledEvent += () => _audioManager.Play(sound.NumSoundShot);
+                        _audioManager.Play(sound.NumSoundShot);
                         projectile.ProjectilePool = projectilePool;
                         return projectile;
                     },
                     projectileGet =>
                     {
-                        _audioManager.Play(1);
                         projectileGet.gameObject.SetActive(true);
                     },
                     projectileRelease =>
@@ -83,10 +87,5 @@ public partial class ProjectilePool : MonoBehaviour
         projectilePool = pool;
 
         return projectilePool;
-    }
-
-    private void ProjectileHit()
-    {
-        _audioManager.Play(0);
     }
 }

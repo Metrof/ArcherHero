@@ -6,6 +6,7 @@ using UnityEngine.Pool;
 public class Projectile : MonoBehaviour
 {
     public event Action OnHitEvent;
+    public event Action OnEnabledEvent;
 
     [SerializeField] private TypeDamage _typeDamage;
     [SerializeField] private int _moveSpeedProjectile;
@@ -62,6 +63,11 @@ public class Projectile : MonoBehaviour
         _target = target;
 
         StartPositionY = transform.position.y;
+    }
+
+    private void OnEnable()
+    {
+        OnEnabledEvent?.Invoke();
     }
 
     public void Move()
