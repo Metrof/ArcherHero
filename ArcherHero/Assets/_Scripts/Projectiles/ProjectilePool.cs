@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -9,6 +10,13 @@ public partial class ProjectilePool : MonoBehaviour
     [SerializeField] public List<OwnerPoolData> _ownerPoolData;
 
     private Dictionary<ProjectileOwner, Dictionary<TypeDamage, ObjectPool<Projectile>>> _poolDictionary = new();
+    private AudioManager _audioManager;
+
+    [Inject]
+    private void Construct(AudioManager audioManager)
+    {
+        _audioManager = audioManager;
+    }
 
     private void Awake()
     {
@@ -32,7 +40,7 @@ public partial class ProjectilePool : MonoBehaviour
             {
                 GameObject childrenGo = CreateGOAndSetParent(parentGo.transform, pool.TypeDamage);
 
-                _poolDictionary[owner.ProjectileOwner].Add(pool.TypeDamage, CreatePool(pool, childrenGo.transform));
+                _poolDictionary[owner.ProjectileOwner].Add(pool.TypeDamage, CreatePool(pool, childrenGo.transform, owner.ProjectileOwner));
             }
         }
     }
@@ -44,13 +52,18 @@ public partial class ProjectilePool : MonoBehaviour
         return childrenGo;
     }
 
-    private ObjectPool<Projectile> CreatePool(ProjectilePoolData data, Transform container)
+    private ObjectPool<Projectile> CreatePool(ProjectilePoolData data, Transform container, ProjectileOwner owner)
     {
+        ProjectileSounds sound = new(owner);
+
         ObjectPool<Projectile> projectilePool = null;
         ObjectPool<Projectile> pool = new(
                     () =>
                     {
                         Projectile projectile = Instantiate(data.Prefab, container);
+                        projectile.OnHitEvent += () => _audioManager.Play(sound.NumSoundHit);
+                        projectile.OnEnabledEvent += () => _audioManager.Play(sound.NumSoundShot);
+                        _audioManager.Play(sound.NumSoundShot);
                         projectile.ProjectilePool = projectilePool;
                         return projectile;
                     },

@@ -5,6 +5,9 @@ using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
+    public event Action OnHitEvent;
+    public event Action OnEnabledEvent;
+
     [SerializeField] private TypeDamage _typeDamage;
     [SerializeField] private int _moveSpeedProjectile;
 
@@ -19,6 +22,7 @@ public class Projectile : MonoBehaviour
     private IProjectileMovement _projectileMovement;
     private IProjectileHit _projectileHit;
 
+    public ProjectileOwner Owner { get; set; }
     public int MoveSpeedProjectile { get => _moveSpeedProjectile; }
     public float StartPositionY { get; private set; }
 
@@ -61,6 +65,11 @@ public class Projectile : MonoBehaviour
         StartPositionY = transform.position.y;
     }
 
+    private void OnEnable()
+    {
+        OnEnabledEvent?.Invoke();
+    }
+
     public void Move()
     {
         NewMoveSequence();
@@ -75,6 +84,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        OnHitEvent?.Invoke();
         _projectileHit.Hit(other, this);
     }
 
