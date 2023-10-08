@@ -1,23 +1,25 @@
 using PlayerStats;
 using UnityEngine;
 using Zenject;
+using TMPro;
 
 public class StatMenuLogic : MonoBehaviour
 {
     [SerializeField] private StatButton _prefabButton;
     [SerializeField] private RectTransform _containerButtons;
+    [SerializeField] private TextMeshProUGUI _textInfo;
     private CharacterStats _characterStats;
+    private ResourceBank _resourceBank;
     
     [Inject]
-    void Construct(CharacterStats characterStats)
+    void Construct(CharacterStats characterStats, ResourceBank resourceBank)
     { 
-        _characterStats = characterStats;  
+        _characterStats = characterStats; 
+        _resourceBank = resourceBank; 
     }
 
     void Start()
     {
-        //SubscribeButtons();
-        //UpdateButtons();
         CreateButtons();
     }
     private void CreateButtons()
@@ -28,8 +30,10 @@ public class StatMenuLogic : MonoBehaviour
 
             UpdateButton(stat);
 
-            button.Button.onClick.AddListener(stat.UpgradeUP);
+            button.Button.onClick.AddListener(() => BuyStat(stat));
+
             stat.OnChangeUpgradeLvlEvent += UpdateButton;
+
 
             void UpdateButton(StatInfo info)
             {
@@ -38,6 +42,10 @@ public class StatMenuLogic : MonoBehaviour
 
                 button.CurrentText.text = $"Current {info.Name} {info.CurrentValue}";
                 button.LimitUpgradesText.text = $"{info.UnlockedLvl} out of {info.MaxUpgradeLvl}";
+
+                _textInfo.text = $" Money: " + _resourceBank.GetResourceValue(ResourceType.Money).ToString();
+
+
 
                 if (!info.IsUnlocked)
                 {
@@ -51,59 +59,19 @@ public class StatMenuLogic : MonoBehaviour
                     button.Button.interactable = false;
                 }
             }
+        }
 
+        void BuyStat(StatInfo stat)
+        {   
+            if(_resourceBank.TrySpendResource(ResourceType.Money, stat.UpgradePrice))
+            {
+                stat.UpgradeUP();
+            }
+            else
+            {
+                _textInfo.text = $" not enough money ";
+            }
+            
         }
     }
-
-    //private void AddDamage(StatInfo info)
-    //{
-    //    UpdateButtonInfo(info, _buttonDamage);
-    //}
-
-    //private void UpdateButtons()
-    //{
-    //    UpdateButtonInfo(_characterStats.Damage, _buttonDamage);
-
-    //}
-
-    //private static void UpdateButtonInfo(StatInfo statInfo, UI_Button uiButton)
-    //{
-    //    string statName = statInfo.Name;
-    //    int currentLevel = statInfo.UnlockedLvl;
-    //    int maxLevel = statInfo.MaxUpgradeLvl;
-    //    int upgradePrice = statInfo.UpgradePrice;
-    //    int nextValue = statInfo.NextValue;
-
-    //    uiButton.CurrentText.text = $"Current {statName} {statInfo.CurrentValue}";
-    //    uiButton.LimitUpgradesText.text = $"{currentLevel} out of {maxLevel}";
-
-    //    if (!statInfo.IsUnlocked)
-    //    {
-    //        uiButton.PriceText.text = upgradePrice > 0 ? $"Price: {upgradePrice}" : "Max Level Reached";
-    //        uiButton.NextValueText.text = $"Next {statName} {nextValue}";
-    //    }
-    //    else
-    //    {
-    //        uiButton.PriceText.text = "Level Reached";
-    //        uiButton.NextValueText.text = "Max";
-    //        uiButton.Button.interactable = false;
-    //    }
-    //}
-
-    //private void OnDisable()
-    //{
-    //    UnDescribeButtons();
-    //}
-
-    //private void SubscribeButtons()
-    //{
-    //    _buttonDamage.Button.onClick.AddListener(_characterStats.Damage.UpgradeUP);
-    //    _characterStats.Damage.OnChangeUpgradeLvlEvent += AddDamage;
-    //}
-
-    //private void UnDescribeButtons()
-    //{
-    //    _buttonDamage.Button.onClick.RemoveListener(_characterStats.Damage.UpgradeUP);
-    //    _characterStats.Damage.OnChangeUpgradeLvlEvent -= AddDamage;
-    //}
 }

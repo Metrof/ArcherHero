@@ -17,14 +17,16 @@ public class GameManager : MonoBehaviour
     Player _player;
     LvlDoor _door;
     EnemyPool _enemyPool;
+    AudioManager _audioManager;
 
     [Inject]
-    private void Construct(Player player, LvlSwitchManager lvlSwitchManager, EnemyPool enemyPool, LvlDoor lvlDoor)
+    private void Construct(Player player, LvlSwitchManager lvlSwitchManager, EnemyPool enemyPool, LvlDoor lvlDoor, AudioManager audioManager)
     {
         _door = lvlDoor;
         _player = player;
         _lvlSwitchManager = lvlSwitchManager;
         _enemyPool = enemyPool;
+        _audioManager = audioManager;   
     }
     private void OnEnable()
     {
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         if (isPlayerWin)
         {
             _door.OpenDoor();
+            _audioManager.Play(3);
         }
         else
         {
@@ -76,6 +79,7 @@ public class GameManager : MonoBehaviour
         _gameVirtualCamera.Priority = 1;
         StartNewLvl();
 
+        _player.Init();
         _player.PlayerEnable();
         _menuButtons.SetActive(false);
     }
@@ -96,7 +100,8 @@ public class GameManager : MonoBehaviour
     {
         _lvlSwitchManager.SwitchLvl();
         ReturnPlayerToStartPos();
-        _player.Init();
+
+        _audioManager.Play(4);
 
         _door.CloseDoor();
     }

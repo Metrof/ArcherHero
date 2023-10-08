@@ -1,7 +1,7 @@
+using PlayerStats;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -10,30 +10,33 @@ public sealed class Player : Entity
 {
     public event Action<bool> OnPlayerDie;
     [SerializeField] private Transform _spawnProjectile;
+    [SerializeField] private List<Skill> _skills;
 
     CharacterController _characterController;
     Controller _controller;
 
-    private Skill _firstSkill;
-    private Skill _secondSkill;
-
     private Weapon _weapon;
     private ProjectilePool _projectilePool;
     private EnemyPool _enemyPool;
+    private ChangeProjectileType _changeProjectile;
+    private ChangeProjectilePattern _changeProjectilePattern;
+    private CharacterStats _defaultStats;
+    private PlayerSkills _playerSkills;
 
-    private CharacterController CharacterController
+    private CharacterController CurrentCharacterController
     {
         get
         {
             if (_characterController == null)
             {
-                if(!TryGetComponent(out _characterController))
+                if (!TryGetComponent(out _characterController))
                 {
                     _characterController = gameObject.AddComponent<CharacterController>();
                     return _characterController;
-                } else 
-                { 
-                    return _characterController; 
+                }
+                else
+                {
+                    return _characterController;
                 }
             }
             return _characterController;
@@ -41,70 +44,97 @@ public sealed class Player : Entity
         set { _characterController = value; }
     }
 
-    Vector2 _contextDir;
+    public float ColliderRadius { get { return CurrentCharacterController.radius; } }
 
-    public Vector2 MoveDirection { get {  return new Vector2(_contextDir.x, _contextDir.y); } }
+    private Vector2 _contextDir;
+
+    public Vector2 MoveDirection { get { return new Vector2(_contextDir.x, _contextDir.y); } }
+
     [Inject]
-    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool)
+    private void Construct(ProjectilePool projectilePool, EnemyPool enemyPool, CharacterStats stats)
     {
+        _defaultStats = stats;
         _projectilePool = projectilePool;
         _enemyPool = enemyPool;
     }
 
     private void Awake()
     {
-        _characterController = GetComponent<CharacterController>();
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, typeDamage));
+        _playerSkills = new PlayerSkills(this, _controller, _skills);
     }
+
     public override void Init()
     {
-        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
+        _playerSkills.ResetDelay();
+        base.Init();
+        damage = _defaultStats.Damage.CurrentValue;
+        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
+        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
     }
+
     private void OnEnable()
     {
         _controller.Enable();
         _controller.Player.Move.performed += Move;
         _controller.Player.Move.canceled += StartWeaponAttack;
-        _controller.Player.ActivateFirstSkill.performed += ActivateFirstSkill;
-        _controller.Player.ActivateSecondSkill.performed += ActivateSecondSkill;
+        _playerSkills.SubscribeToSkills();
     }
+
     private void OnDisable()
     {
+        _playerSkills.StopDelay();
+        _playerSkills.UnsubscribeToSkills();
         _controller.Player.Move.performed -= Move;
         _controller.Player.Move.canceled -= StartWeaponAttack;
-        _controller.Player.ActivateFirstSkill.performed -= ActivateFirstSkill;
-        _controller.Player.ActivateSecondSkill.performed -= ActivateSecondSkill;
         _controller.Disable();
     }
-    public void PlayerEnable() { _controller.Enable(); }
-    public void PlayerDisable() { _controller.Disable(); }
+
+    public void PlayerEnable() 
+    {
+        CurrentCharacterController.enabled = true;
+        IsImmortal = false;
+        _controller.Enable(); 
+    }
+
+    public void PlayerDisable() 
+    { 
+        IsImmortal = true;
+        _controller.Disable();
+        CurrentCharacterController.enabled = false;
+    }
+
     public void Move(InputAction.CallbackContext context)
     {
-        _weapon?.StopAttack();
+        StopAttack();
         _contextDir = context.ReadValue<Vector2>();
     }
+
     public void StartWeaponAttack(InputAction.CallbackContext context)
     {
         _contextDir = Vector2.zero;
-        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack); 
+        _weapon?.StartAttack(GetEnemy, _spawnProjectile, damage, speedAttack);
     }
-    public void ActivateFirstSkill(InputAction.CallbackContext context)
+
+    public void StopAttack()
     {
-        _firstSkill?.Activate(this);
+        _weapon.StopAttack();
     }
-    public void ActivateSecondSkill(InputAction.CallbackContext context)
+
+    public void SetProjectilePattern(ProjectileCreationType creation, ProjectileMovementType movement, ProjectileHitType hit, float second = 0)
     {
-        _secondSkill?.Activate(this);
+        _changeProjectilePattern?.Stop();
+        _changeProjectilePattern = new ChangeProjectilePattern(_weapon, creation, movement, hit, second);
     }
-    public void SetFirstSkill(Skill skill)
+
+    public void SetNewProjectile(TypeDamage type, float seconds = 0)
     {
-        _firstSkill = skill;
+        _changeProjectile?.Stop();
+        _changeProjectile = new ChangeProjectileType(ProjectileOwner.Player, _weapon, _projectilePool, typeDamage, type, seconds);
     }
-    public void SetSecondSkill(Skill skill)
-    {
-        _secondSkill = skill;
-    }
+
     private Transform GetEnemy()
     {
         return _enemyPool.GetNearestEnemy(transform.position);
@@ -115,15 +145,20 @@ public sealed class Player : Entity
         if (_controller.Player.Move.IsPressed())
         {
             Vector3 moveDir = new Vector3(_contextDir.x, 0, _contextDir.y);
-            CharacterController.Move(moveDir * Time.deltaTime * Speed);
+            CurrentCharacterController.Move(moveDir * Time.deltaTime * _moveSpeed);
 
-            transform.LookAt(Vector3.LerpUnclamped(transform.forward + transform.position, moveDir + transform.position, RotationSpeed));
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, moveDir, RotationSpeed * Time.deltaTime, 0);
+            transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }
+
     protected override void Die()
     {
+        _playerSkills.StopDelay();
+        _changeProjectilePattern?.Stop();
+        _changeProjectile?.Stop();
         OnPlayerDie?.Invoke(false);
-        _weapon.StopAttack();
+        StopAttack();
         base.Die();
     }
 }

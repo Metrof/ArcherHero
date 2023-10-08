@@ -1,8 +1,6 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -36,7 +34,7 @@ public class ExplosiveEnemy : Enemy
         _animator = GetComponent<Animator>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         StartRandomMovement().Forget();
@@ -65,8 +63,7 @@ public class ExplosiveEnemy : Enemy
     {   
         _cancellationTokenAttack = new CancellationTokenSource();
         while (!_cancellationTokenAttack.IsCancellationRequested)
-        {   
-            Debug.Log("preparation for attack");
+        {             
             Vector3 directionToPlayer = _targetAttack.position - transform.position;
             Quaternion rotationToPlayer = Quaternion.LookRotation(directionToPlayer, Vector3.up);
             transform.rotation = rotationToPlayer;
@@ -88,15 +85,14 @@ public class ExplosiveEnemy : Enemy
             await UniTask.WaitUntil(() => transform.position == distanceToTarget , cancellationToken: _cancellationTokenAttack.Token).SuppressCancellationThrow();
             
             
-            ExplosiveAttack();
+            Attack();
         }
     }
 
-    private void ExplosiveAttack()
+    protected virtual void Attack()
     {
         if (_distanceToTarget <= _explosionRadius)
-        {   
-            Debug.Log("Boom");
+        {            
             IDamageable damageable = _targetAttack.GetComponent<IDamageable>();
             if (damageable != null)
             {
@@ -115,7 +111,7 @@ public class ExplosiveEnemy : Enemy
             if (_distanceToTarget <= _attackTriggerDistance)
             {
                 isAttack = true;
-                _cancellationToken.Cancel();
+                _cancellationToken?.Cancel();
                 _agent.ResetPath();
                 AttackPlayer().Forget();
             }
