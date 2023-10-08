@@ -9,6 +9,13 @@ public partial class ProjectilePool : MonoBehaviour
     [SerializeField] public List<OwnerPoolData> _ownerPoolData;
 
     private Dictionary<ProjectileOwner, Dictionary<TypeDamage, ObjectPool<Projectile>>> _poolDictionary = new();
+    private AudioManager _audioManager;
+
+    [Inject]
+    private void Construct(AudioManager audioManager)
+    {
+        _audioManager = audioManager;
+    }
 
     private void Awake()
     {
@@ -51,11 +58,13 @@ public partial class ProjectilePool : MonoBehaviour
                     () =>
                     {
                         Projectile projectile = Instantiate(data.Prefab, container);
+                        projectile.OnHitEvent += ProjectileHit;
                         projectile.ProjectilePool = projectilePool;
                         return projectile;
                     },
                     projectileGet =>
                     {
+                        _audioManager.Play(1);
                         projectileGet.gameObject.SetActive(true);
                     },
                     projectileRelease =>
@@ -74,5 +83,10 @@ public partial class ProjectilePool : MonoBehaviour
         projectilePool = pool;
 
         return projectilePool;
+    }
+
+    private void ProjectileHit()
+    {
+        _audioManager.Play(0);
     }
 }
