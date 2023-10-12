@@ -7,6 +7,7 @@ using Zenject;
 
 public sealed class Player : Entity
 {
+    public event Action OnPlayerRestartedEvent;
     public event Action<bool> OnPlayerDie;
     [SerializeField] private Transform _spawnProjectile;
     [SerializeField] private List<Skill> _skills;
@@ -62,17 +63,18 @@ public sealed class Player : Entity
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, typeDamage));
         _playerSkills = new PlayerSkills(this, _controller, _skills);
-
-        damage = _defaultStats.Damage.CurrentValue;
-        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
-        currentHealth = _defaultStats.MaxHP.CurrentValue;
-        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
     }
 
     public override void Init()
     {
+        damage = _defaultStats.Damage.CurrentValue;
+        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
+        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
         _playerSkills.ResetDelay();
         base.Init();
+
+        OnPlayerRestartedEvent?.Invoke();
     }
 
     private void OnEnable()
