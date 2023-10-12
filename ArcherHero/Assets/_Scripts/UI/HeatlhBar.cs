@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
    [SerializeField] private Image _filler;
-   [SerializeField] private Entity _entity;
+   [SerializeField] protected Entity _entity;
    [SerializeField] private Canvas _canvas;
    
-   private float _currentFillAmount;
+   protected float _currentFillAmount;
    
 
-   void Start()
+   public virtual void Start()
    {
        _currentFillAmount = _entity.currentHealth; 
    }
