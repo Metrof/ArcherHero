@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 293859640828442225}
   - component: {fileID: 6548473470329803223}
   - component: {fileID: 4137269806150272714}
-  - component: {fileID: 6365060250154946111}
+  - component: {fileID: 8920941079741867499}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -299,7 +299,7 @@ MonoBehaviour:
   _spawnProjectile: {fileID: 825919772246480250}
   _skills:
   - {fileID: 11400000, guid: bf33e28f75d990644afac8551bb4a96d, type: 2}
---- !u!114 &6365060250154946111
+--- !u!114 &8920941079741867499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8673544390339888375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 537f51c9b9154df4aa16ae5bf407227e, type: 3}
+  m_Script: {fileID: 11500000, guid: 59c87da397737cd429a9052cd1b8ebf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _filler: {fileID: 1855408026206853961}

@@ -9,10 +9,10 @@ public class HealthBar : MonoBehaviour
    [SerializeField] private Entity _entity;
    [SerializeField] private Canvas _canvas;
    
-   private float _currentFillAmount;
+   protected float _currentFillAmount;
    
 
-   void Start()
+   public virtual void Start()
    {
        _currentFillAmount = _entity.currentHealth; 
    }
