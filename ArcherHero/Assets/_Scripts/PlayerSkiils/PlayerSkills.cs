@@ -24,7 +24,7 @@ public class PlayerSkills
 
     public void StopDelay()
     {
-        _cTS.Cancel();
+        _cTS?.Cancel();
     }
 
     public void SubscribeToSkills()
