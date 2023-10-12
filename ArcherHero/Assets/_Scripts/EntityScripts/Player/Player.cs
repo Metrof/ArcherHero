@@ -1,7 +1,6 @@
 using PlayerStats;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -63,16 +62,17 @@ public sealed class Player : Entity
         _controller = new Controller();
         _weapon = new Weapon(_projectilePool.GetPool(ProjectileOwner.Player, typeDamage));
         _playerSkills = new PlayerSkills(this, _controller, _skills);
+
+        damage = _defaultStats.Damage.CurrentValue;
+        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
+        currentHealth = _defaultStats.MaxHP.CurrentValue;
+        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
     }
 
     public override void Init()
     {
         _playerSkills.ResetDelay();
         base.Init();
-        damage = _defaultStats.Damage.CurrentValue;
-        speedAttack = _defaultStats.AttackSpeed.CurrentValue;
-        currentHealth = _defaultStats.MaxHP.CurrentValue;
-        _moveSpeed = _defaultStats.MovementSpeed.CurrentValue;
     }
 
     private void OnEnable()
@@ -81,6 +81,8 @@ public sealed class Player : Entity
         _controller.Player.Move.performed += Move;
         _controller.Player.Move.canceled += StartWeaponAttack;
         _playerSkills.SubscribeToSkills();
+
+        _defaultStats.MaxHP.OnChangeUpgradeLvlEvent += ChangeMaxHP;
     }
 
     private void OnDisable()
@@ -90,6 +92,8 @@ public sealed class Player : Entity
         _controller.Player.Move.performed -= Move;
         _controller.Player.Move.canceled -= StartWeaponAttack;
         _controller.Disable();
+
+        _defaultStats.MaxHP.OnChangeUpgradeLvlEvent -= ChangeMaxHP;
     }
 
     public void PlayerEnable() 
@@ -160,5 +164,10 @@ public sealed class Player : Entity
         OnPlayerDie?.Invoke(false);
         StopAttack();
         base.Die();
+    }
+
+    private void ChangeMaxHP(StatInfo info)
+    {
+        currentHealth = info.CurrentValue;
     }
 }

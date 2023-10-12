@@ -61,7 +61,6 @@ public partial class ProjectilePool : MonoBehaviour
                     () =>
                     {
                         Projectile projectile = Instantiate(data.Prefab, container);
-                        projectile.OnHitEvent += () => _audioManager.Play(sound.NumSoundHit);
                         projectile.OnEnabledEvent += () => _audioManager.Play(sound.NumSoundShot);
                         _audioManager.Play(sound.NumSoundShot);
                         projectile.ProjectilePool = projectilePool;
