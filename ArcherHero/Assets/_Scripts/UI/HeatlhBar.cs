@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour
    }
 
 
-   private void ChangeHealth(int currentHealth)
+   protected void ChangeHealth(int currentHealth)
    {    
        _filler.fillAmount =  currentHealth / _currentFillAmount;
    }
