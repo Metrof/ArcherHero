@@ -66,7 +66,7 @@ public class SaveLoadUpgradeSystems
     {
         foreach (StatInfo stat in CharacterStats.Stats)
         {
-            _storageService.Save(_statsPathFolder + stat.Name, stat.CurrentValue);
+            _storageService.Save(_statsPathFolder + stat.Name, stat.UnlockedLvl);
         }
     }
 
