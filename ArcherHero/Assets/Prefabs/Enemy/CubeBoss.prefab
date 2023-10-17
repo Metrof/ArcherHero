@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lvl:
-    _statMultiplier: 1
+    _statMultiplier: 3
     _enemySpawnPoints:
     - {fileID: 4560133661720167887}
     - {fileID: 8368012691561271337}
