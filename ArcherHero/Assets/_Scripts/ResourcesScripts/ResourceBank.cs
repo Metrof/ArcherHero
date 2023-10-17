@@ -7,8 +7,8 @@ public class ResourceBank
 
     private readonly Dictionary<ResourceType, Resource> _resources;
 
-    private readonly int _startMoney;
-    private readonly int _startGoldCoins;
+    private int _startMoney;
+    private int _startGoldCoins;
 
     public ResourceBank(IStorageService storageService)
     {
@@ -21,8 +21,8 @@ public class ResourceBank
 
     private void LoadResources()
     {
-        StorageService.Load<int>(ResourceType.Money.ToString(), (money) => money = _startMoney);
-        StorageService.Load<int>(ResourceType.GoldCoins.ToString(), (goldCoins) => goldCoins = _startGoldCoins);
+        StorageService.Load<int>(ResourceType.Money.ToString(), (money) => _startMoney = money);
+        StorageService.Load<int>(ResourceType.GoldCoins.ToString(), (goldCoins) => _startGoldCoins = goldCoins);
     }
 
     private Dictionary<ResourceType, Resource> CreateResources()

@@ -16,5 +16,6 @@ public class PlayerHealthBar : HealthBar
     private void GetChangeMaxHP()
     {
         _currentFillAmount = _entity.currentHealth;
+        ChangeHealth((int)_currentFillAmount);
     }
 }
