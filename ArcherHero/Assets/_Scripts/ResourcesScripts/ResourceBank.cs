@@ -92,7 +92,7 @@ public class ResourceBank
     {
         foreach (var resource in _resources)
         {
-            StorageService.Save(resource.Key.ToString(), resource.Value);
+            StorageService.Save(resource.Key.ToString(), resource.Value.Amount);
         }
     }
 }

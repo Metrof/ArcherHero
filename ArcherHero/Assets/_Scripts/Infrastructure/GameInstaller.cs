@@ -23,7 +23,7 @@ public class GameInstaller : MonoInstaller
     {
         Container
             .Bind<AudioManager>()
-            .FromInstance(_audioManager)
+            .FromComponentInNewPrefab(_audioManager)
             .AsSingle()
             .NonLazy();       
     }

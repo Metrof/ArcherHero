@@ -19,14 +19,20 @@ public class GameManager : MonoBehaviour
     EnemyPool _enemyPool;
     AudioManager _audioManager;
 
+    private SaveLoadUpgradeSystems _saveSystem;
+    private ResourceBank _resourceBank;
+
     [Inject]
-    private void Construct(Player player, LvlSwitchManager lvlSwitchManager, EnemyPool enemyPool, LvlDoor lvlDoor, AudioManager audioManager)
+    private void Construct(Player player, LvlSwitchManager lvlSwitchManager, EnemyPool enemyPool, 
+        LvlDoor lvlDoor, AudioManager audioManager, SaveLoadUpgradeSystems saveSystem, ResourceBank bank)
     {
         _door = lvlDoor;
         _player = player;
         _lvlSwitchManager = lvlSwitchManager;
         _enemyPool = enemyPool;
-        _audioManager = audioManager;   
+        _audioManager = audioManager;
+        _saveSystem = saveSystem;
+        _resourceBank = bank;
     }
     private void OnEnable()
     {
@@ -85,6 +91,9 @@ public class GameManager : MonoBehaviour
     }
     private void GameOver()
     {
+        _saveSystem.Save();
+        _resourceBank.SaveResources();
+
         _startVirtualCamera.Priority = 1;
         _gameVirtualCamera.Priority = 0;
 
