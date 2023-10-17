@@ -308,13 +308,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
   - _dropItemPrefab: {fileID: -8137173113293147979, guid: d1aa131fed2de354fa4b007660ecc119, type: 3}
-    _dropChance: 0.1
+    _dropChance: 0.3
   - _dropItemPrefab: {fileID: -8137173113293147979, guid: 9aa7e9913f9207240bc0b9733446b272, type: 3}
-    _dropChance: 0.1
+    _dropChance: 0.3
   - _dropItemPrefab: {fileID: -8137173113293147979, guid: dbe19a6d2ad996b498867453db4fb1b8, type: 3}
-    _dropChance: 0.1
+    _dropChance: 0.3
   - _dropItemPrefab: {fileID: -8137173113293147979, guid: 92effd4a9469ebc46aac3c34e4f228bc, type: 3}
-    _dropChance: 0.1
+    _dropChance: 0.3
   _owner: {fileID: 8154993833063171704}
 --- !u!1 &5980697457540158316
 GameObject:

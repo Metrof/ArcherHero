@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHP:
     _icon: {fileID: 0}
-    _name: ' HP'
+    _name: HP
     _description: 
     _unlockedLvl: 1
     _upgradeList:

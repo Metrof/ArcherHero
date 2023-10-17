@@ -9,7 +9,7 @@ public class MovementHingedTrajectory : IProjectileMovement
     public void Move(Projectile projectile, Vector3 target, float speed)
     {
         projectile.MoveSequence
-            .Append(projectile.transform.DOJump(target, _jumpPower, _numJumps, speed * 0.5f)
+            .Append(projectile.transform.DOJump(target, _jumpPower, _numJumps, speed * 0.1f)
             .SetEase(Ease.Linear));
         projectile.MoveSequence
             .AppendCallback(()=> projectile.ProjectileHit

@@ -10,6 +10,16 @@ public class JsonToFileStorageService : IStorageService
         string path = BuildPath(key);
         string json = JsonConvert.SerializeObject(data);
 
+        if (!File.Exists(path))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+            using (var fileStream = File.Create(path))
+            {
+                fileStream.Close();
+            }
+        }
+
         using (var fileStream = new StreamWriter(path))
         {
             fileStream.Write(json);
